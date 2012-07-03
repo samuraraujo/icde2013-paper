@@ -1,27 +1,47 @@
-\section{Problem Definition}
-In this paper, we tackle the problem of candidate selection queries over multiple heterogeneous datasets where there might be only little or no overlap between schemas. Candidate selection queries refer to the problem of finding queries, for each instance s in a source set $G_s$, that retrieve a set of possible candidate matches for s in the target dataset $G_t$.  Ideally, assuming that there is a 1-to-1 mapping between the instances, the best query produces candidates set with cardinality 1, because we can not have less than one candidate. We pose the problem as an optimization problem, where the goal is to find the most selective conjunction of query clauses that produces minimal candidate sets.
+\section{Overview}
+In this section, we introduce the data model, discuss the problem, and finally, present a brief overview of existing solutions as well as our approach.
 
-We focus on Web data including relational data, XML, RDF and other types of data that can be modeled as graphs $\mathbb{G}$ (e.g. RDF graphs),  where every graph G $\in\mathbb{G}$ is a set of triples $(subject, predicate, object)$.  Closely resembling this data model we employ a graph-structured data model: 
+\subsection{Data} We focus on heterogeneous Web data including relational data, XML, RDF and other types of data that can be modeled as graphs. Closely resembling the RDF data model, we employ a graph-structured data model where every dataset is conceived as a graph $G \in\mathbb{G}$ comprising a set of triples: 
 
-\begin{definition}[Data Model] Web data is are modeled as a set of graphs $\mathbb{G}$, where every graph G $\in\mathbb{G}$ is a set of triples, each of the form (s, p, o) where s $\in$U (called subject), p $\in$ U (predicate) and o $\in$ U $\cup$ L (object). Here, U denotes the set of Uniform Resource Identifiers (URIs) and L the set of literals, which together, form the vocabulary V, i.e. V=U $\cup$ L.  
+\begin{definition}[Data Model] A dataset set is a graph $G$ formed by a set of triples of the form $(s, p, o)$ where $s \in U$ (called subject), $p \in U$ (predicate) and $o \in U \cup L$ (object). Here, $U$ denotes the set of Uniform Resource Identifiers (URIs) and $L$ the set of literals. Every literal $l \in L$ is a bag of tokens, $l = \{t_1,\ldots,t_i,\ldots,t_n\}$, drawn from the vocabulary $V$, i.e. $t_i \in V$.  
 \end{definition} 
 
-With respect to this model, instances are resources that appear at the subject position of triples. An instance representation can be obtained from the data graph as follows:
+With respect to this model, \emph{instances} are resources that appear at the subject position of triples. An instance representation can be obtained from the data graph as follows:
 
-\begin{definition}[Instance Representation] The instance representation $IR: \mathbb{G} \times U \rightarrow \mathbb{G}$ is a function, which given an instance $s \in U$ and a graph $G \in \mathbb{G}$, maps $s$ to a set of triples in which $s$ appears as the subject, i.e. $IR(s) = \{ (s, p, o) | (s, p, o) \in G \}$. 
+\begin{definition}[Instance Representation] The instance representation $IR: U \times \mathbb{G} \rightarrow \mathbb{G}$ is a function, which given an instance $s \in U$ and a graph $G \in \mathbb{G}$, maps $s$ to a set of triples in which $s$ appears as the subject, i.e. $IR(s) = \{ (s, p, o) | (s, p, o) \in G \}$. 
 \end{definition} 
 
-We will use the terms instance and instance representation interchangeably from now on. Thus, only outgoing edges $(s, p, o)$ of an instance $s$ are considered. However, notice that the instance representation may be extended by including ingoing edges as well.
+Thus, an instance is basically represented through a set of \emph{predicate-value} pairs. \todo{add a graph to provide example, also, provide one example for instance representation} 
+We will use the terms instance and instance representation interchangeably from now on. Note that for the sake of presentation, only the outgoing edges $(s, p, o)$ of an instance $s$ are considered while incoming edges (triples where $s$ appears as the object) can also be added to the representation of $s$. 
 
-For a given set of source instances S, we can model a candidate selection query as a template that can be instantiate for each source instance s $\in$ S.
+\subsection{Problem} Instance matching is about finding instances that refer to the same real-world object based on their representations extracted from the data. In this paper, we tackle the problem of \emph{instance matching across multiple datasets}: given instances of a \emph{source dataset} $G_s$, the problem is to find instances in other datasets, collectively referred to as the \emph{target dataset} $G_t$, which represents the same real world object. Compared to the single dataset setting, this problem entails additional challenges especially when the data is heterogeneous not only at the data but also schema level. In this regard, \emph{data-level heterogeneity} means that for the same property, instances referring to the same object may have different values, or different syntactical representations of the same value. \todo{example: two instances with different values}. Schema-level heterogeneity arises when there is only little or no schema overlaps between the datasets. That is, instances referring to the same object may be represented by different predicates, or different representations of the same predicates. Finding different representations of the same predicate is part of a problem also known as schema matching. 
+
+\subsection{Existing Solutions} One main class of solutions for this problem comprises learning-based approaches, which relying on training examples, find a (weighted) combination of similarity function predicates, $\sum_i{w_i s_i(p_m,p_n)} > \alpha$, to decide if a given pair of instances match (when the similarity exceeds the threshold $\alpha$), or not. This learning entails the problem of finding the comparable predicates $p_m$ and $p_n$(schema matching), choosing (and weighting) these predicate pairs, as well as determining the threshold $\alpha$.  
+\todo{describe second category: unsupervised learning e.g. ISWC paper, those that does not require training examples}
+\todo{schema-agnostic: WSDM paper}
+\todo{class-based disambiguation: make clear that learning/finding comparable predicates is not possible when there are no overlaps between schemas, i.e. predicates in different datasets do not matches}.
+
+
+\subsection{Our Solution}
+In this work, we perform learning but...
+\todo{differences to existing learning-based approaches: not a (weighted) combination of similarity function predicates to be applied to all pairs of instances but one by one: for every source instance, we learn optimal match selection queries:}
 
 \begin{definition} [Template Query]  A template query Q is conjunction of $n$ tuples $(p, k)$, where $p$ is a predicate in $G_t$ and $k$ is a token, defined as $ \bigwedge_{i}^n (p_i, k_i)=\{t | (t,p_i,o) \in G_t  \land o \sim k_i  \}$. The similarity function $\sim$ is given. Without loss of generality we can also assume that can exist tuples where p are undefined, acting as a wild card. 
 \end{definition} 
  
 \begin{definition} [Candidate Set]  A candidate set of an instance s in $G_s$ is a instantiation of a template query Q where we have a tuple $(p,k)$ where $(s,x,k) \in IR(s)$
 \end{definition} 
-
 In this work, we discuss how query templates can be derived. Also, executing all these queries is expensive, hence we propose to reduce the number of queries that has to be executed for retrieving candidates for every instance in the source.
+
+
+
+For a given set of source instances S, we can model a candidate selection query as a template that can be instantiate for each source instance s $\in$ S.
+
+
+Candidate selection queries refer to the problem of finding queries, for each instance s in a source set $G_s$, that retrieve a set of possible candidate matches for s in the target dataset $G_t$.  Ideally, assuming that there is a 1-to-1 mapping between the instances, the best query produces candidates set with cardinality 1, because we can not have less than one candidate. We pose the problem as an optimization problem, where the goal is to find the most selective conjunction of query clauses that produces minimal candidate sets.
+
+
+
 
 \textbf{Solutions}. Aiming to approximate our solution to the optimal solution, we approach this problem in an iterative fashion, where at each iteration we use information from the previous iteration to refine and increase the selectivity of the query templates used on next iterations. Notice that as more selective a query is, as more efficient and effective it is, because, it selects less elements and it takes less time; and it selects less incorrect matches.  
 
