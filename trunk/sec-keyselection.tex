@@ -1,0 +1,67 @@
+\section{Constructing Candidate Selection Queries} 
+In order to construct queries, Sonda firstly find comparable attribute pair between the source and the target datasets. 
+
+\subsection{Selecting Key Attributes}
+Intuitively, attributes shall be used as keys when they are highly discriminative such that every possible value of such an attributed are shared only by a few instances. They discriminate the instances well in that when instances have different values on these keys.
+%, they can be considered as referring to different real-world objects. 
+For instance, there are much more people \verb+born in+ Brazil than a person with the \verb+name+ Anna White. Hence, \verb+name+ is more discriminative and thus, a better key than \verb+born in+. Following this intuition, the discriminability $d(p)$ of an attribute $p$ can be measured in terms of its entropy. More precisely, given an attribute and its literal values $\{o_1,\ldots,o_i,\ldots,o_n\}$, 
+\begin{equation}
+d(p) = - \sum_{i=1}^{n} P(o_i)log_2P(o_i).
+\end{equation}
+where $P(o_i)$ denotes the probability of observing $o_i$ as the object of an triple in a process, in which a triple is repeatedly sampled from $G$, the set of all triples. Intuitively, $d(p)$ is lower when the values of $p$ are more unique.  
+
+\begin{algorithm}
+\caption{FindKeys(G). Find the blocking schema $U^*_A$ for $G$.}
+\begin{algorithmic}
+\scriptsize\tt
+\STATE $U_A \leftarrow$ the set of attributes in $G$. 
+\FORALL{$p \in U_A$}
+\STATE scores[p] $\leftarrow d(p)$
+\ENDFOR
+\STATE average $\leftarrow$ average(scores[p].values)
+\FORALL{$p \in U_A$}
+\IF{scores[p] $\geq$ average}
+\STATE $U^*_A$.add(p)
+\ENDIF
+\ENDFOR
+\RETURN $U^*_A$
+\end{algorithmic}
+\end{algorithm}
+
+Alg. 1 implements the process of selecting key schema $U^*_A$, for a given dataset $G$. For every attribute $p \in U_A$, it computes its discriminability score using Eq. 1. Then, it computes the average of all scores to keep only those that are above this average as key attributes. We note that the idea behind this is adopted from the key selection technique proposed in previous work~\cite{DBLP:conf/semweb/SongH11}. As opposed to that, it does not consider the coverage of attributes for the computation of $d(p)$ and in particular, only  
+% because as we will show later, low coverage attributes will be automatically pruned by our candidate selection algorithm further in the process.  
+adds single attributes to $U^*_A$. This is to facilitate the search for comparable attributes, which was not considered in previous work. In particular, Sonda does not assume precomputed mappings but computes comparable pairs of attributes on the fly. Limiting attention to single attributes helps to avoid the large number of attribute pair combinations that would have to be considered.  
+
+\subsection{Finding Comparable Key Attributes}
+The technique used for this borrows ideas from instance-based schema matching, which derives attribute mappings based on the similarity between attribute values~\cite{DBLP:conf/fskd/FengHQ09,DBLP:conf/iceis/LemeCBF09}. Here, we consider attributes as comparable when they share some bigrams in their literal values. Additionally, we exploit the discriminability score $d(p)$ as computed before. Intuitively, this score can be seen as another instance-based signal because large discriminability differences between two attributes also indicate they have different values. 
+
+Alg. 2 shows the process of computing pairs of comparable attributes from the two sets of key attributes $U^{*s}_A$ and $U^{*t}_A$ computed separately for $G_s$ and $G_t$, respectively, as discussed before. The result $U^{*st}_A$ now consists of pairs of attributes as entries, one attribute in $U^{*s}_A$ and its corresponding comparable attribute in $U^{*t}_A$. It starts by building a $|U^{*s}_A|\times|U^{*t}_A|$ matrix $M$, with every cell representing a pair of attributes $p_s \in U^{*s}_A$ and $p_t \in U^{*t}_A$ through two features $sim$ and $d$. The set similarity score $sim$ is defined over the sets of bigrams $Bi_{s}$ and $Bi_{t}$ extracted from all literal values in $p_s$ and $p_t$ respectively, as $\frac{|Bi_{s} \cap Bi_{t}|}{min(|Bi_{s}|,|Bi_{t}|)}$; $d$ is the discriminability computed as the difference between $d(p_s)$ and $d(p_t)$. 
+
+These features form a two-dimensional feature space in which an attribute pair can be represented as a point. An agglomerative hierarchical clustering algorithm~\cite{DBLP:books/ph/JainD88} is then applied to all the points corresponding to cells in $M$. In particular, centroid linkage using the four centroids $[0,0], [1,0], [0,1]$ and $[1,1]$ are used to form four clusters. The one resulting cluster with the closest distance to $[0,0]$ contains points with higher bigram overlap and smaller difference in discriminability, compared to points in the other three clusters. Only attribute pairs represented by points in this cluster are considered as comparable and used subsequently for constructing candidate selection queries. 
+  
+
+\begin{algorithm}
+\caption{MapKeys($U^{*s}_A$, $U^{*t}_A$). Computes comparable pairs from $U^{*s}_A$ in $G_s$ and $U^{*t}_A$ in $G_t$.}
+\begin{algorithmic}
+\scriptsize\tt
+\STATE Create a $|U^{*s}_A|\times|U^{*t}_A|$ feature matrix, $M$; every cell $M_{st}$ is used to store two features $[sim,d]$, where $sim$ is the similarity score and $d$ the discriminability score between the attributes $p_s$ and $p_t$
+\FORALL{$p_s \in |U^{*s}_A|$}
+\FORALL{$p_t \in |U^{*t}_A|$}
+\STATE $M_{st} \leftarrow$ [setsim(bigrams($p_s$), bigrams($p_t$)), Abs(d($p_s$) - d($p_t$))]
+\ENDFOR
+\ENDFOR
+\STATE clusters $\leftarrow$ clustering($M$, centroids([0,0],[0,1],[1,0],[1,1]))
+\STATE $U^{*st}_A$ $\leftarrow$ clusters.closestTo([0,0])
+\RETURN $U^{*st}_A$
+\end{algorithmic}
+\end{algorithm}
+
+Below, we show the final alignment  produced by this algorithm between Sider attributes and Diseasome attributes.
+\lstset{basicstyle=\small}
+\begin{lstlisting}[ ]   
+(rdf:label, rdf:label)
+(rdf:label, diseasome:name)
+(sider:sideEffectId, diseasome:size)
+(sider:sideEffectName, rdf:label)
+(sider:sideEffectName, diseasome:name)
+\end{lstlisting}

@@ -1,0 +1,97 @@
+\section{Blocking over Multiple Heterogeneous Datasets}
+We target the setting of heterogeneous Web data where there might be only little or no overlap between schemas. That is, the attributes captured in different schemas might be so different such that applying schema matching techniques may yield no or only few correspondences (e.g. same-as mappings) between attributes. We tackle the problem of blocking over multiple datasets: for instances of one dataset, called the \emph{source}, the goal is to find instances in other datasets, collectively referred to as the \emph{target} dataset, that might refer to the same real-word object. They are then grouped into blocks, which can be further refined through an effective matching technique. Blocking is performed using keys, which are chosen/learned for a given dataset~\cite{}.   Due to schema heterogeneity, the keys learned for the source, however do not apply to the target because for the source attribute used as key, there is not corresponding attribute in the target. 
+
+More precisely, we consider Web data including relational data, XML, RDF and other types of data that can be conceived as graphs. 
+%For instance, tuples in the relational database setting correspond to graph nodes and foreign key relationships between them represent edges.
+For instance, RDF data consist of triples, which collectively form a graph. Closely resembling this data model
+% (omitting special RDF semantics and constructs such as blank nodes), 
+we employ a graph-structured data model: 
+\begin{definition}[Data Model] Web data is are modeled as a set of graphs $\mathbb{G}$, where every graph G $\in\mathbb{G}$ is a set of triples, each of the form (s, p, o) where s $\in$U (called subject), p $\in$ U (predicate) and o $\in$ U $\cup$ L (object). Here, U denotes the set of Uniform Resource Identifiers (URIs) and L the set of literals, which together, form the vocabulary V, i.e. V=U $\cup$ L.  
+\end{definition} 
+
+With respect to this model, instances are resources that appear at the subject position of triples. An instance representation can be obtained from the data graph as follows:
+
+\begin{definition}[Instance Representation] The instance representation $IR: \mathbb{G} \times U \rightarrow \mathbb{G}$ is a function, which given an instance $s \in U$ and a graph $G \in \mathbb{G}$, maps $s$ to a set of triples in which $s$ appears as the subject, i.e. $IR(s) = \{ (s, p, o) | (s, p, o) \in G, o \in L \}$. 
+\end{definition} 
+
+
+%We will use the terms instance and instance representation interchangeably from now on. 
+Thus, only outgoing edges $(s, p, o)$ of an instance $s$ are considered. Further, only triples indicating attribute values (triples $o$ as a literal) are typically used for blocking. Hence, the features used for blocking are referred to as attribute-value pairs instead of predicate-object pairs. Though, not all (attribute-)values are used as blocking aims at quick matching based on a subset of features called \emph{blocking keys}. When attribute information is used~\cite{}, the blocking key is determined by the blocking scheme. Let $U_A$ be the set of all attributes of a dataset $G$, the blocking scheme is a subset of attributes, i.e. $U^*_A  \subseteq U_A$. Given the scheme $U^*_A$, the keys used for blocking instances in $G$ are simply a subset of attribute-value pairs extracted from the instance description:  
+
+\begin{definition}[Schema-based Blocking Key] Let $U^*_A$ be the blocking scheme for the dataset $G$. The schema-based blocking key for an instance $s$ in $G$ is $K(s) =\{ s, p, o) | (s, p, o) \in G, p \in U^*_A \}$. 
+\end{definition} 
+
+As opposed to that, no attribute information is used in the schema-agnostic approach~\cite{} such that the blocking key is simply a set of value tokens. Considering a literal value $o$ as a bag of tokens, the key here can be defined as follows:
+
+\begin{definition}[Schema-agnostic Blocking Key] The schema-agnostic blocking key for an instance $s$ in $G$ is $K(s) =\{ k \in o | (s, p, o) \in G \}$. 
+\end{definition} 
+
+Given the key representation, blocking over the source and target dataset $G_s$ and $G_t$ can be solved through a series of queries, one for each instance in $G_s$:
+
+\begin{definition} [Candidate Selection Query]  Given two datasets $G_s$ and $G_t$, a candidate selection query for an instance $s \in G_s$, returns all instances $t_i \in G_t$, which match $K(s)$. 
+\end{definition} 
+
+Evaluating a selection query for every instance $s_i \in G_s$ yields a set of candidate sets, as illustrated in Fig.~\ref{fig:candidates}.
+
+\begin{figure} 
+\centering
+\includegraphics[height=90px ]{p4.png}
+\caption{Candidate sets for four source instances $s_1, s_2, s_3, s_4$.} 
+\label{fig:candidates}
+\end{figure} 
+ 
+Using SPARQL, a query can be expressed as a basic graph pattern that is composed of a set of triple patterns $\langle s, p, o \rangle$, where $s$, $p$ and $o$ might be a constant or a variable. A SPARQL-based candidate selection query for a schema-agnostic key $K(s)$ is simply the triple pattern $\langle ?s, ?p, K(s) \rangle$, where $?s$ and $?p$ denote variables and $K(s)$ is a constant. It simply returns all triples that match $K(s)$ at the object position. The set of candidates for $s$ is captured by the subject (binding to $?s$) of the resulting triples. Instead of exact matching, key overlap has also been used~\cite{}. This can be conceived as using a query, where the tokens in $K(s)$ are not interpreted as a conjunction (AND-semantics) but a disjunction (OR-semantics). The query with OR-semantics returns all triples, which match at least one token in $K(s)$ at the object position. 
+
+For a schema-based key, which is a set of triples $(s,p,o)$, the query is a set of corresponding triple patterns $\langle ?s, p, o \rangle$ where the attribute and the value in the triple are used as constants at the predicate and object positions of the corresponding triple pattern. The blocking scheme $U^*_A$ uses to construct the keys are learned for one specific dataset, e.g. the source $G_s$. So far, existing works assume that attributes in $G_s$ and $G_t$ are the same (same dataset)~\cite{} or are pre-aligned through upfront schema matching (similar datasets)~\cite{}. Clearly, when attributes in $G_s$ and $G_t$ are different such that for attributes in $U^*_A$, there are no corresponding attributes in $G_t$, the queries constructed way do not yield any candidates when evaluated against $G_t$ (because there are no triples in $G_t$ that match the constant $p$ in $\langle ?s, p, o \rangle$). In this work, we provide the first solution towards schema-based blocking in scenarios, where the schemas are heterogeneous/different in this sense. 
+
+
+
+\subsection{Optimization Problem}
+
+Given a list of possible queries Q,  for each source instances $s_i \in S_C$, our goal is to select a query $q \in Q$ that generates an optimal candidate set for $s_i$ in the most efficient way. Efficiency here means to evaluate the minimum amount of queries to obtain a minimum candidate set that contains the correct match for an instance $s_i$. This problem can be defined as the following optimization problem:
+
+\begin{definition}[Candidate Selection Problem - CSP] Given that $S_C$ is a set of source instance, Q is a set of queries, $q(s_i)$ is the cost of evaluate the query q, and $w_q$  is a binary weight associated to q, then:
+\end{definition}  
+\[
+min \sum_{s_i \in S_C} \sum_{q \in Q} w_qq(s_i)
+\]
+
+
+
+In this work, we define $q(s_i)$ such as:
+
+\begin{definition}[Query Cost]  The cost of evaluate a query q is given by:
+
+\[
+  q(s_i) = \left\{
+  \begin{array}{l l} 
+      1 + |C_{si}^q|,  & \quad \text{if $|C_{si}^q|>$  0}\\
+      \infty & \quad otherwise\\
+  \end{array} \right.
+\]
+ 
+ 
+Where $|C_{si}^q|$ is the cardinality of the set $C_{si}$ generated by the query q.
+\end{definition}  
+
+This minimization problem has an complexity $O(2^N)$, where N is the number of queries. However, under some assumptions (Definition 1), we can show that we can find an exact solution to this problem in polynomial time. 
+
+Assuming that the class-based resemblance assumption (Definition 1) applies to the source instances $S_C$ and that we have a sample of positive and negative  matches for these instances, then we can determine the binary weight for the queries, by minimizing the following sub-problem:
+
+\begin{definition}[Query Selection Problem - QSP]Given a set P of positives matches, a set N of negative matches, a set V = P $\cup$ N, a set Q of all possible queries that select at least one element in V, and a set $X_q$ = $\{x | x \in q_i(V)$ and $q_i \in Q\}$, then:
+\end{definition}  
+\[
+min_{q \in 2^Q} (|X_q- P| +|P - X_q| + |q|)
+\]
+Intuitively, we want to find a minimum set of queries that select all positive examples and the minimum of negative examples. Those queries in q represent the queries that should have the weight w=1 in the CSP (Definition 7). In the best case, we would have a unique query that selects all positives and non-negative examples. 
+
+Notice that solving the QSP, we reduce the number of queries evaluated in the CSP. If we assume that the sample V is representative enough we can guarantee that: 
+\[
+  precision(CSP) \leq precision(CSP+QSP)
+\]
+
+It means that by finding the weight for the queries Q in CSP using QSP, we can reach an optimal performance, w.r.t efficiency, without penalize the precision (or even improving it).
+In the next section, we will describe our approach to solve the CSP + QSP.
+ 
+ 
+
