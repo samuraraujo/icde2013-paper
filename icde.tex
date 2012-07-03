@@ -1,0 +1,97 @@
+% IEEE Paper Template for US-LETTER Page Size (V1)
+% Sample Conference Paper using IEEE LaTeX style file for US-LETTER pagesize.
+% Copyright (C) 2006 Causal Productions Pty Ltd.
+% Permission is granted to distribute and revise this file provided that
+% this header remains intact.
+%
+\documentclass[10pt,conference,letterpaper]{IEEEtran}
+\usepackage{times,amsmath,epsfig}
+
+%
+\usepackage{makeidx}  % allows for indexgeneration
+%
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{mathrsfs}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{mathtools}
+ 
+\usepackage{algorithm}
+\usepackage{algorithmic} 
+
+\lstloadlanguages{XML}
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\enq}{\end{equation}}
+\newcounter{mytempeqncnt}
+\newcommand{\bquote}{\begin{quote}}
+\newcommand{\equote}{\end{quote}}
+
+\newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}}
+\newcommand{\dtr}[1]{\textbf{\textit{#1}$^\textbf{[dtr]}$}}
+\algsetup{linenosize=\small}
+\newtheorem{definition}{Definition}
+ 
+\title{Efficient and Effective On-line Learning-Based Instance Matching over Heterogeneous Data}
+%
+\author{%
+% author names are typeset in 11pt, which is the default size in the author block
+{Samur Araujo{\small $~^{\#1}$}, Duc Thanh Tran {\small $~^{*2}$}, Arjen de Vries{\small $~^{\#3}$} }%
+% add some space between author names and affils
+\vspace{1.6mm}\\
+\fontsize{10}{10}\selectfont\itshape
+$~^{\#}$Delft University of Technology, PO Box 5031, 2600 GA Delft, the Netherlands\\
+\fontsize{9}{9}\selectfont\ttfamily\upshape
+$~^{1}$s.f.cardosodearaujo@tudelft.nl\\
+$~^{3}$a.p.devries@tudelft.nl%
+% add some space between email and affil
+\vspace{1.2mm}\\
+\fontsize{10}{10}\selectfont\rmfamily\itshape
+$~^{*}$Karlsruher Institute of Technology, Germany\\
+\fontsize{9}{9}\selectfont\ttfamily\upshape
+$~^{2}$ducthanh.tran@kit.edu
+}
+%
+\begin{document}
+\maketitle
+%
+\begin{abstract} 
+This document gives formatting instructions for authors preparing
+papers for publication in the Proceedings of an IEEE conference.  The
+authors must follow the instructions given in the document for the
+papers to be published.  You can use this document as both an
+instruction set and as a template into which you can type your own
+text.
+\end{abstract}
+
+% NOTE keywords are not used for conference papers so do not populate them
+\begin{keywords}
+ignore
+\end{keywords}
+   
+%\input{sec-intro}
+  
+  
+
+\input{sec-problem}
+%\input{sec-keyselection}
+%\input{sec-approach}
+ 
+%\input{sec-experiment}
+%\input{sec-related}
+
+\section{Conclusions}
+
+
+\bibliographystyle{IEEEtran}
+
+\bibliography{icde}
+
+\end{document} 

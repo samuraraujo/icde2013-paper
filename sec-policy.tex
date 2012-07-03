@@ -1,0 +1,40 @@
+\section{Optimal Transition Space}
+
+In our settings, we can speed up the heuristic search by minimizing the number of transitions evaluated, i.e.; the number of transitions that we compute f(n). For that, we need to qualify when a transition should be evaluated or not. In this section, we will introduce some preliminary definition in this direction.
+
+\subsection{Optimal Transitions}
+
+Firstly, we will assume that all candidate sets produced will contains also the correct match, otherwise it is an empty set.
+
+\begin{definition}[Transition Recall] All transition produces a candidate set containing the correct match or an empty set otherwise.
+\end{definition}  
+
+\begin{definition}[Local Optimal Transition] A transition is considered local optimal transition if it retrieves an optimal candidate set.
+\end{definition}  
+
+\begin{definition}[Global Optimal Transitions] A local optimal transition is considered global optimal transition if it is local optimal for all states. 
+\end{definition}  
+
+As oppose to that, we can define:
+
+\begin{definition}[Worst Transition] The worst transition is a transition that produces an empty candidate set.
+\end{definition}   
+ 
+\subsection{Transition Components}
+
+To solve this optimization issue we need a transition that its class component selects the exactly class of interest (e.g.; Artists), and its attribute component select the exact match (e.g.; Michael Jackson) among the instance in this class of interest.
+
+\subsubsection{Class Query Component}
+
+Assuming that a transition A has the optimal attribute query, then the optimal class query component for A must select instances in the class of interest. We can determine this class (those classes) of interest from a given set of positive and negative examples. The principle is similar to that of estimating selectivity of predicates using uniform random samples. Intuitively, we need to obtain the class query component that select most of the positive examples and the least of the negative examples from the sample. Theoretically, this class query component is the best representative of the class of interest, in other words, the transition that contains this class query component will select the optimal candidate set.
+
+In our setting, we can disambiguate the candidate sets generated up to the state n-1 to find those sample to estimate the selectivity for the transition of the state n. 
+
+As mentioned before, we do not need to evaluate all transitions because a transition A can produce a subset of another transition B. For instance, if a transition A (e.g.; which select artists) retrieves a subset of the element of a transition B (e.g.; which select people), then we do not need to evaluate B, because A retrieves the minimal set that we can obtain between these two transitions. We can determine the relationship among transitions by computing their selectivity.
+
+\begin{definition}[Pruning Criteria] The heuristic search will follow the path for the first transition that produces a non-empty candidate set.
+\end{definition}   
+
+The framework proposed is robust and allow its components to be optimized individually to serve to specific purpose of the data integration task. In the next sections, we will present a concrete implementation of this framework, in which we focused on optimizing the process of generating the transition queries. This work is about selecting the best queries for each state in an semi-supervised way.
+
+  
