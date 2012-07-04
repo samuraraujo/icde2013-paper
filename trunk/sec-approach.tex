@@ -12,14 +12,14 @@ The challenge is to select for each source instance the one fast query (few fast
 
 The goal of the optimization is to avoid executing all queries, while selecting the optimal nodes requires knowing the cardinality and execution time, which can only be obtained after executing the query. To avoid query execution, we use information acquired during the iterative process to estimate these. In particular, we note that for every instance, there are $k \times q$ query templates, which are initiated with the key value representation of that instance. We call such a query template a \emph{query type}. For different instances, the queries instantiating a particular type vary only w.r.t.~the key value component. Thus, for queries of the same type, we recorded the execution time and cardinality observed for instances processed in previous iterations. Then, we compute an average for each of these dimensions and use it as the estimate for the instance in the current iteration. 
 
- \begin{figure*} 
+ \begin{figure} 
 \vspace{-20pt}
 \centering
 \includegraphics[scale=0.5]{p22.png}
 \caption{The search space for an example with 2 queries and 4 instances.} 
 \vspace{-30pt}
-\label{fig:sspace}
-\end{figure*}
+\label{fig:space}
+\end{figure}
 %Accordingly, the best queries for a source instance are the ones with low cardinality and less excution time. 
 
 \subsection{Best-First Search With Branch-and-Bound Pruning} 
