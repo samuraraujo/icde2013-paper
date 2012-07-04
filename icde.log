@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  4 JUL 2012 19:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  4 JUL 2012 21:49
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -388,11 +388,11 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <9> not available
 
 ] <p1.png, id=20, 452.69125pt x 93.34875pt>
 File: p1.png Graphic file (type png)
- <use p1.png>
+ <use p1.png> [2 <./p1.png (PNG copy)>]
 
-LaTeX Warning: Citation `•' on page 2 undefined on input line 56.
+LaTeX Warning: Citation `•' on page 3 undefined on input line 60.
 
-[2 <./p1.png (PNG copy)>]) (./icde.bbl)
+) (./icde.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -414,11 +414,11 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  4642 strings out of 493848
  66722 string characters out of 3149207
- 160424 words of memory out of 3000000
+ 158424 words of memory out of 3000000
  7823 multiletter control sequences out of 15000+200000
  41861 words of font info for 93 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 32i,11n,36p,2038b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,11n,36p,1888b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -435,7 +435,7 @@ t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/ty
 pe1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on icde.pdf (3 pages, 175551 bytes).
+Output written on icde.pdf (3 pages, 175622 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
