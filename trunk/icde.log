@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  5 JUL 2012 16:51
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  5 JUL 2012 21:23
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -388,10 +388,12 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <9> not available
 
 ] <p1.png, id=20, 473.77pt x 128.48pt>
 File: p1.png Graphic file (type png)
- <use p1.png> [2 <./p1.png (PNG copy)>]) (./icde.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ <use p1.png> [2 <./p1.png (PNG copy)>]
+Underfull \hbox (badness 1377) in paragraph at lines 98--99
+[]\OT1/ptm/m/n/10 Describe how we tackle the time is-sue. re-order-ing
+ []
 
-)
+) (./icde.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -407,7 +409,7 @@ Before submitting the final camera ready copy, remember to:
 Here is how much of TeX's memory you used:
  4641 strings out of 493848
  66742 string characters out of 3149207
- 158424 words of memory out of 3000000
+ 160424 words of memory out of 3000000
  7823 multiletter control sequences out of 15000+200000
  40754 words of font info for 92 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -428,7 +430,7 @@ e/2009/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/tex
 mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on icde.pdf (3 pages, 181561 bytes).
+Output written on icde.pdf (3 pages, 182869 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
