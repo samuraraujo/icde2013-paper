@@ -65,7 +65,6 @@ OPTIMIZATION PROBLEM
 \item Describe the optimal criteria for those template queries. 
 \item For a specific instance, its optimal query template should avoid negative matches and include all positive matches in the candidate set. 
 \item Describe the problem of building those optimal queries.
-\item Describe that it requires that we learn the discriminative predicates from the data and their mappings.
 \item Describe the efficiency part of the problem. 
 \item Due to the large number of queries templates, we can not evaluate all queries because it takes too much time. Therefore, we need to be efficient on selecting only the queries that has the highest chance to retrieve a optimal candidate set. We should ignore queries that perform badly.
 
@@ -88,6 +87,60 @@ SOLUTION
 \item Describe that we need a set of heuristic for efficiently select the best queries.
 \item Describe how this heuristic are used in the branch-and-bound framework
 \end{itemize}
+
+
+\section{Constructing Template Queries}
+
+\begin{itemize}
+
+\item Describe the template queries are compose of two type of clauses
+\item Describe the motivation for the use of attribute clauses
+\item Describe the problem with clauses with multiple predicates (to specific then recall is penalized)
+\item Describe the algorithm to find key predicates
+\item Describe how we sample the source and target data to find the key predicates
+\item Describe heuristic for sampling. 
+\item Describe how processing highly discriminative instance first help to find better keys.
+\item Describe how the assumption that the sources instance are belong to the same class can speed up the generation of attribute clauses.
+\item Describe the algorithm to map comparable keys
+
+\item Describe the motivation for use class clauses (because the ambiguity at class level)
+\item Define what is a class clause. (a predicate/value pair that select positive and no negative examples.)
+\item Describe that we have to assume that instances belong to a same class. 
+\item Then we case use the class based disambiguation to generate examples and those examples are used to find class clauses.
+\item Describe the algorithm to find those class clauses.
+
+\end{itemize}
+
+\section{Branch-and-Bound Optimization}
+
+\begin{itemize}
+\item Describe the motivation to use the branch-and-bound to approach the efficiency issues (execute all queries are costly)
+\item The idea is to execute the minimum amount of queries.
+\item Describe the heuristic used to determined when evaluate a query
+\item Describe how those heuristic are used in the framework
+\item Describe how we tackle the time issue.  (reordering queries).
+\item Describe the moment  that attribute queries are generated. (at the beginning of the process)
+\item Describe the moment the queries with class clauses are generated. (they are generated when the cardinality of candidates are above a threshold)
+\item Describe how the predictor can increase the efficiency by skipping queries
+\item Describe how we train the classifier. it is done automatically after it converges.
+\end{itemize}
+
+
+\section{Evaluation}
+
+\begin{itemize}
+
+\item Describe the datasets
+\item Data preparation (indexes)
+\item Describe the metrics
+\item Describe alternative approaches
+\item Results for candidate selection
+\item Results for instance matching
+
+\end{itemize}
+
+
+
  
 %\textbf{Solution overview}. Aiming to approximate our solution to the optimal solution, we approach this problem in an iterative fashion, where at each iteration we use information from the previous iteration to refine and increase the selectivity of the query templates used on next iterations. Notice that as more selective a query is, as more efficient and effective it is, because, it selects less elements(and it takes less time); and it selects less incorrect matches.  
 
