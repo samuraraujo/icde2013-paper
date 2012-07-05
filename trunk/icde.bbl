@@ -18,6 +18,10 @@
 \fi
 #2}}
 
+\bibitem{DBLP:conf/vldb/ChaudhuriCGK07}
+S.~Chaudhuri, B.-C. Chen, V.~Ganti, and R.~Kaushik, ``Example-driven design of
+  efficient record matching queries,'' in \emph{VLDB}, 2007, pp. 327--338.
+
 \bibitem{DBLP:conf/semweb/SongH11}
 D.~Song and J.~Heflin, ``Automatically generating data linkages using a
   domain-independent candidate selection approach,'' in \emph{International

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  5 JUL 2012 13:09
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  5 JUL 2012 13:45
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -388,12 +388,7 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <9> not available
 
 ] <p1.png, id=20, 473.77pt x 128.48pt>
 File: p1.png Graphic file (type png)
- <use p1.png>
-
-LaTeX Warning: Citation `DBLP:conf/vldb/ChaudhuriCGK07' on page 2 undefined on 
-input line 40.
-
-[2 <./p1.png (PNG copy)>]
+ <use p1.png> [2 <./p1.png (PNG copy)>]
 
 LaTeX Warning: Citation `•' on page 3 undefined on input line 60.
 
@@ -441,7 +436,7 @@ t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/ty
 pe1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on icde.pdf (3 pages, 182883 bytes).
+Output written on icde.pdf (3 pages, 183522 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
