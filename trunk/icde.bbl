@@ -32,4 +32,8 @@ G.~Papadakis, E.~Ioannou, C.~Nieder{\'e}e, and P.~Fankhauser, ``Efficient
   entity resolution for large heterogeneous information spaces,'' in
   \emph{WSDM}, 2011, pp. 535--544.
 
+\bibitem{DBLP:conf/soda/CarrDKM00}
+R.~D. Carr, S.~Doddi, G.~Konjevod, and M.~V. Marathe, ``On the red-blue set
+  cover problem,'' in \emph{SODA}, 2000, pp. 345--353.
+
 \end{thebibliography}
