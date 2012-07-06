@@ -1,67 +1,30 @@
-\section{Constructing Candidate Selection Queries} 
-In order to construct queries, Sonda firstly find comparable attribute pair between the source and the target datasets. 
+\section{Constructing Template Queries}
 
-\subsection{Selecting Key Attributes}
-Intuitively, attributes shall be used as keys when they are highly discriminative such that every possible value of such an attributed are shared only by a few instances. They discriminate the instances well in that when instances have different values on these keys.
-%, they can be considered as referring to different real-world objects. 
-For instance, there are much more people \verb+born in+ Brazil than a person with the \verb+name+ Anna White. Hence, \verb+name+ is more discriminative and thus, a better key than \verb+born in+. Following this intuition, the discriminability $d(p)$ of an attribute $p$ can be measured in terms of its entropy. More precisely, given an attribute and its literal values $\{o_1,\ldots,o_i,\ldots,o_n\}$, 
-\begin{equation}
-d(p) = - \sum_{i=1}^{n} P(o_i)log_2P(o_i).
-\end{equation}
-where $P(o_i)$ denotes the probability of observing $o_i$ as the object of an triple in a process, in which a triple is repeatedly sampled from $G$, the set of all triples. Intuitively, $d(p)$ is lower when the values of $p$ are more unique.  
+\begin{itemize}
 
-\begin{algorithm}
-\caption{FindKeys(G). Find the blocking schema $U^*_A$ for $G$.}
-\begin{algorithmic}
-\scriptsize\tt
-\STATE $U_A \leftarrow$ the set of attributes in $G$. 
-\FORALL{$p \in U_A$}
-\STATE scores[p] $\leftarrow d(p)$
-\ENDFOR
-\STATE average $\leftarrow$ average(scores[p].values)
-\FORALL{$p \in U_A$}
-\IF{scores[p] $\geq$ average}
-\STATE $U^*_A$.add(p)
-\ENDIF
-\ENDFOR
-\RETURN $U^*_A$
-\end{algorithmic}
-\end{algorithm}
+\item Describe the template queries are compose of two type of clauses
+\item Describe the motivation for the use of attribute clauses
+\item Describe the problem with clauses with multiple predicates (to specific then recall is penalized)
+\item Describe the algorithm to find key predicates
+\item Describe how we sample the source and target data to find the key predicates
+\item Describe heuristic for sampling. 
+\item Describe how processing highly discriminative instance first help to find better keys.
+\item Describe how the assumption that the sources instance are belong to the same class can speed up the generation of attribute clauses.
+\item Describe the algorithm to map comparable keys
 
-Alg. 1 implements the process of selecting key schema $U^*_A$, for a given dataset $G$. For every attribute $p \in U_A$, it computes its discriminability score using Eq. 1. Then, it computes the average of all scores to keep only those that are above this average as key attributes. We note that the idea behind this is adopted from the key selection technique proposed in previous work~\cite{DBLP:conf/semweb/SongH11}. As opposed to that, it does not consider the coverage of attributes for the computation of $d(p)$ and in particular, only  
-% because as we will show later, low coverage attributes will be automatically pruned by our candidate selection algorithm further in the process.  
-adds single attributes to $U^*_A$. This is to facilitate the search for comparable attributes, which was not considered in previous work. In particular, Sonda does not assume precomputed mappings but computes comparable pairs of attributes on the fly. Limiting attention to single attributes helps to avoid the large number of attribute pair combinations that would have to be considered.  
+\item Describe the motivation for use class clauses (because the ambiguity at class level)
+\item Define what is a class clause. (a predicate/value pair that select positive and no negative examples.)
+\item Describe that we have to assume that instances belong to a same class. 
+\item Then we case use the class based disambiguation to generate examples and those examples are used to find class clauses.
+\item Describe the algorithm to find those class clauses.
 
-\subsection{Finding Comparable Key Attributes}
-The technique used for this borrows ideas from instance-based schema matching, which derives attribute mappings based on the similarity between attribute values~\cite{DBLP:conf/fskd/FengHQ09,DBLP:conf/iceis/LemeCBF09}. Here, we consider attributes as comparable when they share some bigrams in their literal values. Additionally, we exploit the discriminability score $d(p)$ as computed before. Intuitively, this score can be seen as another instance-based signal because large discriminability differences between two attributes also indicate they have different values. 
+\end{itemize}
 
-Alg. 2 shows the process of computing pairs of comparable attributes from the two sets of key attributes $U^{*s}_A$ and $U^{*t}_A$ computed separately for $G_s$ and $G_t$, respectively, as discussed before. The result $U^{*st}_A$ now consists of pairs of attributes as entries, one attribute in $U^{*s}_A$ and its corresponding comparable attribute in $U^{*t}_A$. It starts by building a $|U^{*s}_A|\times|U^{*t}_A|$ matrix $M$, with every cell representing a pair of attributes $p_s \in U^{*s}_A$ and $p_t \in U^{*t}_A$ through two features $sim$ and $d$. The set similarity score $sim$ is defined over the sets of bigrams $Bi_{s}$ and $Bi_{t}$ extracted from all literal values in $p_s$ and $p_t$ respectively, as $\frac{|Bi_{s} \cap Bi_{t}|}{min(|Bi_{s}|,|Bi_{t}|)}$; $d$ is the discriminability computed as the difference between $d(p_s)$ and $d(p_t)$. 
+In this section we describe how we construct the template queries in our approach. Basically, we want to avoid queries composed by too many clauses, because they are too selective, and they end up missing some positive matches. Therefore, in this work, we investigate template queries that are composed at most of two clauses; namely, an attribute clause and a class clause. The attribute clause helps us to find candidates based on the assumption that positive matches share a similar token on a pair of highly discriminative predicates. The class clause help us to disambiguate candidates that share the same token but belong to different classes.  We only build template queries that contains an attribute clause or an attribute clause and an class clause. 
 
-These features form a two-dimensional feature space in which an attribute pair can be represented as a point. An agglomerative hierarchical clustering algorithm~\cite{DBLP:books/ph/JainD88} is then applied to all the points corresponding to cells in $M$. In particular, centroid linkage using the four centroids $[0,0], [1,0], [0,1]$ and $[1,1]$ are used to form four clusters. The one resulting cluster with the closest distance to $[0,0]$ contains points with higher bigram overlap and smaller difference in discriminability, compared to points in the other three clusters. Only attribute pairs represented by points in this cluster are considered as comparable and used subsequently for constructing candidate selection queries. 
-  
+An attribute clause denoted by $A(p_t,o_s)$ is derived from the comparable predicate pair $(p_s, p_t)$ where the triple $(s_i, p_s, o_s)$ exists in $G_s$. To build attribute clauses, we use known algorithms to determine the best pair of comparable predicates. Highly discriminative pairs are desired. The discriminative property guaranties that the clause will select a few candidates, impacting in the overall precision. Among those predicates, the set that cover all the positive match are used in process. The coverage property avoids that we miss positive matches, impacting the overall recall. To find the source predicates, we apply this algorithm over a subset of the source instances, which is quite straightforward. To find the target predicates and align them with the source predicates to form pairs is much less obvious; specially because we need to query the target endpoint to collect the data. A reasonable approach to get relevant data is to use the values of the selected source predicates to query the target endpoint. Then, we apply the algorithm over those candidates to determine the target predicates. Afterwards, we map the source and target predicates that their values are similar above a specific threshold. Notice that we do not use any schema information in this process, because in the heterogeneous setting, the schemas may not align. The final set of predicate pairs that we found is then transformed in a set of template queries containing one clause (one for each predicate pair).
 
-\begin{algorithm}
-\caption{MapKeys($U^{*s}_A$, $U^{*t}_A$). Computes comparable pairs from $U^{*s}_A$ in $G_s$ and $U^{*t}_A$ in $G_t$.}
-\begin{algorithmic}
-\scriptsize\tt
-\STATE Create a $|U^{*s}_A|\times|U^{*t}_A|$ feature matrix, $M$; every cell $M_{st}$ is used to store two features $[sim,d]$, where $sim$ is the similarity score and $d$ the discriminability score between the attributes $p_s$ and $p_t$
-\FORALL{$p_s \in |U^{*s}_A|$}
-\FORALL{$p_t \in |U^{*t}_A|$}
-\STATE $M_{st} \leftarrow$ [setsim(bigrams($p_s$), bigrams($p_t$)), Abs(d($p_s$) - d($p_t$))]
-\ENDFOR
-\ENDFOR
-\STATE clusters $\leftarrow$ clustering($M$, centroids([0,0],[0,1],[1,0],[1,1]))
-\STATE $U^{*st}_A$ $\leftarrow$ clusters.closestTo([0,0])
-\RETURN $U^{*st}_A$
-\end{algorithmic}
-\end{algorithm}
+In this work, we assume that the source instances to be matched belong to the same class (e.g. country, people, drugs, etc.). This assumption help us to find the best comparable predicates in two ways. First, because instances that share the same class are less diverse in the number of predicates; consequently, it is easier to find the ones with the highest coverage and discriminability. Second, the target instances for those source instances will also belong to a limited set of target class. Therefore, as both source and target sample are less diverse, we can with much less effort produce attribute clauses with the highest coverage and the maximal selectivity.
 
-Below, we show the final alignment  produced by this algorithm between Sider attributes and Diseasome attributes.
-\lstset{basicstyle=\small}
-\begin{lstlisting}[ ]   
-(rdf:label, rdf:label)
-(rdf:label, diseasome:name)
-(sider:sideEffectId, diseasome:size)
-(sider:sideEffectName, rdf:label)
-(sider:sideEffectName, diseasome:name)
-\end{lstlisting}
+Beside of that, we can only produce class clauses with we consider this assumption. An class clause denoted by $C(p_t,o_t)$ is derived from a triple $(s_j, p_t, o_t)$ that exists in $G_t$. To build class clauses, we use a set-cover based algorithm \cite{DBLP:conf/soda/CarrDKM00} to quickly retrieve the list of predicate/value pair that select all positive elements but avoid the negative ones. The positive and negative matches are obtained during the candidate selection process that we will detail further.
+
