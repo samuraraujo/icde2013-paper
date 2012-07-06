@@ -57,6 +57,8 @@ We noticed there are two problem with the existing approaches. First, they do no
 
 %To solve this problem, we propose an optimization framework where the goal is to efficiently find template queries that select the optimal results for each instance.  Our optimization focuses on both aspect of efficiency and effectiveness of the problem. To efficiently select template queries, we learn from the data most discriminative template queries and we keep a history of their performances. Those histories are used to decide when to performance a query or not, therefore minimizing the number of queries performed. To achieve the optimal results, which means to produce candidate sets that contains all positive matches but the least of negative ones, we build highly selective template queries that respect such optimal criteria. 
 
+
+
 OPTIMIZATION PROBLEM
 \begin{itemize}
 \item Describe the optimization goal. to be efficient and effective on building candidate sets.
@@ -68,6 +70,7 @@ OPTIMIZATION PROBLEM
 \item Describe the efficiency part of the problem. 
 \item Due to the large number of queries templates, we can not evaluate all queries because it takes too much time. Therefore, we need to be efficient on selecting only the queries that has the highest chance to retrieve a optimal candidate set. We should ignore queries that perform badly.
 
+We pose the problem of candidate selection as a optimization problem, where, for each source instance, the goal is to find a query $s$ that  selects all positive matches for $s$, avoiding negative matches. Assuming every source instance maps to a target instance (a 1-to-1 mapping), the optimal query for this problem would retrieve a candidate sets with one element. For now, we consider that an oracle can decide if the match is correct or not. Due the heterogeneity of the data, there is no unique template query that works for all instances. Therefore, to be effective, we need to find a template query for each specific source instance.  As the number of those queries may be large, we do not want  to evaluate all to to find the optimal query, because it is time prohibitive; specially when we have to query a remote endpoint. Therefore, we need to be time efficient by evaluating only the queries that has the highest change to be optimal.
 \end{itemize}
 
 SOLUTION
