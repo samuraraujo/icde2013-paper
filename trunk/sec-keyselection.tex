@@ -1,24 +1,21 @@
 \section{Constructing Template Queries}
 
-\begin{itemize}
-
-\item Describe the template queries are compose of two type of clauses
-\item Describe the motivation for the use of attribute clauses
-\item Describe the problem with clauses with multiple predicates (to specific then recall is penalized)
-\item Describe the algorithm to find key predicates
-\item Describe how we sample the source and target data to find the key predicates
-\item Describe heuristic for sampling. 
-\item Describe how processing highly discriminative instance first help to find better keys.
-\item Describe how the assumption that the sources instance are belong to the same class can speed up the generation of attribute clauses.
-\item Describe the algorithm to map comparable keys
-
-\item Describe the motivation for use class clauses (because the ambiguity at class level)
-\item Define what is a class clause. (a predicate/value pair that select positive and no negative examples.)
-\item Describe that we have to assume that instances belong to a same class. 
-\item Then we case use the class based disambiguation to generate examples and those examples are used to find class clauses.
-\item Describe the algorithm to find those class clauses.
-
-\end{itemize}
+%\begin{itemize}
+%\item Describe the template queries are compose of two type of clauses
+%\item Describe the motivation for the use of attribute clauses
+%\item Describe the problem with clauses with multiple predicates (to specific then recall is penalized)
+%\item Describe the algorithm to find key predicates
+%\item Describe how we sample the source and target data to find the key predicates
+%\item Describe heuristic for sampling. 
+%\item Describe how processing highly discriminative instance first help to find better keys.
+%\item Describe how the assumption that the sources instance are belong to the same class can speed up the generation of attribute clauses.
+%\item Describe the algorithm to map comparable keys
+%\item Describe the motivation for use class clauses (because the ambiguity at class level)
+%\item Define what is a class clause. (a predicate/value pair that select positive and no negative examples.)
+%\item Describe that we have to assume that instances belong to a same class. 
+%\item Then we case use the class based disambiguation to generate examples and those examples are used to find class clauses.
+%\item Describe the algorithm to find those class clauses.
+%\end{itemize}
 
 In this section we describe how we construct the template queries in our approach. Basically, we want to avoid queries composed by too many clauses, because they are too selective, and they end up missing some positive matches. Therefore, in this work, we investigate template queries that are composed at most of two clauses; namely, an attribute clause and a class clause. The attribute clause helps us to find candidates based on the assumption that positive matches share a similar token on a pair of highly discriminative predicates. The class clause help us to disambiguate candidates that share the same token but belong to different classes.  We only build template queries that contains an attribute clause or an attribute clause and an class clause. 
 

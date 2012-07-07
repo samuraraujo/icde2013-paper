@@ -1,5 +1,16 @@
-\section{Experiments} 
-Our system Sonda was implemented in Ruby and the queries were implemented as SPARQL queries issues over real endpoints. Sonda is available for download at GitHub as a command line tool $\footnote{https://github.com/samuraraujo/Experiments/tree/master/experiments/ISWC2012}$, as well as all the results. We conducted experiments on a MacBook with an processor 2.4GHz Intel Core 2 Duo and 4GB memory.
+\section{Evaluation}
+
+\begin{itemize}
+
+\item Describe the datasets
+\item Data preparation (indexes)
+\item Describe the metrics
+\item Describe alternative approaches
+\item Results for candidate selection
+\item Results for instance matching
+
+\end{itemize}
+In this section, we discuss how we evaluate our approach and discuss about the results. Our system Sonda was implemented in Ruby and the queries were implemented as SPARQL queries issues over alive SPARQL endpoints. Sonda is available for download at GitHub as a command line tool $\footnote{https://github.com/samuraraujo/Experiments/tree/master/experiments/ICDE2013}$, as well as all the results that we obtained. 
  
 \subsection{Datasets} 
 
@@ -8,30 +19,31 @@ Evaluation Initiative (OAEI) \cite{DBLP:journals/jods/EuzenatMSSS11}. We used th
 includes Sider, Drugbank, Dailymed TCM, and Diseasome) and the Person-Restaurant (PR) from the 2010 collection. We excluded LinkedCT from our experiments due to known quality problem in the ground truth. We used all datasets from the 2011 collection. 
 
 \subsection{Querying Candidates} 
-We implemented the queries in our algorithm as SPARQL queries (as discussed before) and directly query a SPARQL endpoint to obtain results (limit to 30 instances per query). For that, we loaded all datasets into the OpenLink Virtuoso Universal Server (Version 06.01.3127), except for DBPedia, which we queried its on-line endpoint. We use the default S-P-O index created by this server, and created an inverted index for literal values using the following commands:
+We implemented the queries in our algorithm as SPARQL queries (as discussed before) and directly query a SPARQL endpoint to obtain results (limit to 30 instances per query). For that, we loaded all datasets into the OpenLink Virtuoso Universal Server (Version 6.1.5.3127), except for DBPedia, which we queried its on-line sparql endpoint. We use the default S-P-O index created by this server, and created an inverted index for literal values using the following commands:
 
 \lstset{basicstyle=\small}
 \begin{lstlisting}[ ]   
-DB.DBA.RDF_OBJ_FT_RULE_ADD (null, null, 'index_local');
+DB.DBA.RDF_OBJ_FT_RULE_ADD 
+(null, null, 'index_local');
 DB.DBA.VT_INC_INDEX_DB_DBA_RDF_OBJ (); 
 \end{lstlisting}
 
-%We use the specific Virtuoso SPARQL implementation to have access to the index, and we limited all query results to 30 instances. This avoids the queries to retrieve too many data for non-discriminative queries. For example, in this syntax, the 4 query types EXACT, LIKE, AND, and OR are, respectively: 
-%\lstset{basicstyle=\small}
-%\begin{lstlisting}[ ]   
-% SELECT DISTINCT ?s  WHERE {?s ?p  'eosinophilic pneumonia' .} 
-% limit 30
-% 
-% SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
-% ?o bif:contains  '"eosinophilic pneumonia"'  . } limit 30
-% 
-% SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
-% ?o bif:contains  '"eosinophilic"AND"pneumonia"'  . } limit 30
-% 
-% SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
-% ?o bif:contains  '"eosinophilic"OR"pneumonia"'  . } limit 30
-%\end{lstlisting}
-%
+We use the specific Virtuoso SPARQL implementation to have access to the index, and we limited all query results to 30 instances. This avoids the queries to retrieve too many data for non-discriminative queries. For example, in this syntax, the 4 query types EXACT, LIKE, AND, and OR are, respectively: 
+\lstset{basicstyle=\small}
+\begin{lstlisting}[ ]   
+ SELECT DISTINCT ?s  WHERE {?s ?p  'eosinophilic pneumonia' .} 
+ limit 30
+ 
+ SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
+ ?o bif:contains  '"eosinophilic pneumonia"'  . } limit 30
+ 
+ SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
+ ?o bif:contains  '"eosinophilic"AND"pneumonia"'  . } limit 30
+ 
+ SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
+ ?o bif:contains  '"eosinophilic"OR"pneumonia"'  . } limit 30
+\end{lstlisting}
+
 \subsection{Evaluation metrics and alternative approaches} 
 We used standard metrics, namely Reduction Ratio (RR), Pair-wise Completeness (PP) and F1. Basically, high RR means that the candidate selection algorithm helps to focus on a smaller number of candidates, while high PP means that it could preserve more of the correct candidates. Because RR is small given the number of all possible candidates is large in this scenario, we use a normalized version of RR. In particular, these metrics are computed as follows: $PC =$ \# Correctly Computed Candidates / \# Ground Truth Candidates; $RR =$ \# Instances with Non-Empty Candidate Sets / \# All Computed Candidates; $F1 = \frac{2 * RR * PC}{ RR + PC}$. Beside these metrics, we also count the average number of queries evaluated per instance as well as overall time for accomplishing the task of finding the candidate sets. 
 
@@ -43,84 +55,8 @@ For comparison, we implemented the \emph{S-agnostic}~\cite{papadakis_efficient_2
 Table 1 shows the results. Comparing all approaches over all the 16 datasets pairs that we evaluated, Sonda achieves the best F1 score in all cases (in 96\% of the cases, to be precise), except for the NYT-Geonames pair, where S-based has best F1 result (due to high RR). 
 %Sonda yields better F1 score in 96\% of the cases and also
  
-\begin{table} 
-\scriptsize\tt
-\caption{Results of the three systems over all pairs of datasets. Queries denote the total number of queries given to the system. Queries/Instance denotes the amount of queries evaluated per instance.} 
-    \begin{tabular}{|c|l|c|c|c|c|c|c|}
-        \hline
-        Dataset Pairs & Systems & RR($\%$) & PC($\%$) &  F1($\%$) & Queries(Nodes) & Queries/Instance & Time(s) \\ \hline
-\multirow{3}{*}{Restaurant1-Restaurant2} & Sonda          & 91.13 & 99.12 & 94.95  & 10 & 3.09   & 37.62  \\
-											& S-based & 91.74 & 87.61 & 89.63  & 3 & 3.0   & 47.12\\
- 											& S-agnostic      & 91.35 & 81.42 & 86.1  & 2 & 2.0   & 56.36\\ \hline
- 											
-\multirow{3}{*}{Person11-Person12} & Sonda    & 31.45 & 100.0 & 47.85  & 15 & 4.37   & 249.27\\
-											& S-based & 29.78 & 99.17 & 45.8  & 4 & 4.0   & 280.8\\
- 											& S-agnostic      & 31.36 & 99.58 & 47.7  & 3 & 3.0   & 305.31\\ \hline
-
-\multirow{3}{*}{Person21-Person22} & Sonda   & 28.79 & 83.9 & 42.87  & 15 & 4.46   & 195.07\\
-											& S-based & 26.03 & 94.07 & 40.78  & 4 & 4.0   & 233.74\\
- 											& S-agnostic       	& 27.14 & 85.59 & 41.21  & 3 & 3.0   & 118.94\\ \hline 										
-
- \multirow{3}{*}{Sider-Tcm} & Sonda          & 83.69 & 98.25 & 90.38  & 10 & 4.13   & 213.51  \\
-											& S-based & 61.63 & 96.49 & 75.21  & 3 & 3.0   & 190.15\\
- 											& S-agnostic        & 61.63 & 96.49 & 75.21  & 2 & 2.0   & 165.98\\ \hline
- 											
-\multirow{3}{*}{Sider-Dailymed} & Sonda     & 26.43 & 78.08 & 39.5  & 35 & 8.89   & 801.42 \\
-											& S-based  & 23.3 & 85.06 & 36.57  & 7 & 7.0   & 1230.16\\
- 											& S-agnostic     & - & - & -  & 3 & 3   & >10000   \\ \hline 		
- 																							
-\multirow{3}{*}{Sider-Drugbank} & Sonda &  91.91 & 99.19 & 95.41  & 90 & 19.26   & 991.65     \\
-											& S-based  & 88.15 & 99.3 & 93.39  & 18 & 18.0   & 1428.95\\
- 											& S-agnostic     & 92.32 & 97.79 & 94.98  & 3 & 3.0   & 600.1     \\ \hline 											
-
-\multirow{3}{*}{Sider-Diseasome} & Sonda    & 63.48 & 95.35 & 76.21  & 25 & 10.16   & 989.53  \\
-											& S-based   & 54.75 & 91.86 & 68.61  & 5 & 5.0   & 848.16\\
- 											& S-agnostic    & 57.14 & 88.95 & 69.58  & 3 & 3.0   & 324.15      \\ \hline 		 									
-
-\multirow{3}{*}{Dailymed-Sider} & Sonda     & 97.28 & 87.69 & 92.24  & 30 & 6.28   & 1398.02 \\
-											& S-based  & 92.4 & 88.82 & 90.57  & 6 & 6.0   & 2296.59\\
- 											& S-agnostic         & 92.4 & 88.82 & 90.57  & 3 & 3.0   & 1595.46 \\ \hline 		
-
-\multirow{3}{*}{Diseasome-Sider} & Sonda    & 83.63 & 95.93 & 89.36  & 30 & 8.27   & 771.44   \\
-											& S-based   & 57.46 & 95.93 & 71.87  & 6 & 6.0   & 689.75\\
- 											& S-agnostic  & 57.46 & 95.93 & 71.87  & 2 & 2.0   & 325.12        \\ \hline 		 									
-
-\multirow{3}{*}{Drugbank-Sider} & Sonda    & 97.66 & 93.64 & 95.61  & 10 & 3.4   & 884.91   \\
-											& S-based   & 83.45 & 93.29 & 88.09  & 2 & 2.0   & 855.28\\
- 											& S-agnostic          & 83.45 & 93.29 & 88.09  & 3 & 3.0   & 935.5\\ \hline 											
-
-
-\multirow{3}{*}{NYT-Geonames} & Sonda & 6.26 & 78.2 & 11.6  & 15 & 5.13   & 3921.45  \\
-											& S-based   & 25.46 & 50.2 & 33.78  & 4 & 4.0   & 1084.79 \\
- 											& S-agnostic    & 17.25 & 23.53 & 19.91  & 3 & 3.0   & 719.24 \\ \hline 											
-
-
-\multirow{3}{*}{NYT-DBPedia(Geo)} & Sonda & 15.01 & 56.72 & 23.74  & 5 & 1.37   & 3268.27   \\
-											& S-based   & 15.99 & 34.64 & 21.88  & 1 & 1.0   & 2222.01\\
- 											& S-agnostic & 6.92 & 32.66 & 11.43  & 4 & 4.0   & 7642.49      \\ \hline 											
- 		
-\multirow{3}{*}{NYT-DBPedia(Per)} & Sonda & 27.16 & 85.75 & 41.25  & 5 & 1.38   & 4569.49  \\
-											& S-based  & 31.53 & 13.52 & 18.93  & 1 & 1.0   & 3703.02\\
- 											& S-agnostic   & 22.03 & 11.79 & 15.36  & 4 & 4.0   & 4234.47    \\ \hline 											
- 		
- 		
-\multirow{3}{*}{NYT-Freebase(Geo)} & Sonda  & 80.83 & 88.13 & 84.32  & 25 & 5.26   & 962.2   \\
-											& S-based    & 65.97 & 77.76 & 71.38  & 5 & 5.0   & 1147.87\\
- 											& S-agnostic    & 69.16 & 46.51 & 55.62  & 4 & 4.0   & 576.53     \\ \hline 											
+\todo{add table of results} 
  
- 
-
-\multirow{3}{*}{NYT-Freebase(Corp.)} & Sonda  & 83.68 & 83.44 & 83.56  & 5 & 1.8   & 806.42   \\
-											& S-based    & 67.11 & 62.68 & 64.82  & 1 & 1.0   & 845.63 \\
- 											& S-agnostic          & 68.02 & 32.82 & 44.28  & 2 & 2.0   & 409.61\\ \hline 					
- 											
-\multirow{3}{*}{NYT-Freebase(Person)} & Sonda  & 82.15 & 91.87 & 86.74  & 20 & 5.33   & 1861.38\\
-											& S-based      & 72.16 & 71.88 & 72.02  & 4 & 4.0   & 2729.75\\
- 											& S-agnostic   & 82.32 & 21.07 & 33.55  & 4 & 4.0   & 718.16    \\ \hline 								
-
-\end{tabular}
-\end{table}
-
 In the NYTimes-Freebases case, Sonda achieves a considerable improvement in both RR and PC. The other approaches perform worse in this case because the comparable key pairs and queries they use are not discriminative, producing too many matching instances. Sonda also considers many comparable key pairs, thereby ensuring high PC (reflecting recall). However, not all queries generated from them are used to obtain candidates but only optimal ones found during the process. This helps to balance PC with RR (reflecting precision). 
 
 For Sider-Dailymed, we could not obtain the results for S-agnostic because it took more than 10,000 seconds to compute it. This may be attributed to the fact that the Dailymed dataset contains a large number of textual attributes and the queries generated by S-agnostic are evaluated over all these attributes, resulting in a large number of disk accesses.
