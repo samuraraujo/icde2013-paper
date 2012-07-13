@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  7 JUL 2012 22:06
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  12 JUL 2012 10:37
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -386,48 +386,61 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <9> not available
 /pdftex.map}
 
 
-] [2] [3]) (./sec-keyselection.tex) (./sec-experiment.tex
-Overfull \hbox (17.92894pt too wide) in paragraph at lines 13--13
+] [2] [3]) (./sec-keyselection.tex) (./sec-approach.tex [4]
+<p23.png, id=29, 538.01pt x 153.57375pt>
+File: p23.png Graphic file (type png)
+ <use p23.png>
+LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <7> not available
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 51.
+Missing character: There is no Ã in font cmr7!
+Missing character: There is no Ÿ in font cmr7!
+
+Overfull \hbox (6.97208pt too wide) in paragraph at lines 82--83
+[] []\OT1/pcr/m/n/7 candidates[i] $\OMS/cmsy/m/n/7  $ \OT1/pcr/m/n/7 AggregateM
+inimalCandidatesSet(processed) 
+ []
+
+[5 <./p23.png (PNG copy)>]
+
+LaTeX Warning: Citation `â€¢' on page 6 undefined on input line 97.
+
+<p26.png, id=33, 463.7325pt x 124.465pt>
+File: p26.png Graphic file (type png)
+ <use p26.png>) (./sec-experiment.tex
+Overfull \hbox (17.92894pt too wide) in paragraph at lines 12--12
 [][][]\OT1/ptm/m/n/8 https://github.com/samuraraujo/Experiments/tree/master/exp
 eriments/ICDE2013| 
  []
 
-[4]
+[6 <./p26.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 33.
 
-LaTeX Warning: Citation `DBLP:journals/jods/EuzenatMSSS11' on page 5 undefined 
-on input line 18.
-
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 34.
 (/usr/local/texlive/2009/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
 [][][][][][][][][][][][][][][][][][][][][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--40
+Underfull \hbox (badness 10000) in paragraph at lines 37--39
 [][][][][][][][][][][][][][][][][][][]
  []
 
 
-Overfull \hbox (18.00275pt too wide) in paragraph at lines 41--43
+Overfull \hbox (18.00275pt too wide) in paragraph at lines 40--42
 [][][][][][][][][][][][][][][][][][][][][]
  []
 
 
-Overfull \hbox (12.60269pt too wide) in paragraph at lines 44--45
+Overfull \hbox (12.60269pt too wide) in paragraph at lines 43--44
 [][][][][][][][][][][][][][][][][][][][][]
  []
 
-
-LaTeX Warning: Citation `papadakis_efficient_2011' on page 5 undefined on input
- line 51.
-
-[5]) (./icde.bbl)
+) (./icde.bbl [7])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -439,7 +452,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[6
+[8
 
 ] (./icde.aux)
 
@@ -447,33 +460,34 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4678 strings out of 493848
- 67351 string characters out of 3149207
- 168424 words of memory out of 3000000
- 7845 multiletter control sequences out of 15000+200000
- 47310 words of font info for 104 fonts, out of 3000000 for 9000
+ 4738 strings out of 493848
+ 67928 string characters out of 3149207
+ 167424 words of memory out of 3000000
+ 7895 multiletter control sequences out of 15000+200000
+ 48639 words of font info for 109 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 32i,11n,36p,1875b,1121s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,11n,36p,2171b,1121s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2009/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
 live/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
-ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
-/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
-09/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2009/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2009/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2009/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2009/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2009/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2009/tex
-mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2009/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type
-1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/tim
-es/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri8a
-.pfb>
-Output written on icde.pdf (6 pages, 191705 bytes).
+ve/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
+/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2
+009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2009
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2009/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2009/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2009/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2009/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2009/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2009/texmf
+-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2009/texmf-dist/fo
+nts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type
+1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/time
+s/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmr8a.
+pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on icde.pdf (8 pages, 258939 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

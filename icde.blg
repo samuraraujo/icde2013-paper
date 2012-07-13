@@ -11,54 +11,60 @@ A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
 refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
 A bad cross reference---entry "DBLP:conf/soda/CarrDKM00"
 refers to entry "DBLP:conf/soda/2000", which doesn't exist
+A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
+refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
+A bad cross reference---entry "papadakis_efficient_2011"
+refers to entry "DBLP:conf/icde/2011w", which doesn't exist
 Warning--I didn't find a database entry for "DBLP:conf/soda/2000"
 Warning--I didn't find a database entry for "DBLP:conf/vldb/2007"
 Warning--I didn't find a database entry for "DBLP:conf/wsdm/2011"
+Warning--I didn't find a database entry for "DBLP:journals/jods/2011-15"
 Warning--I didn't find a database entry for "DBLP:conf/semweb/2011-1"
+Warning--I didn't find a database entry for "DBLP:conf/icde/2011w"
 -- IEEEtran.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 4 entries,
+You've used 8 entries,
             3975 wiz_defined-function locations,
-            830 strings with 8043 characters,
-and the built_in function-call counts, 3644 in all, are:
-= -- 261
-> -- 88
-< -- 32
-+ -- 52
-- -- 14
-* -- 178
-:= -- 501
-add.period$ -- 8
-call.type$ -- 4
-change.case$ -- 4
-chr.to.int$ -- 84
-cite$ -- 4
-duplicate$ -- 248
-empty$ -- 325
-format.name$ -- 18
-if$ -- 858
+            863 strings with 8932 characters,
+and the built_in function-call counts, 7201 in all, are:
+= -- 560
+> -- 165
+< -- 70
++ -- 98
+- -- 25
+* -- 350
+:= -- 1026
+add.period$ -- 16
+call.type$ -- 8
+change.case$ -- 8
+chr.to.int$ -- 171
+cite$ -- 8
+duplicate$ -- 494
+empty$ -- 592
+format.name$ -- 33
+if$ -- 1689
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 42
-newline$ -- 32
-num.names$ -- 4
-pop$ -- 110
+int.to.str$ -- 8
+missing$ -- 80
+newline$ -- 46
+num.names$ -- 8
+pop$ -- 187
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 285
+skip$ -- 571
 stack$ -- 0
-substring$ -- 200
-swap$ -- 200
-text.length$ -- 4
+substring$ -- 407
+swap$ -- 419
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 0
-while$ -- 16
-width$ -- 5
-write$ -- 55
-(There were 4 error messages)
+while$ -- 33
+width$ -- 9
+write$ -- 99
+(There were 6 error messages)
