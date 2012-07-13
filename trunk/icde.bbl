@@ -36,4 +36,26 @@ G.~Papadakis, E.~Ioannou, C.~Nieder{\'e}e, and P.~Fankhauser, ``Efficient
 R.~D. Carr, S.~Doddi, G.~Konjevod, and M.~V. Marathe, ``On the red-blue set
   cover problem,'' in \emph{SODA}, 2000, pp. 345--353.
 
+\bibitem{DBLP:journals/jacm/DechterP85}
+R.~Dechter and J.~Pearl, ``Generalized best-first search strategies and the
+  optimality of a*,'' \emph{J. ACM}, vol.~32, no.~3, pp. 505--536, 1985.
+
+\bibitem{Hand2001Idiots}
+\BIBentryALTinterwordspacing
+D.~J. Hand and K.~Yu, ``{Idiot's Bayes---Not So Stupid After All?}''
+  \emph{International Statistical Review}, vol.~69, no.~3, pp. 385--398, 2001.
+  [Online]. Available:
+  \url{http://dx.doi.org/10.1111/j.1751-5823.2001.tb00465.x}
+\BIBentrySTDinterwordspacing
+
+\bibitem{DBLP:journals/jods/EuzenatMSSS11}
+J.~Euzenat, C.~Meilicke, H.~Stuckenschmidt, P.~Shvaiko, and C.~T. dos Santos,
+  ``Ontology alignment evaluation initiative: Six years of experience,''
+  \emph{J. Data Semantics}, vol.~15, pp. 158--192, 2011.
+
+\bibitem{papadakis_efficient_2011}
+G.~Papadakis and W.~Nejdl, ``Efficient entity resolution methods for
+  heterogeneous information spaces,'' in \emph{ICDE Workshops}, 2011, pp.
+  304--307.
+
 \end{thebibliography}
