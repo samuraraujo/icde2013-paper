@@ -1,21 +1,33 @@
-\section{Evaluation}
+\section{Evaluation On Candidate Selection}
 
-\begin{itemize}
-\item Describe the datasets
-\item Data preparation (indexes)
-\item Describe the metrics
-\item Describe alternative approaches
-\item Results for candidate selection
-\item Results for instance matching
-
-\end{itemize}
-In this section, we discuss how we evaluate our approach and discuss about the results. Our system Sonda was implemented in Ruby and the queries were implemented as SPARQL queries issues over alive SPARQL endpoints. Sonda is available for download at GitHub as a command line tool $\footnote{https://github.com/samuraraujo/Experiments/tree/master/experiments/ICDE2013}$, as well as all the results that we obtained. 
+In this section, we discuss how we evaluate Sonda on the context of candidate selection and discuss about the results. Our system Sonda was implemented in Ruby and the queries were implemented as SPARQL queries issues over alive SPARQL endpoints. Sonda is available for download at GitHub as a command line tool $\footnote{https://github.com/samuraraujo/ICDE2013}$, as well as all the results that we obtained. 
  
 \subsection{Datasets} 
 
 We evaluated our framework using the datasets and ground truth published by the instance-matching benchmark of the Ontology Alignment
 Evaluation Initiative (OAEI) \cite{DBLP:journals/jods/EuzenatMSSS11}. We used the datasets provided in 2010 and 2011. We used the life science (LS) collection (which
 includes Sider, Drugbank, Dailymed TCM, and Diseasome) and the Person-Restaurant (PR) from the 2010 collection. We excluded LinkedCT from our experiments due to known quality problem in the ground truth. We used all datasets from the 2011 collection. 
+
+\subsection{Evaluation metrics and alternative approaches} 
+
+We used standard metrics, namely Reduction Ratio (RR), Pair-wise Completeness (PP) and F1. Basically, high RR means that the candidate selection algorithm helps to focus on a smaller number of candidates, while high PP means that it could preserve more of the correct candidates. Because the number of all possible candidates is large in this scenario, we use a normalized version of RR. In particular, these metrics are computed as follows: 
+\[
+\scriptsize\tt
+ PC = \frac{\text{ \#Correctly Computed Candidates}} { \text{ \#Ground Truth Candidates}}
+\] 
+ \[
+ \scriptsize\tt
+ RR = \frac{\text{\#Instances with Non-Empty Candidate Sets} }{ \text{\#All Computed Candidates} }
+\]
+
+\[
+\scriptsize\tt
+F1 = \frac{2 * RR * PC}{ RR + PC}
+\]
+Beside these metrics, we also count the average number of queries evaluated per instance as well as overall time for accomplishing the task of leaning the candidate selection scheme and finding(searching) the candidate sets. 
+
+For comparison, we implemented the \emph{S-agnostic}~\cite{papadakis_efficient_2011} and \emph{S-based}~\cite{DBLP:conf/semweb/SongH11} approaches as discussed in Sec.~2. S-based uses only an OR query and it does not feature the branch-and-bound optimization. It requires key pairs, which are generated as in Sec.~3.1. Further, S-based applies a similarity function on the keys to further prune incorrect candidates after that have been retrieved using the OR queries. For comparison purposes, we apply this strategy to all approaches, using the same similarity function. Sonda uses four types of queries for each key pair, and employs the proposed branch-and-bound optimization to select best queries. 
+%. We evaluated our approach with all functionalities that we described before (including the predictor , sorting by time, etc.).
 
 \subsection{Querying Candidates} 
 We implemented the queries in our algorithm as SPARQL queries (as discussed before) and directly query a SPARQL endpoint to obtain results (limit to 30 instances per query). For that, we loaded all datasets into the OpenLink Virtuoso Universal Server (Version 6.1.5.3127), except for DBPedia, which we queried its on-line sparql endpoint. We use the default S-P-O index created by this server, and created an inverted index for literal values using the following commands:
@@ -43,25 +55,19 @@ We use the specific Virtuoso SPARQL implementation to have access to the index, 
  ?o bif:contains  '"eosinophilic"OR"pneumonia"'  . } limit 30
 \end{lstlisting}
 
-\subsection{Evaluation metrics and alternative approaches} 
-We used standard metrics, namely Reduction Ratio (RR), Pair-wise Completeness (PP) and F1. Basically, high RR means that the candidate selection algorithm helps to focus on a smaller number of candidates, while high PP means that it could preserve more of the correct candidates. Because RR is small given the number of all possible candidates is large in this scenario, we use a normalized version of RR. In particular, these metrics are computed as follows: $PC =$ \# Correctly Computed Candidates / \# Ground Truth Candidates; $RR =$ \# Instances with Non-Empty Candidate Sets / \# All Computed Candidates; $F1 = \frac{2 * RR * PC}{ RR + PC}$. Beside these metrics, we also count the average number of queries evaluated per instance as well as overall time for accomplishing the task of finding the candidate sets. 
-
-
-For comparison, we implemented the \emph{S-agnostic}~\cite{papadakis_efficient_2011} and \emph{S-based}~\cite{DBLP:conf/semweb/SongH11} approaches as discussed in Sec.~2. S-based uses only an OR query and it does not feature the branch-and-bound optimization. It requires key pairs, which are generated as in Sec.~3.1. Further, S-based applies a similarity function on the keys to further prune incorrect candidates after that have been retrieved using the OR queries. For comparison purposes, we apply this strategy to all approaches, using the same similarity function. Sonda uses four types of queries for each key pair, and employs the proposed branch-and-bound optimization to select best queries. 
-%. We evaluated our approach with all functionalities that we described before (including the predictor , sorting by time, etc.).
 
 \subsection{Candidate Selection Results} 
 Table 1 shows the results. Comparing all approaches over all the 16 datasets pairs that we evaluated, Sonda achieves the best F1 score in all cases (in 96\% of the cases, to be precise), except for the NYT-Geonames pair, where S-based has best F1 result (due to high RR). 
 %Sonda yields better F1 score in 96\% of the cases and also
  
 \begin{center}
-\begin{table*}[ht]
+\begin{table*}[h]
 \centering
 \scriptsize\tt
-\caption{Results of the three systems over all pairs of datasets. Queries denote the total number of queries given to the system. Queries/Instance denotes the amount of queries evaluated per instance.} 
+\caption{Results of the three systems over all pairs of datasets. Queries denote the total number of queries given to the system. Queries/Instance(Q/I) denotes the amount of queries evaluated per instance.} 
     \begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|}
         \hline
-        Dataset Pairs & Systems & Queries & Queries/Instance & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
+        Dataset Pairs & Systems & Queries & Q/I & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
  
 \multirow{4}{*}{Restaurant1-Restaurant2} & SondaA           \\
 											& SondaC  \\
@@ -130,36 +136,43 @@ Table 1 shows the results. Comparing all approaches over all the 16 datasets pai
  											& S-agnostic       \\ \hline 											
  		
  		
-\multirow{4}{*}{NYT-Freebase(Geo)} & SondaA    \\
-											& SondaC  \\
-											& S-based   \\
- 											& S-agnostic        \\ \hline 											
- 
+\multirow{4}{*}{NYT-Freebase(Geo)} & SondaA  & 20 & 3.59   & 39.89  & 819.35     & 82.55 & 94.43 & 88.09 \\
+											& SondaC    & 40 & 4.04   & 31.57  & 978.81   & 86.39 & 95.0 & 90.49\\
+											& S-based     & 4 & 4.0   & 24.23  & 1308.69   & 58.07 & 78.7 & 66.83\\
+ 											& S-agnostic    & 5 & 5.0   & 12.84  & 749.24    & 60.26 & 64.38 & 62.25   \\ \hline 											
  
 
 \multirow{4}{*}{NYT-Freebase(Corp.)} & SondaA   & 15 & 3.02   & 30.51  & 911.26  & 78.06 & 88.27 & 82.85   \\
 											 & SondaC   & 15 & 3.09   & 22.09  & 986.65  & 73.21 & 88.17 & 80.0\\
-											& S-based    \\
- 											& S-agnostic          \\ \hline 					
+											& S-based     & 3 & 3.0   & 16.73  & 1468.65   & 62.47 & 69.05 & 65.6\\
+ 											& S-agnostic   & 2 & 2.0   & 13.23  & 622.9       & 63.05 & 43.04 & 51.15    \\ \hline 					
  											
-\multirow{4}{*}{NYT-Freebase(Person)} & SondaA  \\
-											& SondaC  \\
-											& S-based      \\
- 											& S-agnostic       \\ \hline 								
+\multirow{4}{*}{NYT-Freebase(Person)} & SondaA    & 15 & 2.12   & 50.75  & 1117.39   & 88.67 & 96.2 & 92.29\\
+											& SondaC  &   45 & 3.16   & 45.22  & 1396.57  & 94.62 & 95.62 & 95.12\\
+											& S-based       & 3 & 3.0   & 46.14  & 3536.16 &   71.6 & 73.57 & 72.57 \\
+ 											& S-agnostic    & 4 & 4.0   & 25.87  & 1321.02    & 86.21 & 28.68 & 43.04   \\ \hline 								
 
 \end{tabular}  
 \end{table*} 
 \end{center}
 
+Overall Sonda ($Sonda_A$ and $Sonda_C$) achieves a considerable improvement in both RR and PC than the other approaches, in the Freebase, DBPedia and Geonames cases. Mainly, due to the high level of ambiguity on those target datasets, those approaches performed worse because they considered only OR queries (that are too inclusive and penalize RR), or do not use comparable keys as in the cases of S-agnostic (penalizing PC).  
+
+\textbf{Class Queries}. The RR in $Sonda_C$ was considerably higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geonames). This occurred due to class level ambiguity (many instances with the same name but from different classes) in those datasets. It indicates that the class clauses indeed make the queries more precise because it select exactly the correct class of target instances. However, a little increase on searching time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
+
+\textbf{Time Performance and F1-Measure}. Regarding the learning time performance, in average it takes less than 10\% of the overall searching time. Although, a more complex learning process (that produces better comparable keys) takes more time, it leads to a better F1. 
+
+In general, the best F1 can only be achieved by using an complex learning process and an efficient execution process. For instance, S-based used the same set of comparable keys than Sonda, but it achieved the worse searching time performance in all cases. Even though Sonda has more queries to evaluate (because it uses different types of queries with different time performances), it is faster than S-based, because its  branch-and-bound algorithm helps to select the ones that require less evaluation time (those that are more efficient than the ones used by the other approaches).  In average, S-agnostic has the best learning and searching time performance, but the worse F1. 
+
+Concluding, the best F1 is associated to learn effective comparable keys, which take more time to compute, and to learn efficient queries execution plan, which can efficiently execute the most effective queries. 
  
-\textbf{Attribute Queries}. In the NYTimes-Freebases case, Sonda achieves a considerable improvement in both RR and PC. The other approaches perform worse in this case because the comparable key pairs and queries they use are not discriminative, producing too many matching instances. Sonda also considers many comparable key pairs, thereby ensuring high PC (reflecting recall). However, not all queries generated from them are used to obtain candidates but only optimal ones found during the process. This helps to balance PC with RR (reflecting precision). 
+\textbf{Query Type Effectiveness}. As S-based and S-agnostic considered more inclusive queries (OR queries) than Sonda, we can conclude that, although necessary, more inclusive queries leads to worse F1, mainly because they decrease the RR, and as it was used a limit on queries, it also decrease the PC. 
 
-For Sider-Dailymed, we could not obtain the results for S-agnostic because it took more than 10,000 seconds to compute it. This may be attributed to the fact that the Dailymed dataset contains a large number of textual attributes and the queries generated by S-agnostic are evaluated over all these attributes, resulting in a large number of disk accesses.
+\textbf{Predictor and Branching Policy Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of queries evaluated per instance. In some cases (e.g., Dailymed-Sider, Diseasome-Sider), it performed nearly one query per instance. Notice that we can not compare the predictor on S-based and S-agnostic, because in both cases, the number of queries executed per instance is fixed. The purpose here is to show  that Sonda's predictor and branching policy was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in many cases. 
 
-\textbf{Class Queries}. The RR in $Sonda_C$ was higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geoenames). it indicates that the class clauses indeed make the queries more precise because it select exactly the class of target instances. However, a little increase on time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
 
 \begin{center}
-\begin{table*}[ht]
+\begin{table*}[h]
 \centering
 \scriptsize\tt
 \caption{Sonda F1-measure (between precision and recall) compared to ExampleDriven and other tools that participate on the OAEI 2011 benchmark.} 
@@ -169,9 +182,9 @@ Dataset  &  SondaA  &  SondaC & KnoFuss+GA & AggreementMaker & SERIMI & Zhishi.l
 DBPedia - Geo. & 0 & 0  & 0.89 & 0.69 & 0.68 & 0.92 & 0 \\ \hline
 DBPedia - Org. & 0& 0 & 0.92 & 0.74 & 0.88 & 0.91 & 0\\ \hline
 DBPedia - People & 0 & 0 & 0.97 & 0.88 & 0.94 & 0.97 & 0\\ \hline
-Freebase - Geo. & 0 & 0 & 0.93 & 0.85 & 0.91 & 0.88 & 0\\ \hline
+Freebase - Geo. & 0.90 & 0.90 & 0.93 & 0.85 & 0.91 & 0.88 & 0\\ \hline
 Freebase - Org. & 0.87 & 0.87 & 0.92 & 0.80 & 0.91 & 0.87 & 0\\ \hline
-Freebase - People & & 0 0 & 0.95 & 0.96 & 0.92 & 0.93 & 0\\ \hline
+Freebase - People & 0.96 &  0.96 & 0.95 & 0.96 & 0.92 & 0.93 & 0\\ \hline
 Geonames & 0 & 0  & 0.90 & 0.85 & 0.80 & 0.91 & 0\\ \hline
 Average & 0 & 0  & 0.93 & 0.85 & 0.89 &  0.92 & 0\\ \hline											 
 \end{tabular}  
@@ -179,7 +192,7 @@ Average & 0 & 0  & 0.93 & 0.85 & 0.89 &  0.92 & 0\\ \hline
 \end{center}
 
 \begin{center}
-\begin{table*}
+\begin{table*}[h]
 \centering
 \scriptsize\tt
 \caption{Sonda  F1-measure (between precision and recall) compared ExampleDriven and  other tools that participate on the OAEI 2010 benchmark.} 
@@ -202,10 +215,9 @@ Restaurant1-Restaurant2 & 0 & 0  & 0.77 & 0.81  & 0.88 & 0\\ \hline
 \end{center}
 
 
-\textbf{Time Performance}. Regarding time performance, even though Sonda has more queries to evaluate, it is faster than S-based in 56\% of the cases; it is faster than S-agnostic in 37\% of the cases. Sonda could achieve these results because it uses different types of queries with different time performances. During the process, its branch-and-bound algorithm helps to select the ones that require less evaluation time (those that are more efficient than the ones used by the other approaches). In particular, we observe that less queries does not directly translate to less execution time. For instance, the OR queries for one token is 10 times slower than the EXACT and LIKE queries together for the same token. Although queries performance time may vary among RDF store implementations, Sonda processes the fastest first, a decision that is based on experiences acquired during the process. 
 
-\textbf{Predictor Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of nodes evaluated per instance. This results shows that Sonda's predictor was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in most of the cases.
-
+\section{Evaluation On Instance Matching}
+In this section, we discuss how we evaluate Sonda on the context of instances matching.  Mainly, we apply two matcher overs the candidates sets produced by Sonda. Then, we compared the results of the match with state-of-the-art instance matching approaches that participate on the OAEI 2010 and 2011 challenge. Also, the ExampleDriven approach was evaluated over the same datasets. As evaluation metrics, we used standard precision, recall and F1 metrics. 
 
 \subsection{Instance Matching Results} 
 
