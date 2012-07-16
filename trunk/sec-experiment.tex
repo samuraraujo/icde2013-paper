@@ -50,19 +50,166 @@ We used standard metrics, namely Reduction Ratio (RR), Pair-wise Completeness (P
 For comparison, we implemented the \emph{S-agnostic}~\cite{papadakis_efficient_2011} and \emph{S-based}~\cite{DBLP:conf/semweb/SongH11} approaches as discussed in Sec.~2. S-based uses only an OR query and it does not feature the branch-and-bound optimization. It requires key pairs, which are generated as in Sec.~3.1. Further, S-based applies a similarity function on the keys to further prune incorrect candidates after that have been retrieved using the OR queries. For comparison purposes, we apply this strategy to all approaches, using the same similarity function. Sonda uses four types of queries for each key pair, and employs the proposed branch-and-bound optimization to select best queries. 
 %. We evaluated our approach with all functionalities that we described before (including the predictor , sorting by time, etc.).
 
-\subsection{Results} 
+\subsection{Candidate Selection Results} 
 Table 1 shows the results. Comparing all approaches over all the 16 datasets pairs that we evaluated, Sonda achieves the best F1 score in all cases (in 96\% of the cases, to be precise), except for the NYT-Geonames pair, where S-based has best F1 result (due to high RR). 
 %Sonda yields better F1 score in 96\% of the cases and also
  
-\todo{add table of results} 
+\begin{center}
+\begin{table*}[ht]
+\centering
+\scriptsize\tt
+\caption{Results of the three systems over all pairs of datasets. Queries denote the total number of queries given to the system. Queries/Instance denotes the amount of queries evaluated per instance.} 
+    \begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|}
+        \hline
+        Dataset Pairs & Systems & Queries & Queries/Instance & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
  
-In the NYTimes-Freebases case, Sonda achieves a considerable improvement in both RR and PC. The other approaches perform worse in this case because the comparable key pairs and queries they use are not discriminative, producing too many matching instances. Sonda also considers many comparable key pairs, thereby ensuring high PC (reflecting recall). However, not all queries generated from them are used to obtain candidates but only optimal ones found during the process. This helps to balance PC with RR (reflecting precision). 
+\multirow{4}{*}{Restaurant1-Restaurant2} & SondaA           \\
+											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic     \\ \hline
+ 											
+\multirow{4}{*}{Person11-Person12} & SondaA    \\
+											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic      \\ \hline
+
+\multirow{4}{*}{Person21-Person22} & SondaA  \\
+											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic       	\\ \hline 										
+
+ \multirow{4}{*}{Sider-Tcm} & SondaA            \\
+ 											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic        \\ \hline
+ 											
+\multirow{4}{*}{Sider-Dailymed} & SondaA     \\
+											& SondaC  \\
+											& S-based  \\
+ 											& S-agnostic        \\ \hline 		
+ 																							
+\multirow{4}{*}{Sider-Drugbank} & SondaA     \\
+											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic      \\ \hline 											
+
+\multirow{4}{*}{Sider-Diseasome} & SondaA      \\
+											& SondaC  \\
+											& S-based   \\
+ 											& S-agnostic         \\ \hline 		 									
+
+\multirow{4}{*}{Dailymed-Sider} & SondaA    & 40 & 1.42   & 101.7  & 263.1   & 98.39 & 99.37 & 98.88  \\
+											& SondaC  & 40 & 1.34   & 34.35  & 210.91  & 99.87 & 99.87 & 99.87 \\
+											& S-based    & 8 & 8.0   & 28.17  & 1385.41  & 96.85 & 97.99 & 97.42\\
+ 											& S-agnostic    & 4 & 4.0   & 16.19  & 759.43    & 96.85 & 97.99 & 97.42  \\ \hline 		
+
+\multirow{4}{*}{Diseasome-Sider} & SondaA    & 20 & 1.85   & 12.63  & 17.78   & 97.62 & 95.35 & 96.47  \\
+											& SondaC   & 20 & 1.85   & 9.1  & 13.66   & 97.62 & 95.35 & 96.47 \\
+											& S-based  & 4 & 4.0   & 6.37  & 51.43   & 85.11 & 93.02 & 88.89 \\
+ 											& S-agnostic    & 2 & 2.0   & 2.06  & 27.34   & 85.11 & 93.02 & 88.89  \\ \hline 		 									
+
+\multirow{4}{*}{Drugbank-Sider} & SondaA    & 40 & 5.88   & 81.49  & 208.78    & 98.61 & 99.29 & 98.95 \\
+											& SondaC	   & 80 & 9.92   & 70.43  & 375.57  & 97.92 & 99.29 & 98.6 \\
+											& S-based     & 8 & 8.0   & 53.9  & 273.07  & 92.76 & 99.65 & 96.08\\
+ 											& S-agnostic   & 26 & 26.0   & 24.56  & 281.62   & 92.46 & 99.65 & 95.92 \\ \hline 											 
+
+\multirow{4}{*}{NYT-Geonames} & SondaA   \\
+											& SondaC  \\
+											& S-based    \\
+ 											& S-agnostic     \\ \hline 											
+
+
+\multirow{4}{*}{NYT-DBPedia(Geo)} & SondaA    \\
+											& SondaC  \\
+											& S-based \\
+ 											& S-agnostic       \\ \hline 											
+ 		
+\multirow{4}{*}{NYT-DBPedia(Per)} & SondaA   \\
+											& SondaC  \\
+											& S-based  \\
+ 											& S-agnostic       \\ \hline 											
+ 		
+ 		
+\multirow{4}{*}{NYT-Freebase(Geo)} & SondaA    \\
+											& SondaC  \\
+											& S-based   \\
+ 											& S-agnostic        \\ \hline 											
+ 
+ 
+
+\multirow{4}{*}{NYT-Freebase(Corp.)} & SondaA   & 15 & 3.02   & 30.51  & 911.26  & 78.06 & 88.27 & 82.85   \\
+											 & SondaC   & 15 & 3.09   & 22.09  & 986.65  & 73.21 & 88.17 & 80.0\\
+											& S-based    \\
+ 											& S-agnostic          \\ \hline 					
+ 											
+\multirow{4}{*}{NYT-Freebase(Person)} & SondaA  \\
+											& SondaC  \\
+											& S-based      \\
+ 											& S-agnostic       \\ \hline 								
+
+\end{tabular}  
+\end{table*} 
+\end{center}
+
+ 
+\textbf{Attribute Queries}. In the NYTimes-Freebases case, Sonda achieves a considerable improvement in both RR and PC. The other approaches perform worse in this case because the comparable key pairs and queries they use are not discriminative, producing too many matching instances. Sonda also considers many comparable key pairs, thereby ensuring high PC (reflecting recall). However, not all queries generated from them are used to obtain candidates but only optimal ones found during the process. This helps to balance PC with RR (reflecting precision). 
 
 For Sider-Dailymed, we could not obtain the results for S-agnostic because it took more than 10,000 seconds to compute it. This may be attributed to the fact that the Dailymed dataset contains a large number of textual attributes and the queries generated by S-agnostic are evaluated over all these attributes, resulting in a large number of disk accesses.
 
-We can see that in all cases, Sonda achieves a considerable reduction in the number of nodes evaluated per instance. This means that many comparable key pairs are considered, including incorrect ones. These ones are not considered further (resulting in reduction of evaluated query nodes) as Sonda iterates through the instances to learn the predictor and to apply the branching policy. 
+\textbf{Class Queries}. The RR in $Sonda_C$ was higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geoenames). it indicates that the class clauses indeed make the queries more precise because it select exactly the class of target instances. However, a little increase on time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
 
-Regarding time performance, even though Sonda has more queries to evaluate, it is faster than S-based in 56\% of the cases; it is faster than S-agnostic in 37\% of the cases. Sonda could achieve these results because it uses different types of queries with different time performances. During the process, its branch-and-bound algorithm helps to select the ones that require less evaluation time (those that are more efficient than the ones used by the other approaches). In particular, we observe that less queries does not directly translate to less execution cost. For instance, the OR queries for one token is 10 times slower than the EXACT and LIKE queries together for the same token. Although queries performance time may vary among RDF store implementations, Sonda processes the fastest first, a decision that is based on experiences acquired during the process. 
+\begin{center}
+\begin{table*}[ht]
+\centering
+\scriptsize\tt
+\caption{Sonda F1-measure (between precision and recall) compared to ExampleDriven and other tools that participate on the OAEI 2011 benchmark.} 
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+Dataset  &  SondaA  &  SondaC & KnoFuss+GA & AggreementMaker & SERIMI & Zhishi.links & ExampleDriven\\ \hline
+DBPedia - Geo. & 0 & 0  & 0.89 & 0.69 & 0.68 & 0.92 & 0 \\ \hline
+DBPedia - Org. & 0& 0 & 0.92 & 0.74 & 0.88 & 0.91 & 0\\ \hline
+DBPedia - People & 0 & 0 & 0.97 & 0.88 & 0.94 & 0.97 & 0\\ \hline
+Freebase - Geo. & 0 & 0 & 0.93 & 0.85 & 0.91 & 0.88 & 0\\ \hline
+Freebase - Org. & 0.87 & 0.87 & 0.92 & 0.80 & 0.91 & 0.87 & 0\\ \hline
+Freebase - People & & 0 0 & 0.95 & 0.96 & 0.92 & 0.93 & 0\\ \hline
+Geonames & 0 & 0  & 0.90 & 0.85 & 0.80 & 0.91 & 0\\ \hline
+Average & 0 & 0  & 0.93 & 0.85 & 0.89 &  0.92 & 0\\ \hline											 
+\end{tabular}  
+\end{table*} 
+\end{center}
+
+\begin{center}
+\begin{table*}
+\centering
+\scriptsize\tt
+\caption{Sonda  F1-measure (between precision and recall) compared ExampleDriven and  other tools that participate on the OAEI 2010 benchmark.} 
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Dataset &  SondaA &  SondaC & SERIMI & ObjectCoref & Rimon & ExampleDriven \\ \hline
+Sider-Dailymed & 0 & 0   & 0.66 & - & 0.62  & 0\\ \hline
+Sider-Diseasome & 0& 0   & 0.87 & - & 0.45 & 0\\ \hline
+Sider-Drugbank & 0 & 0  & 0.97 & - & 0.50  & 0\\ \hline
+Sider-TCM & 0 & 0  & 0.97 & - & 0.79 &  0\\ \hline
+Dailymed-Sider & 0.93  & 0.94 & 0.67 & 0.70 & 0.62  & 0\\ \hline
+Drugbank-Sider & 0.80  & 0.80 & 0.48 & 0.46 & -  & 0\\ \hline
+Diseasome-Sider & 0.95 & 0.95   & 0.87 & 0.74 & -  & 0\\ \hline
+Person11-Person12 & 0 & 0  & 1.00 & 0.99 & 1.00  & 0\\ \hline
+Person21-Person22 & 0 & 0  & 0.46 & 0.95 & 0.97 & 0\\ \hline
+Restaurant1-Restaurant2 & 0 & 0  & 0.77 & 0.81  & 0.88 & 0\\ \hline
+ 								 									 
+\end{tabular}  
+\end{table*} 
+\end{center}
+
+
+\textbf{Time Performance}. Regarding time performance, even though Sonda has more queries to evaluate, it is faster than S-based in 56\% of the cases; it is faster than S-agnostic in 37\% of the cases. Sonda could achieve these results because it uses different types of queries with different time performances. During the process, its branch-and-bound algorithm helps to select the ones that require less evaluation time (those that are more efficient than the ones used by the other approaches). In particular, we observe that less queries does not directly translate to less execution time. For instance, the OR queries for one token is 10 times slower than the EXACT and LIKE queries together for the same token. Although queries performance time may vary among RDF store implementations, Sonda processes the fastest first, a decision that is based on experiences acquired during the process. 
+
+\textbf{Predictor Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of nodes evaluated per instance. This results shows that Sonda's predictor was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in most of the cases.
+
+
+\subsection{Instance Matching Results} 
+
+In this section, we compared the Sonda F1-measure (between precision and recall) with the other alternatives approaches that were evaluated over the same datasets.
 %Notice that although not ideal, Sonda completed the task in a reasonable time, considering that our approach queried directly the datasets SPARQL endpoints. 
 %The drawback of this approach is that there is a huge time delay due to access to disc, packing of the data in the SPARQL protocol and transferring it via the network. In the other hand, we can integrate two alive data endpoint without any configuration issues, parameter tuning, data pre-processing and indexing, in a couple of minutes or in a few hours. 
 
