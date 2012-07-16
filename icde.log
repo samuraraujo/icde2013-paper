@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  16 JUL 2012 17:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.8.12)  16 JUL 2012 19:53
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -437,7 +437,7 @@ Before submitting the final camera ready copy, remember to:
 Here is how much of TeX's memory you used:
  4690 strings out of 493848
  67464 string characters out of 3149207
- 195424 words of memory out of 3000000
+ 200424 words of memory out of 3000000
  7857 multiletter control sequences out of 15000+200000
  49696 words of font info for 115 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -458,7 +458,7 @@ ive/2009/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/t
 exmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2009/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/typ
 e1/urw/times/utmri8a.pfb>
-Output written on icde.pdf (4 pages, 174569 bytes).
+Output written on icde.pdf (4 pages, 175333 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
