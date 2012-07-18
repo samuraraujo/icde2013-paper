@@ -3,68 +3,85 @@ The top-level auxiliary file: icde.aux
 The style file: IEEEtran.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: icde.bib
-A bad cross reference---entry "DBLP:conf/vldb/ChaudhuriCGK07"
-refers to entry "DBLP:conf/vldb/2007", which doesn't exist
-A bad cross reference---entry "DBLP:conf/semweb/SongH11"
-refers to entry "DBLP:conf/semweb/2011-1", which doesn't exist
-A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
-refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
-A bad cross reference---entry "DBLP:conf/soda/CarrDKM00"
-refers to entry "DBLP:conf/soda/2000", which doesn't exist
-A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
-refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
+A bad cross reference---entry "DBLP:conf/cikm/SongH10"
+refers to entry "DBLP:conf/cikm/2010", which doesn't exist
+A bad cross reference---entry "MaurouxHJAM09"
+refers to entry "DBLP:conf/www/2009", which doesn't exist
+A bad cross reference---entry "nikolov08"
+refers to entry "DBLP:conf/aswc/2008", which doesn't exist
+A bad cross reference---entry "hernandez_merge/purge_1995"
+refers to entry "DBLP:conf/sigmod/95", which doesn't exist
+A bad cross reference---entry "MichelsonK06"
+refers to entry "DBLP:conf/aaai/2006", which doesn't exist
 A bad cross reference---entry "papadakis_efficient_2011"
 refers to entry "DBLP:conf/icde/2011w", which doesn't exist
-Warning--I didn't find a database entry for "DBLP:conf/soda/2000"
+A bad cross reference---entry "DBLP:conf/semweb/SongH11"
+refers to entry "DBLP:conf/semweb/2011-1", which doesn't exist
+A bad cross reference---entry "DBLP:conf/ic3k/ScharffeE11"
+refers to entry "DBLP:conf/ic3k/2011keod", which doesn't exist
+A bad cross reference---entry "DBLP:conf/vldb/ChaudhuriCGK07"
+refers to entry "DBLP:conf/vldb/2007", which doesn't exist
+A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
+refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
+A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
+refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
+Warning--I didn't find a database entry for "•"
 Warning--I didn't find a database entry for "DBLP:conf/vldb/2007"
 Warning--I didn't find a database entry for "DBLP:conf/wsdm/2011"
 Warning--I didn't find a database entry for "DBLP:journals/jods/2011-15"
+Warning--I didn't find a database entry for "DBLP:conf/ic3k/2011keod"
+Warning--I didn't find a database entry for "DBLP:conf/cikm/2010"
+Warning--I didn't find a database entry for "DBLP:conf/aaai/2006"
+Warning--I didn't find a database entry for "DBLP:conf/aswc/2008"
+Warning--I didn't find a database entry for "DBLP:conf/www/2009"
 Warning--I didn't find a database entry for "DBLP:conf/semweb/2011-1"
 Warning--I didn't find a database entry for "DBLP:conf/icde/2011w"
+Warning--I didn't find a database entry for "DBLP:conf/sigmod/95"
 -- IEEEtran.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in hernandez_merge/purge_1995
 
 Done.
-You've used 8 entries,
+You've used 15 entries,
             3975 wiz_defined-function locations,
-            863 strings with 8932 characters,
-and the built_in function-call counts, 7201 in all, are:
-= -- 560
-> -- 165
-< -- 70
-+ -- 98
-- -- 25
-* -- 350
-:= -- 1026
-add.period$ -- 16
-call.type$ -- 8
-change.case$ -- 8
-chr.to.int$ -- 171
-cite$ -- 8
-duplicate$ -- 494
-empty$ -- 592
-format.name$ -- 33
-if$ -- 1689
+            917 strings with 10247 characters,
+and the built_in function-call counts, 13040 in all, are:
+= -- 1019
+> -- 294
+< -- 127
++ -- 175
+- -- 44
+* -- 622
+:= -- 1854
+add.period$ -- 30
+call.type$ -- 15
+change.case$ -- 15
+chr.to.int$ -- 309
+cite$ -- 16
+duplicate$ -- 907
+empty$ -- 1083
+format.name$ -- 59
+if$ -- 3074
 int.to.chr$ -- 0
-int.to.str$ -- 8
-missing$ -- 80
-newline$ -- 46
-num.names$ -- 8
-pop$ -- 187
+int.to.str$ -- 15
+missing$ -- 146
+newline$ -- 67
+num.names$ -- 15
+pop$ -- 343
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 571
+skip$ -- 1038
 stack$ -- 0
-substring$ -- 407
-swap$ -- 419
-text.length$ -- 13
+substring$ -- 735
+swap$ -- 762
+text.length$ -- 24
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
-warning$ -- 0
-while$ -- 33
-width$ -- 9
-write$ -- 99
-(There were 6 error messages)
+warning$ -- 1
+while$ -- 61
+width$ -- 17
+write$ -- 165
+(There were 11 error messages)

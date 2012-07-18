@@ -68,26 +68,26 @@ Table 1 shows the results. Comparing all approaches over all the 16 datasets pai
     \begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|}
         \hline
         Dataset Pairs & Systems & Queries & Q/I & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
- 
-\multirow{4}{*}{Restaurant1-Restaurant2} & SondaA           \\
-											& SondaC  \\
-											& S-based \\
- 											& S-agnostic     \\ \hline
+
+\multirow{4}{*}{Restaurant1-Restaurant2} & SondaA     & 10 & 1.76   & 6.78  & 9.33  & 99.12 & 98.23 & 98.67       \\
+											& SondaC    & 10 & 1.77   & 6.75  & 10.18 & 99.12 & 98.23 & 98.67\\
+											& S-based   & 2 & 2.0   & 3.67  & 21.85 &   89.52 & 97.35 & 93.27\\
+ 											& S-agnostic & 3 & 3.0   & 0.74  & 18.3    & 90.98 & 97.35 & 94.06   \\ \hline
  											
-\multirow{4}{*}{Person11-Person12} & SondaA    \\
-											& SondaC  \\
-											& S-based \\
- 											& S-agnostic      \\ \hline
+\multirow{4}{*}{Person11-Person12} & SondaA    & 15 & 1.38   & 8.9  & 38.53   & 99.57 & 93.54 & 96.46 \\
+											& SondaC   & 15 & 1.42   & 8.7  & 47.62  & 99.57 & 93.54 & 96.46 \\
+											& S-based   & 3 & 3.0   & 5.84  & 93.15  & 31.87 & 100.0 & 48.34\\
+ 											& S-agnostic   & 4 & 4.0   & 4.45  & 69.63      & 30.25 & 100.0 & 46.45 \\ \hline
 
-\multirow{4}{*}{Person21-Person22} & SondaA  \\
-											& SondaC  \\
-											& S-based \\
- 											& S-agnostic       	\\ \hline 										
+\multirow{4}{*}{Person21-Person22} & SondaA  & 25 & 13.51   & 2.9  & 43.77   & 22.88 & 96.61 & 36.99 \\
+											& SondaC    & 25 & 13.33   & 2.75  & 41.51 & 22.88 & 96.61 & 36.99\\
+											& S-based   & 5 & 5.0   & 1.42  & 18.31  & 22.01 & 100.0 & 36.08\\
+ 											& S-agnostic     & 4 & 4.0   & 0.57  & 11.06  & 21.67 & 100.0 & 35.62  	\\ \hline 										
 
- \multirow{4}{*}{Sider-Tcm} & SondaA            \\
- 											& SondaC  \\
-											& S-based \\
- 											& S-agnostic        \\ \hline
+ \multirow{4}{*}{Sider-Tcm} & SondaA         & 10 & 1.75   & 7.96  & 14.44   & 86.22 & 98.83 & 92.1     \\
+ 											& SondaC    & 10 & 1.6   & 7.24  & 13.14   & 87.11 & 98.83 & 92.6 \\
+											& S-based   & 2 & 2.0   & 4.1  & 22.88   & 77.93 & 96.49 & 86.23 \\
+ 											& S-agnostic      & 3 & 3.0   & 1.29  & 24.07   & 77.93 & 96.49 & 86.23    \\ \hline
  											
 \multirow{4}{*}{Sider-Dailymed} & SondaA   & 25 & 2.47   & 81.06  & 175.73   & 30.18 & 67.61 & 41.73   \\
 											& SondaC  & 75 & 5.43   & 83.09  & 268.66    & 33.94 & 68.89 & 45.48 \\
@@ -95,9 +95,9 @@ Table 1 shows the results. Comparing all approaches over all the 16 datasets pai
  											& S-agnostic     & 3 & 3.0   & 31.73  & 7909.14      & 31.32 & 81.75 & 45.29 \\ \hline 		
  																							
 \multirow{4}{*}{Sider-Drugbank} & SondaA  & 25 & 3.26   & 51.19  & 284.51 & 92.68 & 98.49 & 95.49   \\
-											& SondaC  \\
-											& S-based \\
- 											& S-agnostic      \\ \hline 											
+											& SondaC   & 25 & 3.31   & 53.62  & 289.05 & 92.68 & 98.49 & 95.49  \\
+											& S-based    & 5 & 5.0   & 51.9  & 500.29   & 90.12 & 99.3 & 94.49\\
+ 											& S-agnostic      & 3 & 3.0   & 41.91  & 358.93 & 93.74 & 97.79 & 95.72  \\ \hline 											
 
 \multirow{4}{*}{Sider-Diseasome} & SondaA    & 20 & 2.02   & 10.75  & 24.19     & 52.44 & 95.35 & 67.67\\
 											& SondaC    & 20 & 2.03   & 10.2  & 23.11 & 52.44 & 95.35 & 67.67  \\
@@ -119,24 +119,24 @@ Table 1 shows the results. Comparing all approaches over all the 16 datasets pai
 											& S-based     & 8 & 8.0   & 53.9  & 273.07  & 92.76 & 99.65 & 96.08\\
  											& S-agnostic   & 26 & 26.0   & 24.56  & 281.62   & 92.46 & 99.65 & 95.92 \\ \hline 											 
 
-\multirow{4}{*}{NYT-Geonames} & SondaA   \\
-											& SondaC  \\
-											& S-based    \\
- 											& S-agnostic     \\ \hline 											
+\multirow{4}{*}{NYT-Geonames} & SondaA     & 10 & 2.4   & 44.54  & 1840.09 & 17.51 & 74.23 & 28.34 \\
+											& SondaC   & 10 & 2.35   & 25.14  & 1621.12 & 18.33 & 74.51 & 29.42 \\
+											& S-based   & 2 & 2.0   & 22.39  & 709.52 & 17.55 & 23.53 & 20.11  \\
+ 											& S-agnostic    & 5 & 5.0   & 11.57  & 1002.44  & 26.07 & 50.2 & 34.32  \\ \hline 											
 
 
-\multirow{4}{*}{NYT-DBPedia(Geo)} & SondaA    \\
+\multirow{4}{*}{NYT-DBPedia(Geo)} & SondaA    & 5 & 1.02   & 43.03  & 998.8  & 65.23 & 75.21 & 69.86 \\
 											& SondaC  \\
 											& S-based \\
  											& S-agnostic       \\ \hline 											
  		
 \multirow{4}{*}{NYT-DBPedia(Per)} & SondaA   \\
-											& SondaC  \\
-											& S-based  \\
- 											& S-agnostic       \\ \hline 			
+											& SondaC   & 10 & 1.2   & 203.13  & 5209.35 & 81.94 & 97.11 & 88.88 \\
+											& S-based  & 1 & 1.0   & 65.93  & 3516.51  & 56.89 & 14.27 & 22.81 \\
+ 											& S-agnostic     & 4 & 4.0   & 25.85  & 5019.58   & 30.55 & 12.02 & 17.25  \\ \hline 			
  																			
-\multirow{4}{*}{NYT-DBPedia(Corp.)} & SondaA   \\
-											& SondaC  \\
+\multirow{4}{*}{NYT-DBPedia(Corp.)} & SondaA     & 5 & 1.55   & 25.85  & 1516.55 & 52.58 & 90.28 & 66.46\\
+											& SondaC    & 5 & 1.55   & 28.34  & 1707.08 & 71.02 & 82.09 & 76.15\\
 											& S-based  \\
  											& S-agnostic       \\ \hline 		 		
  		
@@ -183,13 +183,13 @@ Concluding, the best F1 is associated to learn effective comparable keys, which 
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 Dataset  &  SondaA  &  SondaC & KnoFuss+GA & AggreementMaker & SERIMI & Zhishi.links & ExampleDriven\\ \hline
-DBPedia - Geo. & 0 & 0  & 0.89 & 0.69 & 0.68 & 0.92 & 0 \\ \hline
-DBPedia - Corp. & 0& 0 & 0.92 & 0.74 & 0.88 & 0.91 & 0\\ \hline
-DBPedia - People & 0 & 0 & 0.97 & 0.88 & 0.94 & 0.97 & 0\\ \hline
+DBPedia - Geo. & 0.63 & 0.63  & 0.89 & 0.69 & 0.68 & 0.92 & 0 \\ \hline
+DBPedia - Corp. & 0.91 & 0.91 & 0.92 & 0.74 & 0.88 & 0.91 & 0\\ \hline
+DBPedia - People & 0.96 & 0.96 & 0.97 & 0.88 & 0.94 & 0.97 & 0\\ \hline
 Freebase - Geo. & 0.90 & 0.90 & 0.93 & 0.85 & 0.91 & 0.88 & 0\\ \hline
 Freebase - Corp. & 0.87 & 0.87 & 0.92 & 0.80 & 0.91 & 0.87 & 0\\ \hline
 Freebase - People & 0.96 &  0.96 & 0.95 & 0.96 & 0.92 & 0.93 & 0\\ \hline
-Geonames & 0 & 0  & 0.90 & 0.85 & 0.80 & 0.91 & 0\\ \hline
+Geonames & 0.63 & 0.63  & 0.90 & 0.85 & 0.80 & 0.91 & 0\\ \hline
 Average & 0 & 0  & 0.93 & 0.85 & 0.89 &  0.92 & 0\\ \hline											 
 \end{tabular}  
 \end{table*} 
@@ -202,18 +202,20 @@ Average & 0 & 0  & 0.93 & 0.85 & 0.89 &  0.92 & 0\\ \hline
 \caption{Sonda  F1-measure (between precision and recall) compared ExampleDriven and  other tools that participate on the OAEI 2010 benchmark.} 
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
-Dataset &  SondaA &  SondaC & SERIMI & ObjectCoref & Rimon & ExampleDriven \\ \hline
-Sider-Dailymed & 0.63 & 0.61   & 0.66 & - & 0.62  & 0\\ \hline
-Sider-Diseasome & 0.90 & 0.90   & 0.87 & - & 0.45 & 0\\ \hline
-Sider-Drugbank & 0.93 & 0.93  & 0.97 & - & 0.50  & 0\\ \hline
-Sider-TCM & 0 & 0  & 0.97 & - & 0.79 &  0\\ \hline
-Dailymed-Sider & 0.93  & 0.94 & 0.67 & 0.70 & 0.62  & 0\\ \hline
-Drugbank-Sider & 0.80  & 0.80 & 0.48 & 0.46 & -  & 0\\ \hline
-Diseasome-Sider & 0.95 & 0.95   & 0.87 & 0.74 & -  & 0\\ \hline
-Person11-Person12 & 0 & 0  & 1.00 & 0.99 & 1.00  & 0\\ \hline
-Person21-Person22 & 0 & 0  & 0.46 & 0.95 & 0.97 & 0\\ \hline
-Restaurant1-Restaurant2 & 0 & 0  & 0.77 & 0.81  & 0.88 & 0\\ \hline
- 								 									 
+Dataset &  $Sonda_A$ & $Sonda_C$& SERIMI & ObjectCoref & Rimon & ExampleDriven \\ \hline
+Sider-Dailymed & 0.63 & 0.61   & \textbf{0.66} & - & 0.62  & 0\\ \hline
+Sider-Diseasome & \textbf{0.90} & 0.90   & 0.87 & - & 0.45 & 0\\ \hline
+Sider-Drugbank & 0.93 & 0.93  & \textbf{0.97} & - & 0.50  & 0\\ \hline
+Sider-TCM & 0.92 & 0.92  & \textbf{0.97} & - & 0.79 &  0\\ \hline
+Dailymed-Sider & 0.93  &\textbf{0.94} & 0.67 & 0.70 & 0.62  & 0\\ \hline
+Drugbank-Sider & \textbf{0.80}  & \textbf{0.80} & 0.48 & 0.46 & -  & 0\\ \hline
+Diseasome-Sider & \textbf{0.95} & \textbf{0.95}  & 0.87 & 0.74 & -  & 0\\ \hline
+Person11-Person12 & 0.95 & 0.95  & \textbf{1.00} & 0.99 & \textbf{1.00}  & 0\\ \hline
+Person21-Person22 & 0.45 & 0.45  & 0.46 & 0.95 & \textbf{0.97} & 0\\ \hline
+Restaurant1-Restaurant2 & \textbf{0.98} & \textbf{0.98}  & 0.77 & 0.81  & 0.88 & 0\\ \hline
+Average\footnote{Average of all datasets} &  		\textbf{0.84}	& \textbf{0.84}	& 0.77 & - & - &0						 	\\ \hline								 
+Average\footnote{Average of datasets evaluated by Objecoref} &  	0.84 &	\textbf{0.85}	&0.71&	0.78&-&0\\ \hline
+Average\footnote{Average of datasets evaluated by Rimon} &\textbf{0.84}	&\textbf{0.84}	&0.80	&	-&0.73 & 0\\ \hline
 \end{tabular}  
 \end{table*} 
 \end{center}
