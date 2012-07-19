@@ -68,12 +68,12 @@ In this work, we consider the entire process of learning and execution. We consi
 
 
 \subsection{Our Solution}
-To consider this instance specific schema, we do not consider the solution for instance matching as weight of predicates, but rather, we consider it as a query problem for every instance. Therefore, a candidate set is the results of candidate template query that we define next:
+To tackle this instance specific schema, we do not consider the solution for instance matching as weight of predicates, but rather, we consider it as a query problem for every instance. Therefore, a candidate set for an instance is the results of query over a target dataset that is defined next:
 
-\begin{definition} [Template Query]  A template query Q is conjunction of $n$ tuples $(p, k)$, where $p$ is a predicate in $G_t$ and $k$ is a token, defined as $ \bigwedge_{i}^n (p_i, k_i)=\{t | (t,p_i,o) \in G_t  \land o \sim k_i  \}$. The similarity function $\sim$ is given. Without loss of generality we can also assume that can exist tuples where p are undefined, acting as a wild card. 
+\begin{definition} [Template Query]  A template query Q is conjunction of $n$ tuples $\langle p, k \rangle$ (named clauses), where $p$ is a predicate in $G_t$ and $k = \{k_i, ..., k_n\} $ is a set of tokens, defined as: $ \bigwedge_{i}^n \langle p_i, k_i \rangle=\{t | \langle t,p_i,o \rangle \in G_t \land o \sim k_i  \}$, where $\sim$ is given similarity function. Without loss of generality we can also assume that can exist tuples where p are undefined, acting as a wild card. 
 \end{definition} 
  
-\begin{definition} [Candidate Set]  A candidate set of an instance s in $G_s$ is a instantiation of a template query Q where we have at least a tuple $(p,k)$ where $(s,x,k) \in IR(s)$
+\begin{definition} [Candidate Set]  A candidate set of an instance $s$ in $G_s$ is a instantiation of a template query Q where we have at least a clause $\langle p_t,k \rangle$ where $\langle s,p_s,k \rangle \in IR(s)$
 \end{definition} 
 
 
@@ -88,7 +88,7 @@ To consider this instance specific schema, we do not consider the solution for i
 %\item Describe the efficiency part of the problem. 
 %\item Due to the large number of queries templates, we can not evaluate all queries because it takes too much time. Therefore, we need to be efficient on selecting only the queries that has the highest chance to retrieve a optimal candidate set. We should ignore queries that perform badly.
 %\end{itemize}
-We pose the problem of candidate selection as a optimization problem, where, for each source instance $s$, the goal is to find a template query that selects all positive matches for $s$, avoiding negative matches. Without lost of generality, we can assume that every source instance maps to a target instance (a 1-to-1 mapping), consequently, the optimal query for this problem would retrieve a candidate sets with one element. For now, we consider that an oracle can decide if the match is correct or not. Due the heterogeneity of the data, there is no unique template query that works for all instances. Therefore, to be effective, we need to find a template query for each specific source instance.  As the number of those queries may be large, we do not want to evaluate all to find the optimal query, because it is time prohibitive; specially when we have to query a remote endpoint. Therefore, for every instance, we need to be time efficient by evaluating only the queries that has the highest chance to be optimal.
+We pose the problem of candidate selection as a optimization problem, where, for each source instance $s$, the goal is to find a template query that selects all positive matches for $s$, avoiding negative matches. Without lost of generality, we can assume that every source instance maps to a target instance (a 1-to-1 mapping), consequently, the optimal query for this problem would retrieve a candidate sets with one element. For now, we consider that an oracle can decide if the match is correct or not. Due the heterogeneity of the data, there is no unique template query that works for all instances. Therefore, to be effective, we need to find a template query for each specific source instance.  As the number of those queries may be large, it is time prohibitive to evaluate all to find the optimal one; specially when we have to query a remote endpoint. Therefore, for every instance, we need to be time efficient by evaluating only the queries that has the highest chance to be optimal.
 
  
 %SOLUTION
