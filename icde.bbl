@@ -73,6 +73,10 @@ G.~Papadakis, E.~Ioannou, C.~Nieder{\'e}e, and P.~Fankhauser, ``Efficient
   entity resolution for large heterogeneous information spaces,'' in
   \emph{WSDM}, 2011, pp. 535--544.
 
+\bibitem{DBLP:conf/soda/CarrDKM00}
+R.~D. Carr, S.~Doddi, G.~Konjevod, and M.~V. Marathe, ``On the red-blue set
+  cover problem,'' in \emph{SODA}, 2000, pp. 345--353.
+
 \bibitem{DBLP:journals/jacm/DechterP85}
 R.~Dechter and J.~Pearl, ``Generalized best-first search strategies and the
   optimality of a*,'' \emph{J. ACM}, vol.~32, no.~3, pp. 505--536, 1985.
@@ -89,5 +93,56 @@ D.~J. Hand and K.~Yu, ``{Idiot's Bayes---Not So Stupid After All?}''
 J.~Euzenat, C.~Meilicke, H.~Stuckenschmidt, P.~Shvaiko, and C.~T. dos Santos,
   ``Ontology alignment evaluation initiative: Six years of experience,''
   \emph{J. Data Semantics}, vol.~15, pp. 158--192, 2011.
+
+\bibitem{mccallum_efficient_2000}
+A.~McCallum, K.~Nigam, and L.~H. Ungar, ``Efficient clustering of
+  high-dimensional data sets with application to reference matching,'' in
+  \emph{KDD}, 2000, pp. 169--178.
+
+\bibitem{DBLP:conf/www/HuCQ11}
+W.~Hu, J.~Chen, and Y.~Qu, ``A self-training approach for resolving object
+  coreference on the semantic web,'' in \emph{WWW}, 2011, pp. 87--96.
+
+\bibitem{bernstein_discovering_2009}
+J.~Volz, C.~Bizer, M.~Gaedke, and G.~Kobilarov, ``Discovering and maintaining
+  links on the web of data,'' in \emph{International Semantic Web Conference},
+  2009, pp. 650--665.
+
+\bibitem{Song:2011:AGD:2063016.2063058}
+D.~Song and J.~Heflin, ``Automatically generating data linkages using a
+  domain-independent candidate selection approach,'' in \emph{International
+  Semantic Web Conference (1)}, 2011, pp. 649--664.
+
+\bibitem{Niu:2011:ZWC:2063076.2063091}
+\BIBentryALTinterwordspacing
+X.~Niu, X.~Sun, H.~Wang, S.~Rong, G.~Qi, and Y.~Yu, ``Zhishi.me: weaving
+  chinese linking open data,'' in \emph{Proceedings of the 10th international
+  conference on The semantic web - Volume Part II}, ser. ISWC'11.\hskip 1em
+  plus 0.5em minus 0.4em\relax Berlin, Heidelberg: Springer-Verlag, 2011, pp.
+  205--220. [Online]. Available:
+  \url{http://dl.acm.org/citation.cfm?id=2063076.2063091}
+\BIBentrySTDinterwordspacing
+
+\bibitem{hu_bootstrapping_2011}
+W.~Hu, Y.~Qu, and X.~Sun, ``Bootstrapping object coreferencing on the semantic
+  web,'' \emph{J. Comput. Sci. Technol.}, vol.~26, no.~4, pp. 663--675, 2011.
+
+\bibitem{juanzi_li_rimom:_2009}
+J.~Li, J.~Tang, Y.~Li, and Q.~Luo, ``Rimom: A dynamic multistrategy ontology
+  alignment framework,'' \emph{IEEE Trans. Knowl. Data Eng.}, vol.~21, no.~8,
+  pp. 1218--1232, 2009.
+
+\bibitem{DBLP:conf/esws/NikolovdM12}
+A.~Nikolov, M.~d'Aquin, and E.~Motta, ``Unsupervised learning of link discovery
+  configuration,'' in \emph{ESWC}, 2012, pp. 119--133.
+
+\bibitem{DBLP:conf/semweb/NiuRZW11}
+X.~Niu, S.~Rong, Y.~Zhang, and H.~Wang, ``Zhishi.links results for oaei 2011,''
+  in \emph{OM}, 2011.
+
+\bibitem{serimi}
+S.~Araujo, T.~Tran, A.~P. de~Vries, J.~Hidders, and D.~Schwabe, ``Serimi:
+  Class-based disambiguation for effective instance matching over heterogeneous
+  web data,'' 2012.
 
 \end{thebibliography}

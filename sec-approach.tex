@@ -1,16 +1,16 @@
 \section{Branch-and-Bound Optimization}
 
-\begin{itemize}
-\item Describe the motivation to use the branch-and-bound to approach the efficiency issues (execute all queries are costly)
-\item The idea is to execute the minimum amount of queries.
-\item Describe the heuristic used to determined when evaluate a query
-\item Describe how those heuristic are used in the framework
-\item Describe how we tackle the time issue.  (reordering queries).
-\item Describe the moment  that attribute queries are generated. (at the beginning of the process)
-\item Describe the moment the queries with class clauses are generated. (they are generated when the cardinality of candidates are above a threshold)
-\item Describe how the predictor can increase the efficiency by skipping queries
-\item Describe how we train the classifier. it is done automatically after it converges.
-\end{itemize}
+%\begin{itemize}
+%\item Describe the motivation to use the branch-and-bound to approach the efficiency issues (execute all queries are costly)
+%\item The idea is to execute the minimum amount of queries.
+%\item Describe the heuristic used to determined when evaluate a query
+%\item Describe how those heuristic are used in the framework
+%\item Describe how we tackle the time issue.  (reordering queries).
+%\item Describe the moment  that attribute queries are generated. (at the beginning of the process)
+%\item Describe the moment the queries with class clauses are generated. (they are generated when the cardinality of candidates are above a threshold)
+%\item Describe how the predictor can increase the efficiency by skipping queries
+%\item Describe how we train the classifier. it is done automatically after it converges.
+%\end{itemize}
 
 With the learned key pairs $U^{*st}_A$, now we discuss how to efficiently generate candidate sets by searching for instances that match these keys. We need to retrieve target instances for each of the $n$ source instances. For this, a naive solution would generate $q$ different types of candidate selection queries for every pair of comparable keys. Given $k$ key pairs, it thus would need $n \times k \times q$ queries. We show how this number of queries can be reduced through our branch-and-bound based optimization that aims to execute only a few fast queries for every source instance. 
 
