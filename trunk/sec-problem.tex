@@ -54,17 +54,17 @@ In this work, we tackle the problem of instance matching. However, we focus on t
 
 It has been shown that the use of schema knowledge improves precision but considerably decreases the coverage of correct matches~\cite{DBLP:conf/wsdm/PapadakisINF11} (recall). In this work, we propose a supervised learning strategy to incorporate predicate information into the candidate selection scheme that considerably improves both measures compared to this previous work~\cite{}. \todo{what have to be cited here? what previous work do you mean?}
 
-The main difference between this and both the existing supervised and unsupervised learning strategies lies in the granularity of the learned scheme. Instead of using one scheme for all instances, our solution may yield different schemes for different source instances. This separate treatment of instances is introduced to specifically deal with the heterogeneity problem: \todo{concrete example, showing that different schemes are needed for two source instances.} Using these more fine-grained schemes, we show that the quality of results produced by our approach is superior than those produced by existing supervised~\cite{DBLP:conf/vldb/ChaudhuriCGK07} and unsupervised approaches~\cite{DBLP:conf/semweb/SongH11}. 
+The main difference between this and both the existing supervised and unsupervised learning strategies lies in the granularity of the learned scheme. Instead of using one scheme for all instances, our solution may yield different schemes for different source instances. This separate treatment of instances is introduced to specifically deal with the heterogeneity problem: for instance, two distinct drugs on Sider dataset, named Alpraxolan and Morphine, have two different schemes for mapping to the same drugs on Drugbank Dataset. Alpraxolan uses the scheme $\langle \verb+sider:label+,\verb+drugbank:drugname+ \rangle$, while Morphine uses the scheme $\langle \verb+sider:name+, \verb+drugbank:synomym+ \rangle$,  Using these more fine-grained schemes, we show that the quality of results produced by our approach is superior than those produced by existing supervised~\cite{DBLP:conf/vldb/ChaudhuriCGK07} and unsupervised approaches~\cite{DBLP:conf/semweb/SongH11}. 
 
-Another aspect that has been neglected so far is time efficiency. More precisely, works on finding the scheme as discussed above focus on the quality of matches. On the other hand, there are works on executing similarity joins and building blocking indexes, focusing on how to process the schemes efficiently. In other words, more emphasis is put on the efficiency of execution and less on the efficiency of learning. \todo{what does it means efficiency of execution and learning? I did not understand that?} \todo{stress the fact that efficiency is crucial for online learning, minimize data access over remote endpoints.} Further, how well a scheme can be optimized for time efficiency depends on the nature of the scheme itself. Some schemes are inherently expensive, requiring a large amount of data to be loaded and to be joined. Further, schemes that produce the same result quality may vary in terms of runtime efficiency. Thus, optimized execution performance cannot be achieved independent of learning.\todo{I did not understand this statement. learning of what? what is the relation with optimization?} In this work, we consider the entire process of learning and execution. We consider time as an additional optimization criteria such that optimal schemes are those, which (a) can be learned quickly, (b) can be executed efficiently and (c) yield high quality candidates. We show that this holistic optimization of time efficiency leads to faster execution. In fact, the entire process of learning and execution is faster compared to the unsupervised approach, which requires almost no time in learning.\todo{this is not true, we cannot be faster than an approach that is simpler but get worse candidates. The right statement is that we can get the best results in the fastest time.} We also compare the performance results for the entire process with the supervised approach, which requires training data to be locally available (i.e. offline learning instead of online learning over remote endpoints). Despites the overhead of retrieving data over endpoints, we show that our approach yields competitive performance. 
+Another aspect that has been neglected so far is time efficiency. More precisely, works on finding the scheme as discussed above focus on the quality of matches. On the other hand, there are works on executing similarity joins and building blocking indexes, focusing on how to process the schemes efficiently. In other words, more emphasis is put on the efficiency of execution and less on the efficiency of learning the scheme. The efficiency of learning became crucial when data is accessed over remote endpoints, where minimize the data access is necessary to be make any solution feasible.  
+
+Further, how well a scheme can be optimized for time efficiency depends on the nature of the scheme itself. Some schemes are inherently expensive, requiring a large amount of data to be loaded and to be joined. Further, schemes that produce the same result quality may vary in terms of runtime efficiency. Thus, optimized execution performance cannot be achieved independent of learning.\todo{I did not understand this statement. learning of what? what is the relation with optimization?} 
+
+In this work, we consider the entire process of learning and execution. We consider time as an additional optimization criteria such that optimal schemes are those, which (a) can be learned quickly, (b) can be executed efficiently and (c) yield high quality candidates. We show that this holistic optimization of time efficiency leads to faster execution. In fact, to achieve comparable quality results, the entire process of learning and execution is faster compared to the unsupervised approach, which requires almost no time in learning.  We also compare the performance results for the entire process with the supervised approach, which requires training data to be locally available (i.e. offline learning instead of online learning over remote endpoints). Despite the overhead of retrieving data over endpoints, we show that our approach yields competitive performance. 
 
 
 \subsection{Our Solution}
 To consider this instance specific schema, we do not consider the solution for instance matching as weight of predicates, but rather, we consider it as a query problem for every instance. Therefore, a candidate set is the results of candidate template query that we define next:
-
-
-
-We noticed there are two problem with the existing approaches. First, they do not consider the time dimension of the problem, specially when we consider the scenario where there are remote endpoints. Basically, to learn the schema on these remote endpoints means that we have to execute a lot of queries, which takes a lot of time. 
 
 \begin{definition} [Template Query]  A template query Q is conjunction of $n$ tuples $(p, k)$, where $p$ is a predicate in $G_t$ and $k$ is a token, defined as $ \bigwedge_{i}^n (p_i, k_i)=\{t | (t,p_i,o) \in G_t  \land o \sim k_i  \}$. The similarity function $\sim$ is given. Without loss of generality we can also assume that can exist tuples where p are undefined, acting as a wild card. 
 \end{definition} 
@@ -73,44 +73,40 @@ We noticed there are two problem with the existing approaches. First, they do no
 \end{definition} 
 
 
-OPTIMIZATION PROBLEM
-\begin{itemize}
-\item Describe the optimization goal. to be efficient and effective on building candidate sets.
-\item Describe the effective part of the problem
-\item Due to heterogeneity of the data, there is no unique template query that works for all instances. Therefore, we need to find a query template for each specific instance. 
-\item Describe the optimal criteria for those template queries. 
-\item For a specific instance, its optimal query template should avoid negative matches and include all positive matches in the candidate set. 
-\item Describe the problem of building those optimal queries.
-\item Describe the efficiency part of the problem. 
-\item Due to the large number of queries templates, we can not evaluate all queries because it takes too much time. Therefore, we need to be efficient on selecting only the queries that has the highest chance to retrieve a optimal candidate set. We should ignore queries that perform badly.
-
+%OPTIMIZATION PROBLEM
+%\begin{itemize}
+%\item Describe the optimization goal. to be efficient and effective on building candidate sets.
+%\item Describe the effective part of the problem
+%\item Due to heterogeneity of the data, there is no unique template query that works for all instances. Therefore, we need to find a query template for each specific instance. 
+%\item Describe the optimal criteria for those template queries. 
+%\item For a specific instance, its optimal query template should avoid negative matches and include all positive matches in the candidate set. 
+%\item Describe the problem of building those optimal queries.
+%\item Describe the efficiency part of the problem. 
+%\item Due to the large number of queries templates, we can not evaluate all queries because it takes too much time. Therefore, we need to be efficient on selecting only the queries that has the highest chance to retrieve a optimal candidate set. We should ignore queries that perform badly.
+%\end{itemize}
 We pose the problem of candidate selection as a optimization problem, where, for each source instance $s$, the goal is to find a template query that selects all positive matches for $s$, avoiding negative matches. Without lost of generality, we can assume that every source instance maps to a target instance (a 1-to-1 mapping), consequently, the optimal query for this problem would retrieve a candidate sets with one element. For now, we consider that an oracle can decide if the match is correct or not. Due the heterogeneity of the data, there is no unique template query that works for all instances. Therefore, to be effective, we need to find a template query for each specific source instance.  As the number of those queries may be large, we do not want to evaluate all to find the optimal query, because it is time prohibitive; specially when we have to query a remote endpoint. Therefore, for every instance, we need to be time efficient by evaluating only the queries that has the highest chance to be optimal.
-\end{itemize}
-
-
-
-SOLUTION
-
-\begin{itemize}
-
-\item Describe how we solve this optimization problem. 
-\item Describe that we use a iterative process because we need to refined the templates queries during the process
-
-\item Describe how the process starts
-\item Describe how we solve the efficiency part of the problem
-\item Describe that we need a set of heuristic for efficiently select the best queries.
-\item Describe how this heuristic are used in the branch-and-bound framework
-
-\item Describe how we solve the effective part of the problem
-\item Describe that we learn the comparable predicates from the data
-\item Describe that we refined the queries during the process
-%\item Describe that we consider a set of instances that belong to the same class because it is the only way to solve the problem of ambiguity at class level, when candidate sets contains instances that share the same tokens but belong to different classes.
-%\item Show that class information can solve this problem, therefore making the queries more precise.
-\item Describe that we use a matcher to generate positive and negative examples
-\item Describe how those examples are used to refined the queries. 
 
  
+%SOLUTION
 
+%\begin{itemize}
+
+%\item Describe how we solve this optimization problem. 
+%\item Describe that we use a iterative process because we need to refined the templates queries during the process
+
+%\item Describe how the process starts
+%%\item Describe how we solve the efficiency part of the problem
+%\item Describe that we need a set of heuristic for efficiently select the best queries.
+%\item Describe how this heuristic are used in the branch-and-bound framework
+
+%\item Describe how we solve the effective part of the problem
+%\item Describe that we learn the comparable predicates from the data
+%\item Describe that we refined the queries during the process
+%\item Describe that we consider a set of instances that belong to the same class because it is the only way to solve the problem of ambiguity at class level, when candidate sets contains instances that share the same tokens but belong to different classes.
+%\item Show that class information can solve this problem, therefore making the queries more precise.
+%\item Describe that we use a matcher to generate positive and negative examples
+%\item Describe how those examples are used to refined the queries.  
+%\end{itemize} 
 Basically, we tackle this problem in two stages. First, we build all possible effective template queries by sampling the source and target data. In this process we learn the most discriminative comparable predicates and each pair becomes one clause template query. Then, for each source instance, we use a branch-and-bound optimization algorithm that searches for those queries that have the highest chance to retrieve a optimal candidate set, through tree-structured space compose of all found template queries. 
 
 We start the process with a initial set of template queries. Aiming to approximate our solution to the optimal solution, we approach this problem in an iterative fashion, where at each iteration we make use of a set of policies to decide whether or not evaluate a query. Mainly, those policies are based on queries results obtained on previous iterations, and their aim is to select the queries that have the highest chance to be optimal for next iterations, therefore this process minimizes the number of queries performed. Generally, the most selective queries are selected, which are more efficient and effective, because they select less elements (and it takes less time); and they select less incorrect matches. To be effective, at each iteration we refine the template queries, building highly selective template queries with respect to our optimal criteria (maximize positive and minimize negative matches). 
@@ -120,7 +116,7 @@ Basically, this refining process adds another clause in the template queries, ca
 This algorithm aims to find a best path of queries, representing a minimal set of time-efficient queries that produce high quality results.
 
 
-\end{itemize} 
+
  
 %\textbf{Solution overview}. Aiming to approximate our solution to the optimal solution, we approach this problem in an iterative fashion, where at each iteration we use information from the previous iteration to refine and increase the selectivity of the query templates used on next iterations. Notice that as more selective a query is, as more efficient and effective it is, because, it selects less elements(and it takes less time); and it selects less incorrect matches.  
 

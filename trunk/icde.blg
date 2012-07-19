@@ -3,6 +3,38 @@ The top-level auxiliary file: icde.aux
 The style file: IEEEtran.bst
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: icde.bib
+Repeated entry---line 771 of file icde.bib
+ : @inproceedings{Niu:2011:ZWC:2063076.2063091
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 786 of file icde.bib
+ : @inproceedings{Song:2011:AGD:2063016.2063058
+ :                                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 909 of file icde.bib
+ : @inproceedings{mccallum_efficient_2000
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1021 of file icde.bib
+ : @inproceedings{papadakis_efficient_2011
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1059 of file icde.bib
+ : @article{juanzi_li_rimom:_2009
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1074 of file icde.bib
+ : @article{hernandez_merge/purge_1995
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1095 of file icde.bib
+ : @article{elmagarmid_duplicate_2007
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1185 of file icde.bib
+ : @article{hu_bootstrapping_2011
+ :                               ,
+I'm skipping whatever remains of this entry
 A bad cross reference---entry "DBLP:conf/cikm/SongH10"
 refers to entry "DBLP:conf/cikm/2010", which doesn't exist
 A bad cross reference---entry "MaurouxHJAM09"
@@ -23,12 +55,31 @@ A bad cross reference---entry "DBLP:conf/vldb/ChaudhuriCGK07"
 refers to entry "DBLP:conf/vldb/2007", which doesn't exist
 A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
 refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
+A bad cross reference---entry "DBLP:conf/soda/CarrDKM00"
+refers to entry "DBLP:conf/soda/2000", which doesn't exist
 A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
 refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
+A bad cross reference---entry "DBLP:conf/www/HuCQ11"
+refers to entry "DBLP:conf/www/2011", which doesn't exist
+A bad cross reference---entry "bernstein_discovering_2009"
+refers to entry "DBLP:conf/semweb/2009", which doesn't exist
+A bad cross reference---entry "Song:2011:AGD:2063016.2063058"
+refers to entry "DBLP:conf/semweb/2011-1", which doesn't exist
+A bad cross reference---entry "DBLP:conf/esws/NikolovdM12"
+refers to entry "DBLP:conf/esws/2012", which doesn't exist
+A bad cross reference---entry "DBLP:conf/semweb/NiuRZW11"
+refers to entry "DBLP:conf/semweb/2011om", which doesn't exist
+A bad cross reference---entry "serimi"
+refers to entry "DBLP:conf/webdb/2012", which doesn't exist
 Warning--I didn't find a database entry for "•"
+Warning--I didn't find a database entry for "DBLP:conf/www/2011"
+Warning--I didn't find a database entry for "DBLP:conf/semweb/2011om"
+Warning--I didn't find a database entry for "DBLP:conf/esws/2012"
+Warning--I didn't find a database entry for "DBLP:conf/soda/2000"
 Warning--I didn't find a database entry for "DBLP:conf/vldb/2007"
 Warning--I didn't find a database entry for "DBLP:conf/wsdm/2011"
 Warning--I didn't find a database entry for "DBLP:journals/jods/2011-15"
+Warning--I didn't find a database entry for "DBLP:conf/webdb/2012"
 Warning--I didn't find a database entry for "DBLP:conf/ic3k/2011keod"
 Warning--I didn't find a database entry for "DBLP:conf/cikm/2010"
 Warning--I didn't find a database entry for "DBLP:conf/aaai/2006"
@@ -37,51 +88,53 @@ Warning--I didn't find a database entry for "DBLP:conf/www/2009"
 Warning--I didn't find a database entry for "DBLP:conf/semweb/2011-1"
 Warning--I didn't find a database entry for "DBLP:conf/icde/2011w"
 Warning--I didn't find a database entry for "DBLP:conf/sigmod/95"
+Warning--I didn't find a database entry for "DBLP:conf/semweb/2009"
 -- IEEEtran.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 Warning--empty journal in hernandez_merge/purge_1995
+Warning--empty journal in serimi
 
 Done.
-You've used 15 entries,
+You've used 26 entries,
             3975 wiz_defined-function locations,
-            917 strings with 10247 characters,
-and the built_in function-call counts, 13040 in all, are:
-= -- 1019
-> -- 294
-< -- 127
-+ -- 175
-- -- 44
-* -- 622
-:= -- 1854
-add.period$ -- 30
-call.type$ -- 15
-change.case$ -- 15
-chr.to.int$ -- 309
-cite$ -- 16
-duplicate$ -- 907
-empty$ -- 1083
-format.name$ -- 59
-if$ -- 3074
+            990 strings with 12388 characters,
+and the built_in function-call counts, 22213 in all, are:
+= -- 1710
+> -- 533
+< -- 204
++ -- 311
+- -- 85
+* -- 1060
+:= -- 3136
+add.period$ -- 53
+call.type$ -- 26
+change.case$ -- 26
+chr.to.int$ -- 501
+cite$ -- 28
+duplicate$ -- 1561
+empty$ -- 1885
+format.name$ -- 111
+if$ -- 5247
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 146
-newline$ -- 67
-num.names$ -- 15
-pop$ -- 343
+int.to.str$ -- 26
+missing$ -- 262
+newline$ -- 102
+num.names$ -- 26
+pop$ -- 635
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1038
+skip$ -- 1761
 stack$ -- 0
-substring$ -- 735
-swap$ -- 762
-text.length$ -- 24
+substring$ -- 1194
+swap$ -- 1286
+text.length$ -- 37
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
-warning$ -- 1
-while$ -- 61
-width$ -- 17
-write$ -- 165
-(There were 11 error messages)
+warning$ -- 2
+while$ -- 100
+width$ -- 28
+write$ -- 269
+(There were 26 error messages)
