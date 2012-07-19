@@ -64,36 +64,6 @@ F.~Scharffe and J.~Euzenat, ``Linked data meets ontology matching - enhancing
   data linking through ontology alignments,'' in \emph{KEOD}, 2011, pp.
   279--284.
 
-\bibitem{DBLP:conf/vldb/ChaudhuriCGK07}
-S.~Chaudhuri, B.-C. Chen, V.~Ganti, and R.~Kaushik, ``Example-driven design of
-  efficient record matching queries,'' in \emph{VLDB}, 2007, pp. 327--338.
-
-\bibitem{DBLP:conf/wsdm/PapadakisINF11}
-G.~Papadakis, E.~Ioannou, C.~Nieder{\'e}e, and P.~Fankhauser, ``Efficient
-  entity resolution for large heterogeneous information spaces,'' in
-  \emph{WSDM}, 2011, pp. 535--544.
-
-\bibitem{DBLP:conf/soda/CarrDKM00}
-R.~D. Carr, S.~Doddi, G.~Konjevod, and M.~V. Marathe, ``On the red-blue set
-  cover problem,'' in \emph{SODA}, 2000, pp. 345--353.
-
-\bibitem{DBLP:journals/jacm/DechterP85}
-R.~Dechter and J.~Pearl, ``Generalized best-first search strategies and the
-  optimality of a*,'' \emph{J. ACM}, vol.~32, no.~3, pp. 505--536, 1985.
-
-\bibitem{Hand2001Idiots}
-\BIBentryALTinterwordspacing
-D.~J. Hand and K.~Yu, ``{Idiot's Bayes---Not So Stupid After All?}''
-  \emph{International Statistical Review}, vol.~69, no.~3, pp. 385--398, 2001.
-  [Online]. Available:
-  \url{http://dx.doi.org/10.1111/j.1751-5823.2001.tb00465.x}
-\BIBentrySTDinterwordspacing
-
-\bibitem{DBLP:journals/jods/EuzenatMSSS11}
-J.~Euzenat, C.~Meilicke, H.~Stuckenschmidt, P.~Shvaiko, and C.~T. dos Santos,
-  ``Ontology alignment evaluation initiative: Six years of experience,''
-  \emph{J. Data Semantics}, vol.~15, pp. 158--192, 2011.
-
 \bibitem{mccallum_efficient_2000}
 A.~McCallum, K.~Nigam, and L.~H. Ungar, ``Efficient clustering of
   high-dimensional data sets with application to reference matching,'' in
@@ -132,6 +102,10 @@ J.~Li, J.~Tang, Y.~Li, and Q.~Luo, ``Rimom: A dynamic multistrategy ontology
   alignment framework,'' \emph{IEEE Trans. Knowl. Data Eng.}, vol.~21, no.~8,
   pp. 1218--1232, 2009.
 
+\bibitem{DBLP:conf/vldb/ChaudhuriCGK07}
+S.~Chaudhuri, B.-C. Chen, V.~Ganti, and R.~Kaushik, ``Example-driven design of
+  efficient record matching queries,'' in \emph{VLDB}, 2007, pp. 327--338.
+
 \bibitem{DBLP:conf/esws/NikolovdM12}
 A.~Nikolov, M.~d'Aquin, and E.~Motta, ``Unsupervised learning of link discovery
   configuration,'' in \emph{ESWC}, 2012, pp. 119--133.
@@ -144,5 +118,31 @@ X.~Niu, S.~Rong, Y.~Zhang, and H.~Wang, ``Zhishi.links results for oaei 2011,''
 S.~Araujo, T.~Tran, A.~P. de~Vries, J.~Hidders, and D.~Schwabe, ``Serimi:
   Class-based disambiguation for effective instance matching over heterogeneous
   web data,'' 2012.
+
+\bibitem{DBLP:conf/wsdm/PapadakisINF11}
+G.~Papadakis, E.~Ioannou, C.~Nieder{\'e}e, and P.~Fankhauser, ``Efficient
+  entity resolution for large heterogeneous information spaces,'' in
+  \emph{WSDM}, 2011, pp. 535--544.
+
+\bibitem{DBLP:conf/soda/CarrDKM00}
+R.~D. Carr, S.~Doddi, G.~Konjevod, and M.~V. Marathe, ``On the red-blue set
+  cover problem,'' in \emph{SODA}, 2000, pp. 345--353.
+
+\bibitem{DBLP:journals/jacm/DechterP85}
+R.~Dechter and J.~Pearl, ``Generalized best-first search strategies and the
+  optimality of a*,'' \emph{J. ACM}, vol.~32, no.~3, pp. 505--536, 1985.
+
+\bibitem{Hand2001Idiots}
+\BIBentryALTinterwordspacing
+D.~J. Hand and K.~Yu, ``{Idiot's Bayes---Not So Stupid After All?}''
+  \emph{International Statistical Review}, vol.~69, no.~3, pp. 385--398, 2001.
+  [Online]. Available:
+  \url{http://dx.doi.org/10.1111/j.1751-5823.2001.tb00465.x}
+\BIBentrySTDinterwordspacing
+
+\bibitem{DBLP:journals/jods/EuzenatMSSS11}
+J.~Euzenat, C.~Meilicke, H.~Stuckenschmidt, P.~Shvaiko, and C.~T. dos Santos,
+  ``Ontology alignment evaluation initiative: Six years of experience,''
+  \emph{J. Data Semantics}, vol.~15, pp. 158--192, 2011.
 
 \end{thebibliography}
