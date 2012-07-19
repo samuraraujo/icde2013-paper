@@ -51,26 +51,26 @@ A bad cross reference---entry "DBLP:conf/semweb/SongH11"
 refers to entry "DBLP:conf/semweb/2011-1", which doesn't exist
 A bad cross reference---entry "DBLP:conf/ic3k/ScharffeE11"
 refers to entry "DBLP:conf/ic3k/2011keod", which doesn't exist
-A bad cross reference---entry "DBLP:conf/vldb/ChaudhuriCGK07"
-refers to entry "DBLP:conf/vldb/2007", which doesn't exist
-A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
-refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
-A bad cross reference---entry "DBLP:conf/soda/CarrDKM00"
-refers to entry "DBLP:conf/soda/2000", which doesn't exist
-A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
-refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
 A bad cross reference---entry "DBLP:conf/www/HuCQ11"
 refers to entry "DBLP:conf/www/2011", which doesn't exist
 A bad cross reference---entry "bernstein_discovering_2009"
 refers to entry "DBLP:conf/semweb/2009", which doesn't exist
 A bad cross reference---entry "Song:2011:AGD:2063016.2063058"
 refers to entry "DBLP:conf/semweb/2011-1", which doesn't exist
+A bad cross reference---entry "DBLP:conf/vldb/ChaudhuriCGK07"
+refers to entry "DBLP:conf/vldb/2007", which doesn't exist
 A bad cross reference---entry "DBLP:conf/esws/NikolovdM12"
 refers to entry "DBLP:conf/esws/2012", which doesn't exist
 A bad cross reference---entry "DBLP:conf/semweb/NiuRZW11"
 refers to entry "DBLP:conf/semweb/2011om", which doesn't exist
 A bad cross reference---entry "serimi"
 refers to entry "DBLP:conf/webdb/2012", which doesn't exist
+A bad cross reference---entry "DBLP:conf/wsdm/PapadakisINF11"
+refers to entry "DBLP:conf/wsdm/2011", which doesn't exist
+A bad cross reference---entry "DBLP:conf/soda/CarrDKM00"
+refers to entry "DBLP:conf/soda/2000", which doesn't exist
+A bad cross reference---entry "DBLP:journals/jods/EuzenatMSSS11"
+refers to entry "DBLP:journals/jods/2011-15", which doesn't exist
 Warning--I didn't find a database entry for "•"
 Warning--I didn't find a database entry for "DBLP:conf/www/2011"
 Warning--I didn't find a database entry for "DBLP:conf/semweb/2011om"

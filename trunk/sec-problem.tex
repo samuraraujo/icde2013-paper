@@ -1,7 +1,11 @@
 \section{Overview}
 In this section, we introduce the data model, discuss the problem, and finally, present a brief overview of existing solutions as well as our approach.
 
-\subsection{Data} We focus on heterogeneous Web data including relational data, XML, RDF and other types of data that can be modeled as graphs. Closely resembling the RDF data model, we employ a graph-structured data model where every dataset is conceived as a graph $G \in\mathbb{G}$ comprising a set of triples: 
+%\subsection{Data} We focus on heterogeneous Web data  RDF and other types of data that can be modelled as graphs. Closely resembling the RDF data model, we employ a graph-structured data model where every dataset is conceived as a graph $G \in\mathbb{G}$ comprising a set of triples: 
+
+\subsection{Data} 
+
+We focus on RDF data and other types of data that can be modelled as graphs. Closely resembling the RDF data model, we employ a graph-structured data model where every dataset is conceived as a graph $G \in\mathbb{G}$ comprising a set of triples: 
 
 \begin{definition}[Data Model] A dataset set is a graph $G$ formed by a set of triples of the form $(s, p, o)$ where $s \in U$ (called subject), $p \in U$ (predicate) and $o \in U \cup L$ (object). Here, $U$ denotes the set of Uniform Resource Identifiers (URIs) and $L$ the set of literals. Every literal $l \in L$ is a bag of tokens, $l = \{t_1,\ldots,t_i,\ldots,t_n\}$, drawn from the vocabulary $V$, i.e. $t_i \in V$.  
 \end{definition} 

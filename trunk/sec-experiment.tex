@@ -39,22 +39,7 @@ DB.DBA.RDF_OBJ_FT_RULE_ADD
 DB.DBA.VT_INC_INDEX_DB_DBA_RDF_OBJ (); 
 \end{lstlisting}
 
-We use the specific Virtuoso SPARQL implementation to have access to the index, and we limited all query results to 30 instances. This avoids the queries to retrieve too many data for non-discriminative queries. For example, in this syntax, the 4 query types EXACT, LIKE, AND, and OR are, respectively: 
-\lstset{basicstyle=\small}
-\begin{lstlisting}[ ]   
- SELECT DISTINCT ?s  WHERE {?s ?p  'eosinophilic pneumonia' .} 
- limit 30
- 
- SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
- ?o bif:contains  '"eosinophilic pneumonia"'  . } limit 30
- 
- SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
- ?o bif:contains  '"eosinophilic"AND"pneumonia"'  . } limit 30
- 
- SELECT DISTINCT ?s ?o WHERE {?s ?p ?o .
- ?o bif:contains  '"eosinophilic"OR"pneumonia"'  . } limit 30
-\end{lstlisting}
-
+We use the specific Virtuoso SPARQL implementation to have access to the index, and we limited all query results to 30 instances. This avoids the queries to retrieve too many data for non-discriminative queries.
 
 \subsection{Candidate Selection Results} 
 Table 1 shows the results. Comparing all approaches over all the 16 datasets pairs that we evaluated, Sonda achieves the best F1 score in all cases (in 96\% of the cases, to be precise), except for the NYT-Geonames pair, where S-based has best F1 result (due to high RR). 
