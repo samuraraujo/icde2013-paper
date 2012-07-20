@@ -27,15 +27,7 @@ Based on these two dimensions, we use best-first search with branch-and-bound pr
 
 \textbf{Branching}. It is a breadth-first search procedure that processes queries associated with the source instance of the current level before moving to the next instance in the next level. In every level, this search is guided by the branching policy, which always selects the node that is best w.r.t.~ both dimensions. More precisely, it chooses the one with lowest cardinality and among those not distinguishable in terms of that, it chooses the one that requires less time (based on the estimated values discussed before) . According to the cardinality-based heuristic, this policy indicates to stop and to move to the next level when a node with cardinality 1 is visited (because there are no better queries than this). However, this cardinality-based heuristic can only be applied to query nodes constructed for the same key pair. Queries constructed for different key pairs may be useful to retrieve candidates of different types (e.g. the query constructed from \verb+rdf:label+ retrieves candidates of type \verb+Ingredient+ while the query constructed from \verb+drugs:drugname+ retrieve \verb+Drugs+). In other words, we need to find optimal queries specific to a key pair. Accordingly, when a query with cardinality 1 has been found, the search moves to the queries constructed for a different key pair. 
 Once the optimal queries have been found for all key pairs, or when all queries have been processed, the search moves on to the next level. We use only the instances retrieved for the one with lowest cardinality, among all queries processed for a given key pair. Over all key pairs, we aggregate the results retrieved for their optimal query to obtain all candidates for one source instance. 
-
-\begin{figure} 
-\vspace{-10pt}
-\centering
-\includegraphics[scale=0.45]{p23.png}
-\caption{The number of query nodes that have to be evaluated for every instance is shown. The dynamics of node reduction is illustrated as the process iterates through the instances, from the sorting phase to the learning phase to the prediction phase. Clearly, less queries have to be processed after learning.} 
-\label{fig:3phases}
-\vspace{-10pt}
-\end{figure} 
+ 
 
 \textbf{Bounding}. While the branching policy determines the next node to evaluate (and to stop processing one level when the optimal query is found)  the \emph{bounding policy} decides when to stop the whole process. The search should terminate when there exist no or too few matches for the source instances. This can be decided when through many levels, empty candidates sets are obtained as results. In fact, this kind of early termination could also be applied to the search within every level: when too many nodes within the same levels yield empty result, we can move on to the next level. As shown in Alg.~3, the bounding strategy is 
 controlled by the parameter $\gamma$. In the experiments in this paper, early termination through bounding is not used because we know in advance that matches exist between the datasets. 
@@ -96,11 +88,4 @@ When the Learning phase terminates, both the branching policy and the predictor 
 
 In the \emph{Updating} phase, new template queries are generated with a class clause. The class queries are computed after $\alpha\%$ of the instances have been processed. In this work, we fix $\alpha$ to 5\% of the instances. Then, the candidates obtained so far are input to a matcher that outputs positive and negative examples. As a matcher,  the class-based disambiguator \cite{•} is used in this work, because we assumed the source instances belong to a same class. Those generated examples are input to the algorithm that computes the class clauses. For each class clause found a new query is created by adding it to the original queries. For $q$ queries and $n$ class clauses, then $n \times q$ new queries are generated in the end. After this process, the classifier is retrained using the Leaning procedure described before. 
 
-\begin{figure} 
-\vspace{-10pt}
-\centering
-\includegraphics[scale=0.5]{p26.png}
-\caption{Nodes are sorted according to cardinality (and time) as discussed, thus first node $q_1$ is chosen by the branching strategy. (Unless a node with cardinality 1 is found), node evaluation sequence without the predictor includes all nodes; with predictor, some nodes may be skipped.} 
-\vspace{-10pt}
-\label{fig:pred}
-\end{figure} 
+ 
