@@ -22,30 +22,38 @@ In this section we describe how we construct the template queries in our approac
 The attribute clause helps on find candidates based on the assumption that positive matches share a similar token on a pair of highly discriminative predicates. The class clause help on disambiguating candidates that share the same token but belong to different classes (class level ambiguity).  We only build template queries that contains an attribute clause, or an attribute clause and an class clause. 
 
 
-\emph{Sampling} is key point when learning from data, and almost impossible when the data is accessed remotely. We propose an adapted sampling method for dealing with the scalability issue on the heterogeneous setting. In this work, we assume that the source instances to be matched belong to the same class (e.g. country, people, drugs, etc.). Low cardinality classes are merged and a subset is chosen from high cardinality classes. This assumption also implies that the target matches for those source instances will also belong to a limited set of target classes. Therefore, to cover the necessary data to learn the predicates, much less data need to be mined, because both source and target instances are less diverse than consider the whole dataset.
+\emph{Sampling} is key point when learning from data, and almost impossible when the data is accessed remotely. We propose an adapted sampling method for dealing with the scalability issue on the heterogeneous setting. In this work, we assume that the source instances to be matched belong to the same class (e.g. country, people, drugs, etc.). Low cardinality classes are merged and a subset is chosen from high cardinality classes. This assumption also implies that the target matches for those source instances will also belong to a limited set of target classes. Therefore, to cover the necessary data to learn the predicates, much less data need to be mined, because both source and target instances are less diverse than to consider the whole dataset.
 
 Given that the source instances $S$ were given, we select 5\% of $S$ to determine the source discriminative predicates. We query the target endpoint using an exact boolean query over the tokenized value of those source predicates; obtaining the target data that were used to compute the target discriminative predicates. We empirically proved that this approach was efficiently and effective for our problem. However, note that the discussion on different sampling techniques is out of the scope of this paper.
 
-\subsection{Finding Attribute Clauses}
+\subsection{Finding Attribute Clause}
 
 Let $U_A$ be the set of all attributes of a dataset $G$, the candidate selection schema of $G$ is a subset of attributes, i.e. $U^*_A  \subseteq U_A$.  A alignment between a source schema $U^{*s}_A$ and target scheme $U^{*t}_A$ is denoted by $U^{*st}_A$.
 
-An attribute clause is defined as: $A(p_t,o_s)=\{\langle p_t,o_s \rangle | \langle s_i, p_s, o_s \rangle \in G_s \land \langle p_s, p_t \rangle \in U^{*st}_A\}$. To build the attribute queries we first need to generate $U^{*st}_A$. To generate $U^{*s}_A$ and $U^{*t}_A$, we use a similar approach propose by Song. et.al; based on the discriminability and coverage of the predicates. High discriminative predicates and with high coverage are selected. To produce the aligned schemas $U^{*st}_A$, known schema matching technique for heterogeneous data were applied. Then, each pair of predicate $\langle s_i, p_s, o_s \rangle$ in $U^{*st}_A$ was transformed in a attribute query $A(p_t,o_s)$.
+An attribute clause is defined as: $\langle p_t,o_s,\sim \rangle^A=\{\langle s_t,p_t,o_t \rangle | \langle s_t,p_t,o_t \rangle \in G_t \land o_s\sim o_t \land \langle p_s, p_t \rangle \in U^{*st}_A\}$, where $\sim$ is one of the four type of similarity function: EXACT, LIKE, AND and  OR \todo{explain this semantics}. To build the attribute queries we first need to generate $U^{*st}_A$. To generate $U^{*s}_A$ and $U^{*t}_A$, we use a similar approach propose by Song. et.al; based on the discriminability and coverage of the predicates. High discriminative predicates and with high coverage are selected. To produce the aligned schemas $U^{*st}_A$, known schema matching technique for heterogeneous data were applied.  
 
 %we use known algorithms to determine the best pair of comparable predicates. Highly discriminative pairs are desired. The discriminative property guaranties that the clause will select a few candidates, impacting in the overall precision. Among those predicates, the set that cover all the positive match are used in process. The coverage property avoids that we miss positive matches, impacting the overall recall. To find the source predicates, we apply this algorithm over a subset of the source instances, which is quite straightforward. To find the target predicates and align them with the source predicates to form pairs is much less obvious; specially because we need to query the target endpoint to collect the data. A reasonable approach to get relevant data is to use the values of the selected source predicates to query the target endpoint. Then, we apply the algorithm over those candidates to determine the target predicates. Afterwards, we map the source and target predicates that their values are similar above a specific threshold. Notice that we do not use any schema information in this process, because in the heterogeneous setting, the schemas may not align. The final set of predicate pairs that we found is then transformed in a set of template queries containing one clause (one for each predicate pair).
 
 \subsection{Finding Class Clauses}
  
-An class clause is defined as: $C(p_t,o_t)=\{\langle p_t,o_t \rangle | \langle s_i, p_t, o_t \rangle \in G_s \}$.  Assuming that a list of positive and negative matches are available, to build class clauses, we use a set-cover based algorithm \cite{DBLP:conf/soda/CarrDKM00} to quickly retrieve a list of target predicate/value pairs that occur in all positive matches but in none negative ones. The positive and negative matches are obtained during the candidate selection process that we will detail further. Then, each predicate/value pair found, become an individual clause.
+An class clause is defined as: $\langle p_t,o_t \rangle^C=\{\langle s_t,p_t,o_t \rangle | \langle s_t,p_t,o_t \rangle \in G_t \}$.  Assuming that a list of positive and negative matches are available, to build class clauses, we use a set-cover based algorithm \cite{DBLP:conf/soda/CarrDKM00} to quickly retrieve a list of target predicate/value pairs that occur in all positive matches but in none negative ones. The positive and negative matches are obtained during the candidate selection process that we will detail further. Then, each predicate/value pair found, become an individual class clause.
 
 \subsection{Composing Template Queries} 
 
-In this work, we defined four type of template queries: EXACT, LIKE, AND and  OR queries.  Then, for each attribute clause (and class clause), we generate these four queries. For instance, for an attribute query $A(\verb+rdf:label+,``\verb+eosinophilic+  \verb+pneumonia+")$,  each of these queries can be expressed in SPARQL as: 
+We now defined a template query.
+
+\begin{definition} [Template Query]  A template query is conjunction of clauses, defined as $( \bigwedge_{i}^n\langle p_i,o_i,\sim \rangle^A   \bigwedge_{t}^m\langle p_t,o_t \rangle^C)$, where $n\geq0$ and $m\geq0$. In this work, we only consider template queries with at least an attribute clause, and a maximum of one class clause. The similarity $\sim$ defined the type of the query, refer to as \textit{query type} from now on.
+ \end{definition} 
+ 
+\begin{definition} [Candidate Set]  A candidate set of an instance $s$ in $G_s$ is a instantiation of a template query where we have at least an attribute clause $\langle p_t,k,\sim \rangle^A$ where $\langle s,p_s,k \rangle \in IR(s)$
+\end{definition} 
+
+For instance, for an template query formed by the attribute query $\langle\verb+rdf:label+,``\verb+eosinophilic+$  $\verb+pneumonia+",OR\rangle$, can be expressed in SPARQL as: 
 
 \begin{footnotesize} 
 \begin{verbatim}
 SELECT DISTINCT ?s  
-WHERE {?s rdf:label ``pneumonia'' } 
+WHERE {?s rdf:label ``eosinophilic pneumonia'' } 
  
 SELECT DISTINCT ?s  WHERE {?s rdf:label ?o FILTER
 regex(?0,``eosinophilic pneumonia'') } 

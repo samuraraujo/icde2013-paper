@@ -68,13 +68,9 @@ In this work, we consider the entire process of learning and execution. We consi
 
 
 \subsection{Our Solution}
-To tackle this instance specific schema, we do not consider the solution for instance matching as weight of predicates, but rather, we consider it as a query problem for every instance. Therefore, a candidate set for an instance is the results of query over a target dataset that is defined next:
+To tackle this instance specific schema, we do not consider the solution for instance matching as weight of predicates, but rather, we consider it as a query problem for every instance. Therefore, a candidate set for an instance is the results of query over a target dataset.
 
-\begin{definition} [Template Query]  A template query Q is conjunction of $n$ tuples $\langle p, k \rangle$ (named clauses), where $p$ is a predicate in $G_t$ and $k = \{k_i, ..., k_n\} $ is a set of tokens, defined as: $ \bigwedge_{i}^n \langle p_i, k_i \rangle=\{t | \langle t,p_i,o \rangle \in G_t \land o \sim k_i  \}$, where $\sim$ is given similarity function. Without loss of generality we can also assume that can exist tuples where p are undefined, acting as a wild card. 
-\end{definition} 
- 
-\begin{definition} [Candidate Set]  A candidate set of an instance $s$ in $G_s$ is a instantiation of a template query Q where we have at least a clause $\langle p_t,k \rangle$ where $\langle s,p_s,k \rangle \in IR(s)$
-\end{definition} 
+
 
 
 %OPTIMIZATION PROBLEM
