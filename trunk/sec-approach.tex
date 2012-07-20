@@ -12,6 +12,24 @@
 %\item Describe how we train the classifier. it is done automatically after it converges.
 %\end{itemize}
 
+Suppose you have the following source data represented as triples:
+\begin{lstlisting}[basicstyle=\LSTfont]
+<sider:12312> <label> "Morphine"
+<sider:12312> <type> <sider:Drug>
+<sider:43434> <title> "Eosinophilic Pneumonia"
+<sider:43434> <type> <sider:Drug>
+\end{lstlisting}
+And target data: 
+\begin{lstlisting}[basicstyle=\LSTfont]
+<drugbank:DB00295> <drugname> "Morphine Sulphate"
+<drugbank:DB00295> <synonym> "Morphine"
+<drugbank:DB00295> <type> <drugbank:Drug>
+<drugbank:DB00494> <drugname> "Eosinophilic Pneumonia"
+<drugbank:DB00494> <type> <drugbank:Drug>
+\end{lstlisting}
+
+For this example, each source predicate in $U^{*s}_A$ ={\verb+label+, \verb+title+} match all predicates in $U^{*t}_A$ =\{\verb+name+ and \verb+synonym+\}; therefore, there are four possible predicate alignment that could be exploited to find the match between the source and target instances, namely: $U^{*st}_A$ =\{$\langle label,drugname \rangle$, $\langle label,synonym \rangle$,$\langle title,drugname \rangle$, $\langle title,synonym \rangle$\}. Those pairs in  $U^{*st}_A$ form four template queries as defined before. As any search optimization space, this set of possible choices (queries) forms a tree-shaped search space where each node represents a query and each level of the tree represents an instance. Then, the decision to be taken, it is to select a best query at each level of the tree. Fig.1 depicts this search space.
+
 Given $n$ source instances, $k$ different query types and $k$ comparable predicate pairs in $U^{*st}_A$, a naive approach would perform all $n \times k \times q$ queries to find the optimal candidate set for each instance. We show how this number of queries can be reduced through our branch-and-bound based optimization that aims to execute only a few effective queries for every source instance. 
  
 \subsection{Search-based Optimization} 
