@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.7.20)  20 JUL 2012 19:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.7.20)  23 JUL 2012 17:59
 entering extended mode
  %&-line parsing enabled.
 **icde.tex
@@ -640,12 +640,6 @@ Underfull \hbox (badness 6961) in paragraph at lines 51--52
 []\T1/fve/m/sc/10 (+20) For in-stance, for an tem-plate query formed
  []
 
-
-Underfull \hbox (badness 2229) in paragraph at lines 51--52
-\T1/fve/m/sc/10 (+20) by the at-tribute query $\OMS/cmsy/m/n/10 h[]\OML/cmm/m/i
-t/10 ; \OT1/cmr/m/n/10 \[]$
- []
-
 [6]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 54.
@@ -665,28 +659,39 @@ Overfull \hbox (10.44086pt too wide) in paragraph at lines 27--28
 [][][][][][][][][][][][][][][][][] 
  []
 
+
+Underfull \hbox (badness 2409) in paragraph at lines 56--57
+[]\T1/fve/m/sc/10 (+20) The most
+ []
+
 [7]
+Overfull \hbox (10.94342pt too wide) in paragraph at lines 69--70
+[]
+ []
+
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 6.29996pt on input line 55.
+(Font)              scaled to size 6.29996pt on input line 92.
 LaTeX Font Info:    Font shape `T1/fvm/bx/n' in size <7> not available
-(Font)              Font shape `T1/fvm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/fvm/b/n' tried instead on input line 98.
 LaTeX Font Info:    Font shape `T1/fvm/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 61.
+(Font)              scaled to size 6.29996pt on input line 98.
 Missing character: There is no Ã in font cmr7!
 Missing character: There is no Ÿ in font cmr7!
 
-
-LaTeX Warning: Reference `fig:3phases' on page 8 undefined on input line 99.
-
-
-LaTeX Warning: Reference `fig:3phases' on page 8 undefined on input line 99.
+LaTeX Warning: Reference `fig:3phases' on page 8 undefined on input line 136.
 
 
-LaTeX Warning: Reference `fig:pred' on page 8 undefined on input line 105.
+LaTeX Warning: Reference `fig:3phases' on page 8 undefined on input line 136.
 
-[8]
 
-LaTeX Warning: Citation `â€¢' on page 9 undefined on input line 107.
+Underfull \vbox (badness 1442) has occurred while \output is active []
+
+ [8]
+
+LaTeX Warning: Reference `fig:pred' on page 9 undefined on input line 142.
+
+
+LaTeX Warning: Citation `â€¢' on page 9 undefined on input line 144.
 
 ) (./sec-experiment.tex
 
@@ -698,11 +703,12 @@ LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 19.
 
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 24.
 
+[9]
 
 LaTeX Font Warning: Font shape `T1/fvm/m/sc' undefined
 (Font)              using `T1/fvm/m/n' instead on input line 52.
 
-[9]
+
 Underfull \hbox (badness 1596) in paragraph at lines 158--159
 []\T1/fve/b/n/10 Query Type Ef-fec-tive-ness\T1/fve/m/sc/10 (+20) . As S-based 
 and S-
@@ -725,9 +731,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[11
-
-] [12] [13] (./icde.aux)
+[11] [12] [13] (./icde.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -738,7 +742,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  6978 strings out of 495061
  101889 string characters out of 1182621
- 352300 words of memory out of 3000000
+ 350300 words of memory out of 3000000
  9710 multiletter control sequences out of 15000+50000
  160079 words of font info for 335 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -759,7 +763,7 @@ exmf-texlive/fonts/type1/public/bera/fveb8a.pfb></usr/share/texmf-texlive/fonts
 /fver8a.pfb></usr/share/texmf-texlive/fonts/type1/public/bera/fvmb8a.pfb></usr/
 share/texmf-texlive/fonts/type1/public/bera/fvmr8a.pfb></usr/share/texmf-texliv
 e/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on icde.pdf (13 pages, 227883 bytes).
+Output written on icde.pdf (13 pages, 235123 bytes).
 PDF statistics:
  118 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -28,22 +28,59 @@ And target data:
 <drugbank:DB00494> <type> <drugbank:Drug>
 \end{lstlisting}
 
-For this example, each source predicate in $U^{*s}_A$ ={\verb+label+, \verb+title+} match all predicates in $U^{*t}_A$ =\{\verb+name+ and \verb+synonym+\}; therefore, there are four possible predicate alignment that could be exploited to find the match between the source and target instances, namely: $U^{*st}_A$ =\{$\langle label,drugname \rangle$, $\langle label,synonym \rangle$,$\langle title,drugname \rangle$, $\langle title,synonym \rangle$\}. Those pairs in  $U^{*st}_A$ form four template queries as defined before. As any search optimization space, this set of possible choices (queries) forms a tree-shaped search space where each node represents a query and each level of the tree represents an instance. Then, the decision to be taken, it is to select a best query at each level of the tree. Fig.1 depicts this search space.
+For this example, each source predicate in $U^{*s}_A$ =\{\verb+label+, \verb+title+\} match all predicates in $U^{*t}_A$ =\{\verb+name+ and \verb+synonym+\}; therefore, there are four possible predicate alignment that could be exploited to find the match between the source and target instances, namely: $U^{*st}_A$ =\{$\langle label,drugname \rangle$, $\langle label,synonym \rangle$,$\langle title,drugname \rangle$, $\langle title,synonym \rangle$\}. Those pairs in  $U^{*st}_A$ form 2 possible template queries, assuming  only one type query (e.g. OR). For example, for the instance \verb+sider:12312+, the two queries are:
+$\langle drugname,"Morphine", OR \rangle^A$, 
+$\langle synonym,"Morphine", OR \rangle^A$.
+ 
+As any search optimization space, this set of possible choices (queries) forms a tree-shaped search space where each node represents a query and each level of the tree represents an instance. Then, the decision to be taken, it is to select a best query at each level of the tree. Fig.1 depicts this search space.
 
 Given $n$ source instances, $k$ different query types and $k$ comparable predicate pairs in $U^{*st}_A$, a naive approach would perform all $n \times k \times q$ queries to find the optimal candidate set for each instance. We show how this number of queries can be reduced through our branch-and-bound based optimization that aims to execute only a few effective queries for every source instance. 
  
 \subsection{Search-based Optimization} 
-The problem start by learning the schema alignments $U^{*st}_A$ from the data. Then , from this alignment, a initial set of template queries containing only attribute queries is created. Our initial search space is composed of $n \times k \times q$ queries. We conceive an iterative process where source instances are processed one by one, resulting in a tree-shaped search space where the tree nodes correspond to queries and each level of the tree represents an instance  A path on this tree from the root to a leave indicates the queries selected for their respective instances. We will use node and query as synonyms from now on.
+The problem start by learning the schema alignments $U^{*st}_A$ from the data. Then , from this alignment, a initial set of template queries containing only attribute queries is created. Our initial search space is composed of $n \times k \times q$ queries. We conceive an iterative process where source instances are processed one by one, resulting in a tree-shaped search space where the tree nodes correspond to queries and each level of the tree represents an instance.  A path on this tree from the root to a leave indicates the queries selected for their respective instances. We will use node and query as synonyms from now on.
 
-The challenge is to select for each source instance the one fast query (few fast queries) needed to produce all and only the correct candidates. Thus, a query can be characterized by two dimensions, namely its \emph{execution time} and the \emph{optimality of its results}. As the optimality is not known, we propose a \emph{cardinality-based heuristic}: a candidate selection query is more optimal when it yields less candidates (i.e. a result set with low cardinality). Thus, the most optimal query is the one that yields exactly one candidate while queries with no results or too many results are less optimal. While this is a rather aggressive heuristic that is exclusively focused on reducing the number of candidates (not taking into account whether they are correct or not), we show it performs well in the experiments. 
+\subsubsection{Query Optimal Criteria} 
 
-The goal of the optimization is to avoid executing all queries, while selecting the optimal queries requires knowing the cardinality and execution time, which can only be obtained after executing the query. To avoid query execution, we use information acquired during the iterative process to estimate these. In particular, we note that for every instance, there are $k \times q$ query templates, which are initiated with the key value representation of that instance.  For different instances, the queries instantiating a particular type vary only w.r.t.~the key value component. Thus, for each query template, we recorded the execution time and cardinality observed for instances processed in previous iterations. Then, we compute an average for each of these dimensions and use it as the estimate for the instance in the current iteration. 
- 
+The goal of the optimization is to execute less queries as possible to determine the optimal one, as defined below:
+\begin{definition}[Optimization Goal] Given a set of instances S and a set of template queries $Q =\{q_1,..., q_n\}$ and for every instance $s_i \in S$ exists a set of evaluated queries $Q^e_{s_i} \subset Q$, where $q^o_{s_i} \in Q^e_{s_i}$ is a optimal query for $s_i$, then the optimization goal is to minimize:
+\[
+{\arg \min} \bigcup_{s_i \in S}|Q^e_{s_i}| \land
+{\arg \min} \bigcup_{s_i \in S} |q^o_{s_i}| 
+\]
+\end{definition} 
+
+The optimal query for an instances can only be determined by evaluating all possible queries; however, to minimize the number of queries evaluated is one of the optimization goals. Both goals can be achieved simultaneously by making use of heuristics that helps to determined whether or not is necessary to evaluate a query.
+
+Regarding the optimality of a query, the challenge is to select for each source instance the one fast query (few fast queries) needed to produce all and only the correct candidates. Thus, a query can be characterized by two dimensions, namely its \emph{execution time} and the \emph{optimality of its results}. As both criteria of optimality is not known, we propose a \emph{cardinality-based and time-based heuristics} that can estimate those criteria:
+
+\begin{definition}[Optimal Queries Heuristic] The most optimal query is the one that yields exactly one candidate while queries with no results or too many results are less optimal. 
+\end{definition} 
+\begin{definition}[Time Efficiency Heuristic] A query is is optimal if it is time efficient.
+\end{definition} 
+The time efficiency heuristic captures the intuition queries that retrieves less elements are faster. While they are rather aggressive heuristics that are exclusively focused on reducing the number of candidates (not taking into account whether they are correct or not), we show it performs well in the experiments. 
+
+Regarding the optimality of a the number of queries evaluated, not all queries need to be evaluate, because queries may produce subset of each other or even empty sets. For instance, suppose that the OR queries are superset of all other query types; consequently, a query OR cannot reduce the cardinality of a query AND, thus, it do not need to be evaluated if AND query retrieve a non-empty set. This dependency between query types can be learned and used to skip the evaluation of queries. Therefore, we defined two heuristics that capture this intuition.
+
+\begin{definition}[Query Intersection Heuristic] Given a set of template queries $Q$, there is a $Q_k \subseteq Q$ that can be ordered such as $q_k \subseteq q_{k+1} \subseteq ... \subseteq q_{n}$.
+\end{definition}    
+
+Complementary to this heuristic, two queries that produces disjoint sets are both candidates to be optimal, because we cannot predict in which set are the correct matches.
+
+\begin{definition}[Attribute Clause Intersection Heuristic] Given two template queries $q_i$ and $q_j$, their optimal candidate set is given by $q_i \cup q_j$, if $q_i \cap q_j = \emptyset$, otherwise, the query that yields less candidates produces the optimal candidate set.
+\end{definition}  
+
+The process on which this optimization takes place is described next.
 
 \subsection{Best-First Search With Branch-and-Bound Pruning} 
-Based on these two dimensions, we use best-first search with branch-and-bound pruning~\cite{DBLP:journals/jacm/DechterP85} to execute only the best queries in the search space. The overall procedure is presented Alg.~3, which has three main components. It has a \emph{bounding policy}, which decides when to stop the whole process. The \emph{branching policy} determines the visit order of nodes within every level and when to move to a next level, based on cardinality and time estimates. Further, a classifier helps the bounding policy to decide whether to skip certain queries or not. 
 
-\textbf{Branching}. It is a breadth-first search procedure that processes queries associated with the source instance of the current level before moving to the next instance in the next level. In every level, this search is guided by the branching policy, which always selects the node that is best w.r.t.~ both dimensions. More precisely, it chooses the one with lowest cardinality and among those not distinguishable in terms of that, it chooses the one that requires less time (based on the estimated values discussed before) . According to the cardinality-based heuristic, this policy indicates to stop and to move to the next level when a node with cardinality 1 is visited (because there are no better queries than this). However, this cardinality-based heuristic can only be applied to query nodes constructed for the same key pair. Queries constructed for different key pairs may be useful to retrieve candidates of different types (e.g. the query constructed from \verb+rdf:label+ retrieves candidates of type \verb+Ingredient+ while the query constructed from \verb+drugs:drugname+ retrieve \verb+Drugs+). In other words, we need to find optimal queries specific to a key pair. Accordingly, when a query with cardinality 1 has been found, the search moves to the queries constructed for a different key pair. 
+\begin{enumerate}
+  \item Evaluate first the queries that have the highest chance to be optimal, consequently less queries    are evaluated.
+  \item Evaluate only the queries that can be optimal, because some queries may never have lower cardinality than another query that was evaluated before.
+\end{enumerate} 
+
+Based on these heuristics, we use best-first search with branch-and-bound pruning~\cite{DBLP:journals/jacm/DechterP85} to execute only the best queries in the search space. The overall procedure is presented Alg.~1, which has three main components. It has a \emph{bounding policy}, which decides when to stop the whole process. The \emph{branching policy} determines the visit order of nodes within every level and when to move to a next level, based on cardinality and time estimates. Further, a classifier helps the branching policy to decide whether to skip certain queries or not. 
+
+\textbf{Branching}. It is a breadth-first search procedure that processes queries associated with the source instance of the current level before moving to the next instance in the next level. In every level, this search is guided by the branching policy, which always selects the node that is best w.r.t.~ time and cardinality dimensions. More precisely, it chooses the one with lowest cardinality and among those not distinguishable in terms of that, it chooses the one that requires less time (based on the estimated values discussed before). According to the cardinality-based heuristic, this policy indicates to stop and to move to the next level when a node with cardinality 1 is visited (because there are no better queries than this). However, this cardinality-based heuristic can only be applied to query nodes constructed for the same key pair. Queries constructed for different key pairs may be useful to retrieve candidates of different types (e.g. the query constructed from \verb+rdf:label+ retrieves candidates of type \verb+Ingredient+ while the query constructed from \verb+drugs:drugname+ retrieve \verb+Drugs+). In other words, we need to find optimal queries specific to a key pair. Accordingly, when a query with cardinality 1 has been found, the search moves to the queries constructed for a different key pair. 
 Once the optimal queries have been found for all key pairs, or when all queries have been processed, the search moves on to the next level. We use only the instances retrieved for the one with lowest cardinality, among all queries processed for a given key pair. Over all key pairs, we aggregate the results retrieved for their optimal query to obtain all candidates for one source instance. 
  
 
