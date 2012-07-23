@@ -17,12 +17,12 @@
 %\item Describe the algorithm to find those class clauses.
 %\end{itemize}
 
-In this section we describe how we construct the template queries in our approach. Basically, we want to avoid queries composed by too many clauses, because they are too selective, and they end up missing some positive matches. This intuition was also identified by ObjectCoref\cite{DBLP:conf/www/HuCQ11}; and we empirically proved that in fact two clauses is enough to efficiently generate high recall, with acceptable precision. Therefore, in this work, we investigate template queries that are composed at most of two clauses; namely, an attribute clause and a class clause. 
+In this section we describe how we construct the template queries in our approach. Basically, we want to avoid queries composed by too many clauses, because they are too selective, and they end up missing some positive matches. This intuition was also identified by ObjectCoref\cite{DBLP:conf/www/HuCQ11}; and we empirically proved that in fact two clauses are enough to efficiently generate high recall, with acceptable precision. Therefore, in this work, we investigate template queries that are composed at most of two clauses; namely, an attribute clause and a class clause. 
 
 The attribute clause helps on find candidates based on the assumption that positive matches share a similar token on a pair of highly discriminative predicates. The class clause help on disambiguating candidates that share the same token but belong to different classes (class level ambiguity).  We only build template queries that contains an attribute clause, or an attribute clause and an class clause. 
 
 
-\emph{Sampling} is key point when learning from data, and almost impossible when the data is accessed remotely. We propose an adapted sampling method for dealing with the scalability issue on the heterogeneous setting. In this work, we assume that the source instances to be matched belong to the same class (e.g. country, people, drugs, etc.). Low cardinality classes are merged and a subset is chosen from high cardinality classes. This assumption also implies that the target matches for those source instances will also belong to a limited set of target classes. Therefore, to cover the necessary data to learn the predicates, much less data need to be mined, because both source and target instances are less diverse than to consider the whole dataset.
+\emph{Sampling} is key point when learning from data, and almost impossible when the data is accessed remotely. We propose an adapted sampling method for dealing with the scalability issue on the heterogeneous setting. In this work, we assume that the source instances to be matched belong to the same class (e.g. country, people, drugs, etc.). This assumption also implies that the target matches for those source instances will also belong to a limited set of target classes. Therefore, to cover the necessary data to learn the predicates, much less data need to be mined, because both source and target instances are less diverse than to consider the whole dataset.
 
 Given that the source instances $S$ were given, we select 5\% of $S$ to determine the source discriminative predicates. We query the target endpoint using an exact boolean query over the tokenized value of those source predicates; obtaining the target data that were used to compute the target discriminative predicates. We empirically proved that this approach was efficiently and effective for our problem. However, note that the discussion on different sampling techniques is out of the scope of this paper.
 
@@ -48,7 +48,7 @@ We now defined a template query.
 \begin{definition} [Candidate Set]  A candidate set of an instance $s$ in $G_s$ is a instantiation of a template query where we have at least an attribute clause $\langle p_t,k,\sim \rangle^A$ where $\langle s,p_s,k \rangle \in IR(s)$
 \end{definition} 
 
-For instance, for an template query formed by the attribute query $\langle\verb+rdf:label+,``\verb+eosinophilic+$  $\verb+pneumonia+",OR\rangle$, can be expressed in SPARQL as: 
+For instance, for an template query formed by the attribute clause $\langle\verb+rdf:label+,``\verb+eosinophilic+$  $\verb+pneumonia+",\sim\rangle$, where $\sim$ is one of the query types: EXACT, LIKE, AND and OR, can be expressed in SPARQL as, respectively: 
 
 \begin{footnotesize} 
 \begin{verbatim}
