@@ -42,9 +42,7 @@ DB.DBA.VT_INC_INDEX_DB_DBA_RDF_OBJ ();
 We use the specific Virtuoso SPARQL implementation to have access to the index, and we limited all query results to 30 instances. This avoids the queries to retrieve too many data for non-discriminative queries.
 
 \subsection{Candidate Selection Results} 
-Table 1 shows the results. Comparing all approaches over all the 16 datasets pairs that we evaluated, Sonda achieves the best F1 score in all cases (in 96\% of the cases, to be precise), except for the NYT-Geonames pair, where S-based has best F1 result (due to high RR). 
-%Sonda yields better F1 score in 96\% of the cases and also
- 
+Table 1 shows the results. Comparing all approaches over all the 18 datasets pairs that we evaluated, Sonda achieves the best F1 score in 16 cases (in 89\% of the cases, to be precise).
 \begin{center}
 \begin{table*}[h]
 \centering
@@ -54,100 +52,85 @@ Table 1 shows the results. Comparing all approaches over all the 16 datasets pai
         \hline
         Dataset Pairs & Systems & Queries & Q/I & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
 
-\multirow{4}{*}{Restaurant1-Restaurant2} & SondaA     & 10 & 1.76   & 6.78  & 9.33  & 99.12 & 98.23 & 98.67       \\
-											& SondaC    & 10 & 1.77   & 6.75  & 10.18 & 99.12 & 98.23 & 98.67\\
-											& S-based   & 2 & 2.0   & 3.67  & 21.85 &   89.52 & 97.35 & 93.27\\
- 											& S-agnostic & 3 & 3.0   & 0.74  & 18.3    & 90.98 & 97.35 & 94.06   \\ \hline
- 											
-\multirow{4}{*}{Person11-Person12} & SondaA    & 15 & 1.38   & 8.9  & 38.53   & 99.57 & 93.54 & 96.46 \\
-											& SondaC   & 15 & 1.42   & 8.7  & 47.62  & 99.57 & 93.54 & 96.46 \\
-											& S-based   & 3 & 3.0   & 5.84  & 93.15  & 31.87 & 100.0 & 48.34\\
- 											& S-agnostic   & 4 & 4.0   & 4.45  & 69.63      & 30.25 & 100.0 & 46.45 \\ \hline
-
-\multirow{4}{*}{Person21-Person22} & SondaA  & 25 & 13.51   & 2.9  & 43.77   & 22.88 & 96.61 & 36.99 \\
-											& SondaC    & 25 & 13.33   & 2.75  & 41.51 & 22.88 & 96.61 & 36.99\\
-											& S-based   & 5 & 5.0   & 1.42  & 18.31  & 22.01 & 100.0 & 36.08\\
- 											& S-agnostic     & 4 & 4.0   & 0.57  & 11.06  & 21.67 & 100.0 & 35.62  	\\ \hline 										
-
- \multirow{4}{*}{Sider-Tcm} & SondaA         & 10 & 1.75   & 7.96  & 14.44   & 86.22 & 98.83 & 92.1     \\
- 											& SondaC    & 10 & 1.6   & 7.24  & 13.14   & 87.11 & 98.83 & 92.6 \\
-											& S-based   & 2 & 2.0   & 4.1  & 22.88   & 77.93 & 96.49 & 86.23 \\
- 											& S-agnostic      & 3 & 3.0   & 1.29  & 24.07   & 77.93 & 96.49 & 86.23    \\ \hline
- 											
-\multirow{4}{*}{Sider-Dailymed} & SondaA   & 25 & 2.47   & 81.06  & 175.73   & 30.18 & 67.61 & 41.73   \\
-											& SondaC  & 75 & 5.43   & 83.09  & 268.66    & 33.94 & 68.89 & 45.48 \\
-											& S-based    & 5 & 5.0   & 75.28  & 530.33 & 23.25 & 84.94 & 36.5 \\
- 											& S-agnostic     & 3 & 3.0   & 31.73  & 7909.14      & 31.32 & 81.75 & 45.29 \\ \hline 		
- 																							
-\multirow{4}{*}{Sider-Drugbank} & SondaA  & 25 & 3.26   & 51.19  & 284.51 & 92.68 & 98.49 & 95.49   \\
-											& SondaC   & 25 & 3.31   & 53.62  & 289.05 & 92.68 & 98.49 & 95.49  \\
-											& S-based    & 5 & 5.0   & 51.9  & 500.29   & 90.12 & 99.3 & 94.49\\
- 											& S-agnostic      & 3 & 3.0   & 41.91  & 358.93 & 93.74 & 97.79 & 95.72  \\ \hline 											
-
-\multirow{4}{*}{Sider-Diseasome} & SondaA    & 20 & 2.02   & 10.75  & 24.19     & 52.44 & 95.35 & 67.67\\
-											& SondaC    & 20 & 2.03   & 10.2  & 23.11 & 52.44 & 95.35 & 67.67  \\
-											& S-based    & 4 & 4.0   & 7.91  & 99.04  & 59.25 & 90.7 & 71.67\\
- 											& S-agnostic    & 3 & 3.0   & 1.35  & 49.44  & 61.33 & 88.95 & 72.6      \\ \hline 		 									
-
-\multirow{4}{*}{Dailymed-Sider} & SondaA    & 40 & 1.42   & 101.7  & 263.1   & 98.39 & 99.37 & 98.88  \\
-											& SondaC  & 40 & 1.34   & 34.35  & 210.91  & 99.87 & 99.87 & 99.87 \\
-											& S-based    & 8 & 8.0   & 28.17  & 1385.41  & 96.85 & 97.99 & 97.42\\
- 											& S-agnostic    & 4 & 4.0   & 16.19  & 759.43    & 96.85 & 97.99 & 97.42  \\ \hline 		
-
-\multirow{4}{*}{Diseasome-Sider} & SondaA    & 20 & 1.85   & 12.63  & 17.78   & 97.62 & 95.35 & 96.47  \\
-											& SondaC   & 20 & 1.85   & 9.1  & 13.66   & 97.62 & 95.35 & 96.47 \\
-											& S-based  & 4 & 4.0   & 6.37  & 51.43   & 85.11 & 93.02 & 88.89 \\
- 											& S-agnostic    & 2 & 2.0   & 2.06  & 27.34   & 85.11 & 93.02 & 88.89  \\ \hline 		 									
-
-\multirow{4}{*}{Drugbank-Sider} & SondaA    & 40 & 5.88   & 81.49  & 208.78    & 98.61 & 99.29 & 98.95 \\
-											& SondaC	   & 80 & 9.92   & 70.43  & 375.57  & 97.92 & 99.29 & 98.6 \\
-											& S-based     & 8 & 8.0   & 53.9  & 273.07  & 92.76 & 99.65 & 96.08\\
- 											& S-agnostic   & 26 & 26.0   & 24.56  & 281.62   & 92.46 & 99.65 & 95.92 \\ \hline 											 
-
-\multirow{4}{*}{NYT-Geonames} & SondaA     & 10 & 2.4   & 44.54  & 1840.09 & 17.51 & 74.23 & 28.34 \\
-											& SondaC   & 10 & 2.35   & 25.14  & 1621.12 & 18.33 & 74.51 & 29.42 \\
-											& S-based   & 2 & 2.0   & 22.39  & 709.52 & 17.55 & 23.53 & 20.11  \\
- 											& S-agnostic    & 5 & 5.0   & 11.57  & 1002.44  & 26.07 & 50.2 & 34.32  \\ \hline 											
-
-
-\multirow{4}{*}{NYT-DBPedia(Geo)} & SondaA    & 5 & 1.02   & 43.03  & 998.8  & 65.23 & 75.21 & 69.86 \\
-											& SondaC  \\
-											& S-based \\
- 											& S-agnostic       \\ \hline 											
- 		
-\multirow{4}{*}{NYT-DBPedia(Per)} & SondaA   \\
-											& SondaC   & 10 & 1.2   & 203.13  & 5209.35 & 81.94 & 97.11 & 88.88 \\
-											& S-based  & 1 & 1.0   & 65.93  & 3516.51  & 56.89 & 14.27 & 22.81 \\
- 											& S-agnostic     & 4 & 4.0   & 25.85  & 5019.58   & 30.55 & 12.02 & 17.25  \\ \hline 			
- 																			
-\multirow{4}{*}{NYT-DBPedia(Corp.)} & SondaA     & 5 & 1.55   & 25.85  & 1516.55 & 52.58 & 90.28 & 66.46\\
-											& SondaC    & 5 & 1.55   & 28.34  & 1707.08 & 71.02 & 82.09 & 76.15\\
-											& S-based  \\
- 											& S-agnostic       \\ \hline 		 		
- 		
-\multirow{4}{*}{NYT-Freebase(Geo)} & SondaA  & 20 & 3.59   & 39.89  & 819.35     & 82.55 & 94.43 & 88.09 \\
-											& SondaC    & 40 & 4.04   & 31.57  & 978.81   & 86.39 & 95.0 & 90.49\\
-											& S-based     & 4 & 4.0   & 24.23  & 1308.69   & 58.07 & 78.7 & 66.83\\
- 											& S-agnostic    & 5 & 5.0   & 12.84  & 749.24    & 60.26 & 64.38 & 62.25   \\ \hline 											
- 
-
-\multirow{4}{*}{NYT-Freebase(Corp.)} & SondaA   & 15 & 3.02   & 30.51  & 911.26  & 78.06 & 88.27 & 82.85   \\
-											 & SondaC   & 15 & 3.09   & 22.09  & 986.65  & 73.21 & 88.17 & 80.0\\
-											& S-based     & 3 & 3.0   & 16.73  & 1468.65   & 62.47 & 69.05 & 65.6\\
- 											& S-agnostic   & 2 & 2.0   & 13.23  & 622.9       & 63.05 & 43.04 & 51.15    \\ \hline 					
- 											
-\multirow{4}{*}{NYT-Freebase(Person)} & SondaA    & 15 & 2.12   & 50.75  & 1117.39   & 88.67 & 96.2 & 92.29\\
-											& SondaC  &   45 & 3.16   & 45.22  & 1396.57  & 94.62 & 95.62 & 95.12\\
-											& S-based       & 3 & 3.0   & 46.14  & 3536.16 &   71.6 & 73.57 & 72.57 \\
- 											& S-agnostic    & 4 & 4.0   & 25.87  & 1321.02    & 86.21 & 28.68 & 43.04   \\ \hline 								
+ \multirow{4}{*}{DAILYMED-SIDER}  & SondaA  & 40 & 1.63   & 27.73  & 220.04 & 100.0 & 97.86 & 98.92  \\
+ & SondaC  & 40 & 1.88   & 29.55  & 228.25 & 100.0 & 98.43 & 99.21  \\
+ & S-based  & 8 & 8.0   & 25.17  & 1157.67 & 99.37 & 97.99 & 98.67  \\
+ & S-agnostic  & 4 & 4.0   & 15.17  & 638.2 & 99.37 & 97.99 & 98.67  \\ \hline
+\multirow{4}{*}{DISEASOME-SIDER}  & SondaA  & 20 & 2.77   & 7.62  & 16.31 & 100.0 & 94.77 & 97.31  \\
+ & SondaC  & 20 & 2.47   & 8.54  & 13.97 & 100.0 & 94.77 & 97.31  \\
+ & S-based  & 4 & 4.0   & 5.98  & 49.54 & 99.38 & 92.44 & 95.78  \\
+ & S-agnostic  & 2 & 2.0   & 2.01  & 27.04 & 100.0 & 91.86 & 95.76  \\ \hline
+\multirow{4}{*}{DRUGBANK-SIDER}  & SondaA  & 40 & 1.49   & 56.79  & 36.39 & 100.0 & 99.65 & 99.82  \\
+ & SondaC  & 80 & 7.16   & 56.76  & 154.87 & 100.0 & 98.23 & 99.11  \\
+ & S-based  & 8 & 8.0   & 50.78  & 265.46 & 95.92 & 99.65 & 97.75  \\
+ & S-agnostic  & 29 & 29.0   & 25.2  & 249.16 & 95.59 & 99.65 & 97.58  \\ \hline
+\multirow{4}{*}{NYTIMES-DBPEDIA-CORP}  & SondaA  & 15 & 3.28   & 204.11  & 1906.57 & 47.6 & 91.3 & 62.57  \\
+ & S-agnostic  & 4 & 4.0   & 18.11  & 1771.86 & 13.93 & 33.54 & 19.68  \\ \hline
+ & S-based  & 3 & 3.0   & 106.87  & 1809.11 & 41.04 & 56.39 & 47.51  \\
+\multirow{4}{*}{NYTIMES-DBPEDIA-GEO}  & SondaA  & 15 & 3.2   & 319.49  & 2813.14 & 22.76 & 81.09 & 35.54  \\
+ & SondaC  & 15 & 1.33   & 143.22  & 521.57 & 62.52 & 75.52 & 68.41  \\
+ & S-based  & 3 & 3.0   & 526.5  & 2288.21 & 22.72 & 42.66 & 29.65  \\
+ & S-agnostic  & 5 & 5.0   & 10.22  & 2769.9 & 6.26 & 31.35 & 10.44  \\ \hline
+\multirow{4}{*}{NYTIMES-FREEBASE-CORP}  & SondaA  & 15 & 1.68   & 37.81  & 489.66 & 98.88 & 87.88 & 93.06  \\
+ & SondaC  & 45 & 2.92   & 42.85  & 641.44 & 99.24 & 89.85 & 94.31  \\
+ & S-based  & 3 & 3.0   & 23.66  & 1262.01 & 86.6 & 69.97 & 77.4  \\
+ & S-agnostic  & 4 & 4.0   & 13.03  & 588.26 & 81.1 & 42.35 & 55.64  \\ \hline
+\multirow{4}{*}{NYTIMES-FREEBASE-GEO}  & SondaA  & 15 & 2.57   & 37.79  & 621.28 & 97.62 & 87.71 & 92.4  \\
+ & SondaC  & 15 & 2.29   & 36.32  & 597.06 & 97.56 & 88.13 & 92.6  \\
+ & S-based  & 3 & 3.0   & 31.13  & 866.07 & 79.88 & 56.51 & 66.19  \\
+ & S-agnostic  & 5 & 5.0   & 12.35  & 498.78 & 78.11 & 45.78 & 57.73  \\ \hline
+\multirow{4}{*}{NYTIMES-FREEBASE-PER}  & SondaA  & 15 & 2.1   & 42.28  & 1153.96 & 95.49 & 95.58 & 95.54  \\
+ & SondaC  & 30 & 3.09   & 43.58  & 1348.91 & 93.7 & 96.04 & 94.86  \\
+ & S-based  & 3 & 3.0   & 38.07  & 3180.94 & 93.63 & 73.55 & 82.39  \\
+ & S-agnostic  & 4 & 4.0   & 25.06  & 1216.74 & 95.32 & 29.54 & 45.11  \\ \hline
+\multirow{4}{*}{NYTIMES-GEONAMES}  & SondaA  & 15 & 3.33   & 129.97  & 1826.46 & 16.19 & 90.5 & 27.47  \\
+ & SondaC  & 15 & 3.33   & 128.32  & 2024.58 & 16.19 & 90.5 & 27.47  \\
+ & S-based  & 3 & 3.0   & 38.85  & 1194.26 & 27.54 & 23.59 & 25.41  \\
+ & S-agnostic  & 5 & 5.0   & 11.2  & 552.14 & 28.45 & 19.62 & 23.23  \\ \hline
+\multirow{4}{*}{PERSON11-PERSON12}  & SondaA  & 15 & 1.27   & 11.17  & 26.69 & 99.57 & 95.63 & 97.56  \\
+ & SondaC  & 15 & 1.26   & 11.18  & 26.95 & 99.57 & 95.63 & 97.56  \\
+ & S-based  & 3 & 3.0   & 9.0  & 62.76 & 78.68 & 96.25 & 86.58  \\
+ & S-agnostic  & 4 & 4.0   & 4.46  & 68.34 & 30.98 & 100.0 & 47.3  \\ \hline
+\multirow{4}{*}{PERSON21-PERSON22}  & SondaA  & 20 & 7.16   & 5.91  & 20.19 & 44.59 & 58.47 & 50.6  \\
+ & SondaC  & 20 & 6.24   & 5.91  & 18.23 & 44.3 & 59.32 & 50.72  \\
+ & S-based  & 4 & 4.0   & 4.29  & 13.64 & 25.19 & 87.29 & 39.09  \\
+ & S-agnostic  & 4 & 4.0   & 0.54  & 11.07 & 21.88 & 100.0 & 35.9  \\ \hline
+\multirow{4}{*}{RESTAURANT1-RESTAURANT2}  & SondaA  & 10 & 1.83   & 5.14  & 8.37 & 98.25 & 98.23 & 98.24  \\
+ & SondaC  & 10 & 1.82   & 5.06  & 8.12 & 98.25 & 98.23 & 98.24  \\
+ & S-based  & 2 & 2.0   & 3.42  & 18.81 & 94.02 & 96.46 & 95.22  \\
+ & S-agnostic  & 3 & 3.0   & 0.74  & 17.93 & 94.02 & 96.46 & 95.22  \\ \hline
+\multirow{4}{*}{SIDER-DAILYMED}  & SondaA  & 35 & 3.88   & 177.38  & 140.55 & 34.96 & 64.67 & 45.38  \\
+ & SondaC  & 105 & 11.55   & 179.45  & 315.42 & 40.33 & 57.07 & 47.26  \\
+ & S-based  & 7 & 7.0   & 173.95  & 583.63 & 25.05 & 83.83 & 38.57  \\
+ & S-agnostic  & 3 & 3.0   & 32.61  & 7781.31 & 36.02 & 75.63 & 48.8  \\ \hline
+\multirow{4}{*}{SIDER-DBPEDIA-DRUGS}  & SondaA  & 10 & 1.52   & 46.05  & 112.57 & 98.06 & 92.1 & 94.99  \\
+ & SondaC  & 30 & 2.28   & 41.36  & 199.11 & 99.72 & 94.69 & 97.14  \\
+ & S-based  & 2 & 2.0   & 39.27  & 145.72 & 77.56 & 93.04 & 84.6  \\
+ & S-agnostic  & 3 & 3.0   & 35.41  & 155.64 & 69.18 & 93.19 & 79.41  \\ \hline
+\multirow{4}{*}{SIDER-DBPEDIA-SIDEEFFECT}  & SondaA  & 20 & 1.58   & 33.43  & 303.39 & 76.69 & 89.29 & 82.51  \\
+ & SondaC  & 40 & 4.66   & 21.21  & 508.37 & 94.44 & 90.58 & 92.47  \\
+ & S-based  & 4 & 4.0   & 23.86  & 543.29 & 77.42 & 71.74 & 74.47  \\
+ & S-agnostic  & 3 & 3.0   & 4.51  & 400.67 & 56.85 & 65.42 & 60.83  \\ \hline
+\multirow{4}{*}{SIDER-DISEASOME}  & SondaA  & 20 & 4.52   & 10.05  & 43.41 & 83.33 & 94.77 & 88.68  \\
+ & SondaC  & 20 & 4.53   & 9.82  & 47.45 & 83.33 & 94.77 & 88.68  \\
+ & S-based  & 4 & 4.0   & 7.64  & 91.51 & 86.19 & 91.86 & 88.93  \\
+ & S-agnostic  & 3 & 3.0   & 1.27  & 47.1 & 90.17 & 88.95 & 89.56  \\ \hline
+\multirow{4}{*}{SIDER-DRUGBANK}  & SondaA  & 25 & 3.59   & 52.65  & 269.51 & 95.67 & 98.02 & 96.83  \\
+ & SondaC  & 25 & 2.38   & 54.81  & 153.76 & 98.25 & 97.44 & 97.84  \\
+ & S-based  & 5 & 5.0   & 50.27  & 470.65 & 94.22 & 99.3 & 96.69  \\
+ & S-agnostic  & 3 & 3.0   & 41.43  & 337.92 & 97.11 & 97.79 & 97.45  \\ \hline
+\multirow{4}{*}{SIDER-TCM}  & SondaA  & 10 & 1.68   & 7.8  & 14.0 & 100.0 & 98.25 & 99.12  \\
+ & SondaC  & 10 & 1.61   & 7.75  & 12.48 & 100.0 & 98.25 & 99.12  \\
+ & S-based  & 2 & 2.0   & 4.85  & 22.8 & 100.0 & 95.32 & 97.6  \\
+ & S-agnostic  & 3 & 3.0   & 1.17  & 24.21 & 100.0 & 95.32 & 97.6  \\ \hline					
 
 \end{tabular}  
 \end{table*} 
 \end{center}
 
-Overall Sonda ($Sonda_A$ and $Sonda_C$) achieves a considerable improvement in both RR and PC than the other approaches, in the Freebase, DBPedia and Geonames cases. Mainly, due to the high level of ambiguity on those target datasets, those approaches performed worse because they considered only OR queries (that are too inclusive and penalize RR), or do not use comparable keys as in the cases of S-agnostic (penalizing PC).  
+\textbf{Data Ambiguity}. Sonda ($Sonda_A$ and $Sonda_C$) was much more effective (F1) than other approaches when data was more ambiguous  (e.g., Freebase, DBPedia and Geonames cases), achieving a considerable improvement in both RR and PC than the other approaches. Mainly, those approaches performed worse because they considered only OR queries (that are too inclusive and penalize RR),  and as a query limit was used in all queries, it also decrease the PC, due to the correct matches were out of the sets defined by those limits. As S-agnostic has the most inclusive type of queries, it had the worse performance (F1) in those cases, penalizing even more PC.
 
-\textbf{Class Queries}. The RR in $Sonda_C$ was considerably higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geonames). This occurred due to class level ambiguity (many instances with the same name but from different classes) in those datasets. It indicates that the class clauses indeed make the queries more precise because it select exactly the correct class of target instances. However, a little increase on searching time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
+\textbf{Class Queries}. The RR in $Sonda_C$ was considerably higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geonames). This occurred due to class level ambiguity (many instances with the same name but from different classes) in those datasets. It indicates that the class clauses indeed make the queries more precise because it select exactly the correct class of target instances. However, an increase on searching time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
 
 \textbf{Time Performance and F1-Measure}. Regarding the learning time performance, in average it takes less than 10\% of the overall searching time. Although, a more complex learning process (that produces better comparable keys) takes more time, it leads to a better F1. 
 
