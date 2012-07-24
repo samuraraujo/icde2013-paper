@@ -32,16 +32,16 @@ For this example, each source predicate in $U^{*s}_A$ =\{\verb+label+, \verb+tit
 $\langle drugname,"Morphine", OR \rangle^A$, 
 $\langle synonym,"Morphine", OR \rangle^A$.
  
-As any search optimization space, this set of possible choices (queries) forms a tree-shaped search space where each node represents a query and each level of the tree represents an instance. Then, the decision to be taken, it is to select a best query at each level of the tree. \ref{fig:sspace} depicts this search space.
+As any search optimization space, this set of possible choices (queries) forms a tree-shaped search space where each node represents a query and each level of the tree represents an instance. Then, the decision to be taken, it is to select a best query at each level of the tree. Fig. \ref{fig:sspace} depicts this search space.
 
- \begin{figure*} 
-\vspace{-20pt}
+ \begin{figure} [h]
+\vspace{-10pt}
 \centering
-\includegraphics[scale=0.5]{p22.png}
-\caption{The search space for an example with 2 queries and 4 instances.} 
-\vspace{-30pt}
+\includegraphics[scale=0.45]{p22.png}
+\caption{The search space for an arbitrary example with 2 queries and 4 instances.} 
+\vspace{-10pt}
 \label{fig:sspace}
-\end{figure*}
+\end{figure}
 
 Given $n$ source instances, $k$ different query types and $k$ comparable predicate pairs in $U^{*st}_A$, a naive approach would perform all $n \times k \times q$ queries to find the optimal candidate set for each instance. We show how this number of queries can be reduced through our branch-and-bound based optimization that aims to execute only a few effective queries for every source instance. 
  
