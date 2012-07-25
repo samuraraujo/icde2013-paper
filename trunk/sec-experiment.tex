@@ -135,18 +135,14 @@ Table 1 shows the results. Comparing all approaches over all the 18 datasets pai
 
 \textbf{Data Ambiguity}. Sonda ($Sonda_A$ and $Sonda_C$) was much more effective (F1) than other approaches when data was more ambiguous  (e.g., Freebase, DBPedia and Geonames cases), achieving a considerable improvement in both RR and PC than the other approaches. Mainly, those approaches performed worse because they considered only OR queries (that are too inclusive and penalize RR),  and as a query limit was used in all queries, it also decrease the PC, due to the correct matches were out of the sets defined by those limits. As S-agnostic has the most inclusive type of queries, it had the worse performance (F1) in those cases, penalizing even more PC.
 
-\textbf{Class Queries}. The RR in $Sonda_C$ was considerably higher than in $Sonda_A$ for a few cases (DBPedia, Freebase and Geonames). This occurred due to class level ambiguity (many instances with the same name but from different classes) in those datasets. It indicates that the class clauses indeed make the queries more precise because it select exactly the correct class of target instances. However, an increase on searching time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
+\textbf{Class Queries}. In average $Sonda_C$ had higher F1 than $Sonda_A$, mainly due to a better RR in a few cases in DBPedia and Freebase datasets. The class clauses used in $Sonda_C$ solve better than the other approaches the class level ambiguity (many instances with the same name but from different classes) in those datasets. It indicates that the class clauses indeed make the queries more precise because it select exactly the correct class of target instances. However, an increase on searching time can be observed in $Sonda_C$, mainly due to a higher number of queries that were considered in this version.
 
 \textbf{Time Performance and F1-Measure}. Regarding the learning time performance, in average it takes less than 10\% of the overall searching time. Although, a more complex learning process (that produces better comparable keys) takes more time, it leads to a better F1. 
 
 In general, the best F1 can only be achieved by using an complex learning process and an efficient execution process. For instance, S-based used the same set of comparable keys than Sonda, but it achieved the worse searching time performance in all cases. Even though Sonda has more queries to evaluate (because it uses different types of queries with different time performances), it is faster than S-based, because its  branch-and-bound algorithm helps to select the ones that require less evaluation time (those that are more efficient than the ones used by the other approaches).  In average, S-agnostic has the best learning and searching time performance, but the worse F1. 
 
 Concluding, the best F1 is associated to learn effective comparable keys, which take more time to compute, and to learn efficient queries execution plan, which can efficiently execute the most effective queries. 
- 
- 
- \textbf{Query Type Performance}.  Although the 
- Fig. \ref{fig:time} shows the evaluation time per query type. It confirms our intuition that EXACTLANG and EXACT are the fastest one; however, they are not optimal in many cases, as observed in Fig. \ref{fig:frequency}, which shows the frequency that the queries types were consider optimal per dataset. This diagram reinforces that there is no one type of query that are optimal for all cases; therefore, a smart choice of a template query per each instance by optimization the search space is really necessary. 
- \begin{figure} [h]
+  \begin{figure} [h]
 \vspace{-10pt}
 \centering
 \includegraphics[scale=0.5]{p9.png}
@@ -154,8 +150,12 @@ Concluding, the best F1 is associated to learn effective comparable keys, which 
 \vspace{-10pt}
 \label{fig:time}
 \end{figure} 
+ 
+ \textbf{Query Type Performance}.  Fig. \ref{fig:time} shows the evaluation time per query type. It confirms our intuition that EXACTLANG and EXACT are the fastest one; however, they are not optimal in many cases, as observed in Fig. \ref{fig:frequency}, which shows the frequency that the queries types were consider optimal per dataset. This diagram reinforces that there is no one type of query that are optimal for all cases; therefore, a smart choice of a template query per each instance by optimization the search space is really necessary. 
 
- \begin{figure} [h]
+
+
+\begin{figure} [h]
 \vspace{-10pt}
 \centering
 \includegraphics[scale=0.5]{p8.png}
@@ -164,13 +164,11 @@ Concluding, the best F1 is associated to learn effective comparable keys, which 
 \label{fig:frequency}
 \end{figure}
 
+\textbf{Query Type Effectiveness}. As S-based and S-agnostic considered more inclusive queries (OR queries) than Sonda, we can conclude that, although necessary, more inclusive queries leads to worse F1, mainly because they decrease the RR, and as it was used a limit on queries, it also decrease the PC.  
 
-\textbf{Query Type Effectiveness}. As S-based and S-agnostic considered more inclusive queries (OR queries) than Sonda, we can conclude that, although necessary, more inclusive queries leads to worse F1, mainly because they decrease the RR, and as it was used a limit on queries, it also decrease the PC. 
+\textbf{Predictor and Branching Policy Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of queries evaluated per instance. In some cases (e.g., Sider-TCM, Person11-Person12), it performed nearly one query per instance. Notice that we can not compare the predictor on S-based and S-agnostic, because in both cases, the number of queries executed per instance was fixed. The purpose here is to show  that Sonda's predictor and branching policy was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in many cases. In a few cases, it evaluated a larger number of queries per instances, which indicates that there is a lot of room for improvement w.r.t the number of queries evaluated.
 
-
-
-\textbf{Predictor and Branching Policy Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of queries evaluated per instance. In some cases (e.g., Dailymed-Sider, Diseasome-Sider), it performed nearly one query per instance. Notice that we can not compare the predictor on S-based and S-agnostic, because in both cases, the number of queries executed per instance is fixed. The purpose here is to show  that Sonda's predictor and branching policy was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in many cases. 
-
+\textbf{Overall Conclusion}. $SondaC$ achieved the best trade-off between best F1 and search time, indicating that it was time efficient, also efficient and effective on selecting the correct matches. $SondaA$ can be an alternative to $SondaC$ on applications where a matcher may not be available to generate positive and negative matches, which is necessary to obtain class clauses.
 
 \begin{center}
 \begin{table*}[h]
