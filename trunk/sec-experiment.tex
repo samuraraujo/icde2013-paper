@@ -52,7 +52,7 @@ Table 1 shows the results. Comparing all approaches over all the 18 datasets pai
         \hline
         Dataset Pairs & Systems & Queries & Q/I & Learning(s) & Search(s)  & RR($\%$) & PC($\%$) &  F1($\%$) \\ \hline
 
- \multirow{4}{*}{DAILYMED-SIDER}  & SondaA  & 40 & 1.63   & 27.73  & 220.04 & 100.0 & 97.86 & 98.92  \\
+\multirow{4}{*}{DAILYMED-SIDER}  & SondaA  & 40 & 1.63   & 27.73  & 220.04 & 100.0 & 97.86 & 98.92  \\
  & SondaC  & 40 & 1.88   & 29.55  & 228.25 & 100.0 & 98.43 & 99.21  \\
  & S-based  & 8 & 8.0   & 25.17  & 1157.67 & 99.37 & 97.99 & 98.67  \\
  & S-agnostic  & 4 & 4.0   & 15.17  & 638.2 & 99.37 & 97.99 & 98.67  \\ \hline
@@ -65,8 +65,9 @@ Table 1 shows the results. Comparing all approaches over all the 18 datasets pai
  & S-based  & 8 & 8.0   & 50.78  & 265.46 & 95.92 & 99.65 & 97.75  \\
  & S-agnostic  & 29 & 29.0   & 25.2  & 249.16 & 95.59 & 99.65 & 97.58  \\ \hline
 \multirow{4}{*}{NYTIMES-DBPEDIA-CORP}  & SondaA  & 15 & 3.28   & 204.11  & 1906.57 & 47.6 & 91.3 & 62.57  \\
- & S-agnostic  & 4 & 4.0   & 18.11  & 1771.86 & 13.93 & 33.54 & 19.68  \\ \hline
+ & SondaC  & 30 & 3.33   & 159.5  & 4116.37 & 87.63 & 88.96 & 88.29  \\
  & S-based  & 3 & 3.0   & 106.87  & 1809.11 & 41.04 & 56.39 & 47.51  \\
+ & S-agnostic  & 4 & 4.0   & 18.11  & 1771.86 & 13.93 & 33.54 & 19.68  \\ \hline
 \multirow{4}{*}{NYTIMES-DBPEDIA-GEO}  & SondaA  & 15 & 3.2   & 319.49  & 2813.14 & 22.76 & 81.09 & 35.54  \\
  & SondaC  & 15 & 1.33   & 143.22  & 521.57 & 62.52 & 75.52 & 68.41  \\
  & S-based  & 3 & 3.0   & 526.5  & 2288.21 & 22.72 & 42.66 & 29.65  \\
@@ -122,8 +123,12 @@ Table 1 shows the results. Comparing all approaches over all the 18 datasets pai
 \multirow{4}{*}{SIDER-TCM}  & SondaA  & 10 & 1.68   & 7.8  & 14.0 & 100.0 & 98.25 & 99.12  \\
  & SondaC  & 10 & 1.61   & 7.75  & 12.48 & 100.0 & 98.25 & 99.12  \\
  & S-based  & 2 & 2.0   & 4.85  & 22.8 & 100.0 & 95.32 & 97.6  \\
- & S-agnostic  & 3 & 3.0   & 1.17  & 24.21 & 100.0 & 95.32 & 97.6  \\ \hline					
-
+ & S-agnostic  & 3 & 3.0   & 1.17  & 24.21 & 100.0 & 95.32 & 97.6  \\ \hline	
+ \multirow{4}{*}{Average}  & SondaA  &  19.72	& 2.73 & 	67.40 & 	556.81 & 	78.31 & 	89.77 & 	80.92\\
+ & SondaC  & 31.39	& 3.56 &	54.73 & 	607.61	& 84.17	& 89.25 & 	85.03 \\
+ & S-based  & 3.94	& 3.94	& 	64.64	& 	779.23	& 	72.47	& 	79.32	& 	73.47\\
+  & S-agnostic  & 5.06 &  	5.06	 & 14.14 & 	953.13	 & 66.35	 & 72.47 & 	64.22\\ \hline	
+ 
 \end{tabular}  
 \end{table*} 
 \end{center}
@@ -188,7 +193,14 @@ Average\footnote{Average of datasets evaluated by Rimon} &\textbf{0.84}	&\textbf
 \end{table*} 
 \end{center}
 
-
+ \begin{figure} [h]
+\vspace{-10pt}
+\centering
+\includegraphics[scale=0.5]{p33.png}
+\caption{Frequency of query type execution on $Sonda_A$ and $Sonda_C$} 
+\vspace{-10pt}
+\label{fig:sspace}
+\end{figure}
 
 \section{Evaluation On Instance Matching}
 In this section, we discuss how we evaluate Sonda on the context of instances matching.  Mainly, we apply two matcher overs the candidates sets produced by Sonda. Then, we compared the results of the match with state-of-the-art instance matching approaches that participate on the OAEI 2010 and 2011 challenge. Also, the ExampleDriven approach was evaluated over the same datasets. As evaluation metrics, we used standard precision, recall and F1 metrics. 
