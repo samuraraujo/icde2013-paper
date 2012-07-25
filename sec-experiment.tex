@@ -143,7 +143,31 @@ In general, the best F1 can only be achieved by using an complex learning proces
 
 Concluding, the best F1 is associated to learn effective comparable keys, which take more time to compute, and to learn efficient queries execution plan, which can efficiently execute the most effective queries. 
  
+ 
+ \textbf{Query Type Performance}.  Although the 
+ Fig. \ref{fig:time} shows the evaluation time per query type. It confirms our intuition that EXACTLANG and EXACT are the fastest one; however, they are not optimal in many cases, as observed in Fig. \ref{fig:frequency}, which shows the frequency that the queries types were consider optimal per dataset. This diagram reinforces that there is no one type of query that are optimal for all cases; therefore, a smart choice of a template query per each instance by optimization the search space is really necessary. 
+ \begin{figure} [h]
+\vspace{-10pt}
+\centering
+\includegraphics[scale=0.5]{p9.png}
+\caption{Average evaluation time of the query types.} 
+\vspace{-10pt}
+\label{fig:time}
+\end{figure} 
+
+ \begin{figure} [h]
+\vspace{-10pt}
+\centering
+\includegraphics[scale=0.5]{p8.png}
+\caption{Frequency in which the query types were consider optimal on SondaA.} 
+\vspace{-10pt}
+\label{fig:frequency}
+\end{figure}
+
+
 \textbf{Query Type Effectiveness}. As S-based and S-agnostic considered more inclusive queries (OR queries) than Sonda, we can conclude that, although necessary, more inclusive queries leads to worse F1, mainly because they decrease the RR, and as it was used a limit on queries, it also decrease the PC. 
+
+
 
 \textbf{Predictor and Branching Policy Efficiency}. We can see that in all cases, Sonda achieves a considerable reduction in the number of queries evaluated per instance. In some cases (e.g., Dailymed-Sider, Diseasome-Sider), it performed nearly one query per instance. Notice that we can not compare the predictor on S-based and S-agnostic, because in both cases, the number of queries executed per instance is fixed. The purpose here is to show  that Sonda's predictor and branching policy was very efficient, selecting only a few queries per instance, as well as, very effective, selecting queries that produce near optimal PC, in many cases. 
 
@@ -193,14 +217,7 @@ Average\footnote{Average of datasets evaluated by Rimon} &\textbf{0.84}	&\textbf
 \end{table*} 
 \end{center}
 
- \begin{figure} [h]
-\vspace{-10pt}
-\centering
-\includegraphics[scale=0.5]{p33.png}
-\caption{Frequency of query type execution on $Sonda_A$ and $Sonda_C$} 
-\vspace{-10pt}
-\label{fig:sspace}
-\end{figure}
+
 
 \section{Evaluation On Instance Matching}
 In this section, we discuss how we evaluate Sonda on the context of instances matching.  Mainly, we apply two matcher overs the candidates sets produced by Sonda. Then, we compared the results of the match with state-of-the-art instance matching approaches that participate on the OAEI 2010 and 2011 challenge. Also, the ExampleDriven approach was evaluated over the same datasets. As evaluation metrics, we used standard precision, recall and F1 metrics. 
